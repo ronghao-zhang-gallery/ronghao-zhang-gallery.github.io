@@ -2,7 +2,7 @@ title: Ronghao Zhang
 email: ronghao.zhang.home@gmail.com
 description: Personal photography gallery
 baseurl: ""
-url: ""
+url: "https://ronghao-zhang-gallery.github.io"
 
 # Build settings
 plugins:
