@@ -1,0 +1,63 @@
+// ─── Photo card (gallery grid item) ──────────────────────────────────────────
+
+.photo-card {
+  overflow: hidden;       // clips the zooming image to the fixed frame
+  cursor: pointer;
+  position: relative;
+  background: var(--surface);
+
+  &.hidden { display: none; }
+
+  &:focus-visible { outline: 1px solid var(--accent); }
+
+  // Image zooms inside the fixed frame — card size never changes
+  img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &:hover img,
+  &:focus-visible img { transform: scale(1.08); }
+}
+
+.photo-card-inner {
+  width: 100%; height: 100%;
+  position: relative;
+}
+
+// ── Hover overlay (title + location) ────────────────────────────────────────
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 52%);
+  opacity: 0;
+  transition: opacity var(--ease);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem 1.1rem;
+}
+
+.photo-card:hover .photo-overlay,
+.photo-card:focus-visible .photo-overlay { opacity: 1; }
+
+// Overlay text — soft, slightly transparent
+.photo-title {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 0.2rem;
+  line-height: 1.35;
+}
+
+.photo-location {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.05em;
+}

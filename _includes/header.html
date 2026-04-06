@@ -1,0 +1,32 @@
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="{{ '/' | relative_url }}" class="site-logo">
+      <span class="logo-name">{{ site.title }}</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="site-nav" id="site-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="{{ '/' | relative_url }}"
+             class="nav-link{% if page.url == '/' %} active{% endif %}">Home</a>
+        </li>
+        {% for cat in site.data.categories %}
+        <li class="nav-item">
+          <a href="{{ cat.slug | prepend: '/' | append: '/' | relative_url }}"
+             class="nav-link{% if page.slug == cat.slug %} active{% endif %}">
+            {{ cat.title }}
+          </a>
+        </li>
+        {% endfor %}
+        <li class="nav-item">
+          <a href="{{ '/contact/' | relative_url }}"
+             class="nav-link{% if page.url == '/contact/' %} active{% endif %}">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,49 @@
+---
+layout: page
+title: Contact
+permalink: /contact/
+---
+
+<div class="contact-layout">
+  <div class="contact-intro">
+    <p class="contact-intro-text">
+      Whether you're interested in a print, a collaboration, or just want to talk photography — I'd love to hear from you.
+    </p>
+    <ul class="contact-details">
+      <li>
+        <span class="contact-detail-label">Email</span>
+        <span class="contact-detail-value">ronghao.zhang.home@gmail.com</span>
+      </li>
+      <li>
+        <span class="contact-detail-label">Based in</span>
+        <span class="contact-detail-value">Atlanta, GA</span>
+      </li>
+      <li>
+        <span class="contact-detail-label">Response</span>
+        <span class="contact-detail-value">Within 48 hours</span>
+      </li>
+    </ul>
+  </div>
+
+  <form class="contact-form" action="https://formspree.io/f/xpqokrlr" method="POST">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="contact-name">Name</label>
+        <input class="form-input" type="text" id="contact-name" name="name" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="contact-email">Email</label>
+        <input class="form-input" type="email" id="contact-email" name="email" required placeholder="your@email.com">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="contact-subject">Subject</label>
+      <input class="form-input" type="text" id="contact-subject" name="subject" placeholder="Print inquiry, collaboration...">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="contact-message">Message</label>
+      <textarea class="form-textarea" id="contact-message" name="message" required placeholder="Tell me about your project..."></textarea>
+    </div>
+    <button class="form-submit" type="submit">Send Message</button>
+  </form>
+</div>

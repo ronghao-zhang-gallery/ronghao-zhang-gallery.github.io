@@ -1,0 +1,29 @@
+title: Ronghao Zhang
+email: ronghao.zhang.home@gmail.com
+description: Personal photography gallery
+baseurl: ""
+url: ""
+
+# Build settings
+plugins:
+  - jekyll-feed
+
+# Gallery pages collection — each file in _gallery/ auto-generates a category page
+collections:
+  gallery:
+    output: true
+
+# Auto-apply the category layout to every _gallery/*.md file
+defaults:
+  - scope:
+      path: ""
+      type: gallery
+    values:
+      layout: category
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .jekyll-cache/
+  - .sass-cache/

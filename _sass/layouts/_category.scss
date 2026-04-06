@@ -1,0 +1,69 @@
+// ─── Category page layout ─────────────────────────────────────────────────────
+
+// All non-home pages need top padding to clear the fixed header
+body:not(.home-page) main {
+  padding-top: var(--header-h);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-container {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - var(--header-h) - 80px);
+}
+
+// ─── Gallery content area ─────────────────────────────────────────────────────
+
+.gallery-main {
+  flex: 1;
+  padding: 2.5rem 2.25rem 3rem;
+  min-width: 0;
+}
+
+.gallery-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.gallery-title {
+  font-family: var(--script);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: rgba(232, 232, 232, 0.90);
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+
+.gallery-description {
+  font-size: 0.97rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 62ch;
+  line-height: 1.65;
+}
+
+// ─── Photo grid — dynamic sizes ───────────────────────────────────────────────
+// Every 1st-of-5 card is featured (2×2), every 3rd-of-5 is wide (2×1).
+// This creates an editorial, non-uniform layout.
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 210px;
+  grid-auto-flow: dense;
+  gap: 0.75rem;
+}
+
+// Featured — 2 columns × 2 rows
+.photo-card:nth-child(5n+1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+// Wide — 2 columns × 1 row
+.photo-card:nth-child(5n+3) {
+  grid-column: span 2;
+}

@@ -1,0 +1,31 @@
+---
+---
+// ─── Entry point ──────────────────────────────────────────────────────────────
+// Jekyll compiles this to assets/css/main.css.
+// Edit styles in _sass/ partials — never edit the compiled output directly.
+//
+// Load order:
+//   1. Base       — tokens + reset
+//   2. Components — self-contained UI pieces
+//   3. Layouts    — page-level compositions
+//   4. Responsive — media query overrides (always last)
+
+// Base
+@use "base/variables";
+@use "base/reset";
+
+// Components
+@use "components/header";
+@use "components/footer";
+@use "components/sidebar";
+@use "components/photo-card";
+@use "components/lightbox";
+
+// Layouts
+@use "layouts/page";
+@use "layouts/home";
+@use "layouts/category";
+@use "layouts/contact";
+
+// Responsive (overrides must come after everything else)
+@use "responsive";

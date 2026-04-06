@@ -1,0 +1,31 @@
+# Define all gallery categories here.
+# Adding a new category = add an entry below + add photos to photos.yml + create _gallery/<slug>.md
+
+- title: Landscape
+  slug: landscape
+  description: Capturing the beauty of natural landscapes from around the world.
+  subprojects:
+    - name: Alaska
+      slug: Alaska
+
+- title: Wildlife
+  slug: wildlife
+  description: Wildlife photography from habitats around the world — capturing animals in their natural environment.
+  subprojects:
+    - name: Birds
+      slug: birds
+    - name: Aqua Life
+      slug: aqua_life
+    - name: Mammals
+      slug: mammals
+
+- title: Portrait
+  slug: portrait
+  description: Portraits capturing the essence of people and their stories, from environmental to studio work.
+  subprojects:
+    - name: Environmental
+      slug: environmental
+    - name: Studio
+      slug: studio
+    - name: Street
+      slug: street

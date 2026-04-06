@@ -1,0 +1,23 @@
+// ─── Site footer ─────────────────────────────────────────────────────────────
+
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  margin-bottom: 0.35rem;
+}
+
+.footer-tagline {
+  font-family: var(--script);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--accent);
+}

@@ -1,0 +1,88 @@
+---
+layout: default
+body_class: category-page
+---
+{% comment %}
+  Look up this category's definition and its photos from the unified data files.
+  To add a new category: add to _data/categories.yml + _data/photos.yml + one _gallery/*.md file.
+{% endcomment %}
+
+{% assign cat_def = site.data.categories | where: "slug", page.slug | first %}
+{% assign cat_photos = site.data.photos | where: "category", page.slug %}
+
+<div class="category-container">
+
+  <aside class="sidebar">
+    {% for nav_cat in site.data.categories %}
+      {% assign is_current = false %}
+      {% if nav_cat.slug == page.slug %}{% assign is_current = true %}{% endif %}
+      <div class="sidebar-section{% if is_current %} open{% endif %}" data-slug="{{ nav_cat.slug }}">
+        <button class="sidebar-section-toggle" type="button">
+          <span>{{ nav_cat.title }}</span>
+          <svg class="caret-icon" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ul class="sidebar-section-items">
+          {% if is_current %}
+            <li>
+              <a href="#" class="sidebar-link active"
+                 data-subproject="all"
+                 data-category="{{ nav_cat.slug }}">All</a>
+            </li>
+            {% for sub in cat_def.subprojects %}
+            <li>
+              <a href="#" class="sidebar-link"
+                 data-subproject="{{ sub.slug }}"
+                 data-category="{{ nav_cat.slug }}">{{ sub.name }}</a>
+            </li>
+            {% endfor %}
+          {% else %}
+            {% for sub in nav_cat.subprojects %}
+            <li>
+              <a href="{{ nav_cat.slug | prepend: '/' | append: '/' | relative_url }}?sub={{ sub.slug }}"
+                 class="sidebar-link"
+                 data-category="{{ nav_cat.slug }}">{{ sub.name }}</a>
+            </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+    {% endfor %}
+  </aside>
+
+  <div class="gallery-main">
+    <div class="gallery-header">
+      <h1 class="gallery-title" id="gallery-title">{{ cat_def.title }}</h1>
+      <p class="gallery-description" id="gallery-description">{{ cat_def.description }}</p>
+    </div>
+
+    <div class="photo-grid" id="photo-grid">
+      {% for photo in cat_photos %}
+      <div class="photo-card"
+           data-subproject="{{ photo.subproject_slug }}"
+           data-title="{{ photo.title }}"
+           data-location="{{ photo.location }}"
+           data-iso="{{ photo.iso }}"
+           data-aperture="{{ photo.aperture }}"
+           data-exposure="{{ photo.exposure }}"
+           data-camera="{{ photo.camera }}"
+           data-lens="{{ photo.lens }}"
+           data-date="{{ photo.date }}"
+           data-full="{{ photo.image }}"
+           role="button"
+           tabindex="0"
+           aria-label="View {{ photo.title }}">
+        <div class="photo-card-inner">
+          <img src="{{ photo.image }}" alt="{{ photo.title }}" loading="lazy">
+          <div class="photo-overlay">
+            <span class="photo-title">{{ photo.title }}</span>
+            <span class="photo-location">{{ photo.location }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>

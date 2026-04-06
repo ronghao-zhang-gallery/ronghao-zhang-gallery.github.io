@@ -1,0 +1,75 @@
+# All photos in one place.
+# Each entry requires: category, subproject_slug, image, title, location, iso, aperture, exposure, camera, lens, date
+# - category:        must match a slug in categories.yml
+# - subproject_slug: must match a subproject slug inside that category
+# - image:           single URL used for both the gallery grid and the lightbox (full resolution)
+# - featured: true   (optional) show this photo in the home page hero slideshow
+#
+# To add a photo: paste a new block below with the correct category/subproject_slug.
+# To feature a photo on the home page: add "featured: true" to its entry.
+
+# ─── LANDSCAPE ──────────────────────────────────────────────────────────────
+
+- title: Alaska Pipeline & Dalton Highway I
+  category: landscape
+  subproject_slug: Alaska
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_16-35-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F6.3_1div1000SEC_ISO400.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 400
+  aperture: "F/6.3"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Overlook of the Brooks Range
+  category: landscape
+  subproject_slug: Alaska
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 250
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Alaska Pipeline & Dalton Highway II
+  category: landscape
+  subproject_slug: Alaska
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_183MM_F7.1_1div1000SEC_ISO1250.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 1250
+  aperture: "F/7.1"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Dusk on Dalton Highway I
+  category: landscape
+  subproject_slug: Alaska
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-47_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div125SEC_ISO250.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 250
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Dusk on Dalton Highway II
+  category: landscape
+  subproject_slug: Alaska
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-56_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_325MM_F8.0_1div125SEC_ISO250.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 250
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"

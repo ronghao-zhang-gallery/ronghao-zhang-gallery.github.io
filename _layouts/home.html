@@ -1,0 +1,57 @@
+---
+layout: default
+body_class: home-page
+---
+
+<section class="hero">
+  {% assign featured_photos = site.data.photos | where: "featured", true %}
+  <div class="hero-slideshow" id="hero-slideshow">
+    {% for photo in featured_photos %}
+    <div class="hero-slide"
+         style="background-image: url('{{ photo.image }}')"
+         data-title="{{ photo.title }}"
+         data-category="{{ photo.category }}">
+    </div>
+    {% endfor %}
+  </div>
+  <div class="hero-overlay"></div>
+  <button class="hero-nav hero-nav-prev" id="hero-prev" aria-label="Previous slide">&lt;</button>
+  <button class="hero-nav hero-nav-next" id="hero-next" aria-label="Next slide">&gt;</button>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Photography</p>
+    <h1 class="hero-title">Ronghao Zhang</h1>
+    <div class="hero-caption" id="hero-caption">
+      <span class="caption-title">{{ featured_photos[0].title }}</span>
+      <span class="caption-sep">&mdash;</span>
+      <span class="caption-category">{{ featured_photos[0].category }}</span>
+    </div>
+    <a href="/landscape/" class="hero-cta">Explore Gallery</a>
+  </div>
+  <div class="hero-indicators" id="hero-indicators">
+    {% for photo in featured_photos %}
+    <button class="indicator"
+            data-index="{{ forloop.index0 }}"
+            aria-label="Go to slide {{ forloop.index }}"></button>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="featured-categories">
+  <div class="section-inner">
+    <h2 class="section-title">Collections</h2>
+    <div class="categories-grid">
+      {% for cat in site.data.categories %}
+        {% assign cat_photos = site.data.photos | where: "category", cat.slug %}
+        {% assign cover_photo = cat_photos | first %}
+        <a href="{{ cat.slug | prepend: '/' | append: '/' | relative_url }}" class="category-card">
+          <div class="category-card-bg" style="background-image: url('{{ cover_photo.image }}')"></div>
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <h3 class="category-card-title">{{ cat.title }}</h3>
+            <span class="category-card-meta">{{ cat_photos.size }} Photos</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

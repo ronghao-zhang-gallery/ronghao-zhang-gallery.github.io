@@ -1,0 +1,245 @@
+// ─── Home page — hero slideshow ───────────────────────────────────────────────
+
+.home-page main { padding-top: 0; flex: 1; }
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slideshow { position: absolute; inset: 0; }
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1.4s ease, transform 9s ease;
+
+  &.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(0, 0, 0, 0.10) 0%,
+    rgba(0, 0, 0, 0.40) 50%,
+    rgba(0, 0, 0, 0.70) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+// "Photography" eyebrow — light, airy
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.52);
+  margin-bottom: 0.7rem;
+}
+
+// Signature name — thin fountain-pen style
+.hero-title {
+  font-family: var(--script);
+  font-size: clamp(4rem, 9vw, 7.5rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.90);
+  margin-bottom: 1.6rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+  line-height: 1.2;
+}
+
+.hero-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.75rem;
+  min-height: 1.7rem;
+}
+
+.caption-title {
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.caption-sep {
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 0.9rem;
+}
+
+// Category label — thin, slightly transparent
+.caption-category {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: all var(--ease);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.85);
+    color: #fff;
+  }
+}
+
+// Hero prev / next arrow buttons
+.hero-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color var(--ease);
+
+  &:hover { color: rgba(255, 255, 255, 0.85); }
+}
+
+.hero-nav-prev { left: 1.5rem; }
+.hero-nav-next { right: 1.5rem; }
+
+.hero-indicators {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.65rem;
+  z-index: 2;
+}
+
+.indicator {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  transition: all var(--ease);
+
+  &.active {
+    background: rgba(255, 255, 255, 0.88);
+    transform: scale(1.4);
+  }
+
+  &:hover { background: rgba(255, 255, 255, 0.6); }
+}
+
+// ─── Home page — Collections grid ────────────────────────────────────────────
+
+.featured-categories {
+  padding: 5.5rem 2.5rem;
+  background: var(--bg);
+}
+
+.section-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--script);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: rgba(232, 232, 232, 0.88);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.category-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: block;
+
+  &:hover {
+    .category-card-bg { transform: scale(1.05); }
+    .category-card-overlay {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.14) 58%);
+    }
+  }
+}
+
+.category-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s ease;
+}
+
+.category-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.06) 58%);
+  transition: var(--ease);
+}
+
+.category-card-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.6rem;
+}
+
+.category-card-title {
+  font-family: var(--script);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.90);
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+}
+
+.category-card-meta {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.48);
+}

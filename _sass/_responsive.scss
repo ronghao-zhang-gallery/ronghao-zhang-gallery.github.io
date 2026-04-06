@@ -1,0 +1,126 @@
+// ─── Responsive breakpoints ───────────────────────────────────────────────────
+// Ordered largest → smallest. All media overrides live here so layout rules
+// stay clean in their respective partials.
+
+// ── 1200px — tighten photo grid ──────────────────────────────────────────────
+@media (max-width: 1200px) {
+  .photo-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+// ── 900px — stack lightbox vertically ────────────────────────────────────────
+@media (max-width: 900px) {
+  .lightbox-content {
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: flex-start;
+    max-height: 88vh;
+    padding: 0 0.5rem 1rem;
+  }
+  .lightbox-image-wrap { width: 100%; }
+  .lightbox-info       { width: 100%; padding-top: 1rem; }
+  .lightbox-prev       { left: 0.25rem; }
+  .lightbox-next       { right: 0.25rem; }
+}
+
+// ── 860px — collapse contact to single column ─────────────────────────────────
+@media (max-width: 860px) {
+  .contact-layout      { grid-template-columns: 1fr; gap: 2.5rem; }
+  .form-row            { grid-template-columns: 1fr; }
+  .page-container      { padding: 2.5rem 1.5rem 3rem; }
+}
+
+// ── 768px — mobile navigation + sidebar ──────────────────────────────────────
+@media (max-width: 768px) {
+  :root {
+    --header-h: 60px;
+    --sidebar-w: 100%;
+  }
+
+  .header-inner { padding: 0 1.5rem; }
+  .menu-toggle  { display: flex; }
+
+  // Mobile nav slides in from top
+  .site-nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0 1rem;
+    transform: translateY(-110%);
+    transition: transform var(--ease);
+    z-index: 99;
+
+    &.open { transform: translateY(0); }
+  }
+
+  .nav-list { flex-direction: column; gap: 0; }
+  .nav-link {
+    display: block;
+    padding: 0.9rem 2rem;
+    &::after { display: none; }
+  }
+
+  // Sidebar stacks above the gallery on mobile
+  .category-container { flex-direction: column; }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  // Closed sections stay fully collapsed on mobile
+  .sidebar-section:not(.open) .sidebar-section-items {
+    max-height: 0 !important;
+  }
+
+  // Open section becomes a horizontal scroll strip
+  .sidebar-section.open .sidebar-section-items {
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+
+    li { flex-shrink: 0; }
+  }
+
+  .sidebar-link {
+    padding: 0.65rem 1rem;
+    border-left: none;
+    border-right: 1px solid rgba(42, 42, 42, 0.5);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+
+    &.active {
+      border-left: none;
+      border-bottom-color: var(--accent);
+      background: transparent;
+    }
+  }
+
+  .gallery-main { padding: 1.25rem; }
+
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 160px;
+  }
+
+  // Reset dynamic sizing — uniform 2-col on mobile
+  .photo-card:nth-child(5n+1),
+  .photo-card:nth-child(5n+3) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .categories-grid { grid-template-columns: 1fr; }
+}
+
+// ── 480px — tighten grid gap ─────────────────────────────────────────────────
+@media (max-width: 480px) {
+  .photo-grid { gap: 0.5rem; }
+  .gallery-main { padding: 1rem; }
+}

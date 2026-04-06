@@ -1,0 +1,27 @@
+// ─── Design tokens ───────────────────────────────────────────────────────────
+// All CSS custom properties live here so every partial can reference them.
+// Edit values here; changes propagate to every component automatically.
+
+:root {
+  // Colours
+  --bg:          #0d0d0d;
+  --surface:     #181818;
+  --surface-2:   #222222;
+  --border:      #2a2a2a;
+  --text:        #e8e8e8;
+  --text-muted:  #909090;
+  --text-dim:    #555555;
+  --accent:      #6e9bc8;
+  --accent-dark: #5072a8;
+
+  // Layout
+  --sidebar-w:   260px;
+  --header-h:    70px;
+
+  // Motion
+  --ease:        0.28s ease;
+
+  // Typography
+  --sans:        'Comfortaa', system-ui, sans-serif;   // rounded, thin
+  --script:      'Sacramento', cursive;                // fountain-pen signature
+}
