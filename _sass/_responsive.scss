@@ -42,16 +42,17 @@
   // Mobile nav slides in from top
   .site-nav {
     position: fixed;
-    top: var(--header-h);
+    top: 0;
     left: 0; right: 0;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
     padding: 0.5rem 0 1rem;
-    transform: translateY(-110%);
+    // Offset by own full height + header height so it's completely off-screen
+    transform: translateY(calc(-100% - var(--header-h)));
     transition: transform var(--ease);
     z-index: 99;
 
-    &.open { transform: translateY(0); }
+    &.open { transform: translateY(var(--header-h)); }
   }
 
   .nav-list { flex-direction: column; gap: 0; }
