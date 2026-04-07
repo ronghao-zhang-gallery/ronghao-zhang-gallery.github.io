@@ -34,6 +34,16 @@
     var captionEl  = document.getElementById('hero-caption');
     var current    = 0;
     var timer      = null;
+    var ANIMS      = ['anim-zoom-in', 'anim-zoom-out', 'anim-ltr', 'anim-rtl'];
+
+    function randomAnim() { return ANIMS[Math.floor(Math.random() * ANIMS.length)]; }
+
+    function applyAnim(slide) {
+      ANIMS.forEach(function (a) { slide.classList.remove(a); });
+      // Force reflow so removing + re-adding restarts the animation
+      void slide.offsetWidth;
+      slide.classList.add(randomAnim());
+    }
 
     function updateCaption(slide) {
       if (!captionEl) return;
@@ -45,8 +55,10 @@
 
     function goTo(index) {
       slides[current].classList.remove('active');
+      ANIMS.forEach(function (a) { slides[current].classList.remove(a); });
       if (indicators[current]) indicators[current].classList.remove('active');
       current = (index + slides.length) % slides.length;
+      applyAnim(slides[current]);
       slides[current].classList.add('active');
       if (indicators[current]) indicators[current].classList.add('active');
       updateCaption(slides[current]);

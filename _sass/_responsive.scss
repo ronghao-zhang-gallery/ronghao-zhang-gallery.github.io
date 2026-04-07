@@ -117,6 +117,13 @@
     grid-row: span 1;
   }
 
+  // Hero caption — shrink text so it doesn't overlap the < > arrows
+  .hero-content   { padding: 0 4.5rem; }
+  .caption-title  { font-size: 0.85rem; }
+  .caption-sep    { display: none; }
+  .caption-category { font-size: 0.75rem; letter-spacing: 0.12em; }
+  .hero-nav       { font-size: 2rem; }
+
   .categories-grid { grid-template-columns: 1fr; }
 }
 

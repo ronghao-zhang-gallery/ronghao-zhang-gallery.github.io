@@ -14,19 +14,41 @@
 
 .hero-slideshow { position: absolute; inset: 0; }
 
+// Four Ken Burns variants — randomly assigned by JS
+@keyframes kb-zoom-in {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.00); }
+}
+@keyframes kb-zoom-out {
+  from { transform: scale(1.00); }
+  to   { transform: scale(1.08); }
+}
+@keyframes kb-slide-ltr {
+  from { transform: scale(1.05) translateX(-3%); }
+  to   { transform: scale(1.00) translateX(0);   }
+}
+@keyframes kb-slide-rtl {
+  from { transform: scale(1.05) translateX(3%);  }
+  to   { transform: scale(1.00) translateX(0);   }
+}
+
 .hero-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transform: scale(1.06);
-  transition: opacity 1.4s ease, transform 9s ease;
+  transition: opacity 1.4s ease;
 
   &.active {
     opacity: 1;
-    transform: scale(1);
+    // Default if JS hasn't added an anim class yet
+    animation: kb-zoom-in 9s ease forwards;
   }
+  &.active.anim-zoom-in  { animation: kb-zoom-in   9s ease forwards; }
+  &.active.anim-zoom-out { animation: kb-zoom-out  9s ease forwards; }
+  &.active.anim-ltr      { animation: kb-slide-ltr 9s ease forwards; }
+  &.active.anim-rtl      { animation: kb-slide-rtl 9s ease forwards; }
 }
 
 .hero-overlay {
