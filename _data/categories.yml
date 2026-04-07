@@ -3,17 +3,29 @@
 
 - title: Landscape
   slug: landscape
-  description: Capturing the beauty of natural landscapes from around the world.
+  description: Land, Oceans, Monutains, and Light.
   subprojects:
     - name: Alaska
       slug: Alaska
 
+- title: Avians
+  slug: avians
+  description: Appreciate the Diversity of Birds. 
+  subprojects:
+    - name: Raptors
+      slug: raptors
+    - name: Passerines
+      slug: passerines
+    - name: Landfowl
+      slug: landfowl
+    - name: Strigiformes & Owls
+      slug: strigiformes 
+
+    
 - title: Wildlife
   slug: wildlife
-  description: Wildlife photography from habitats around the world — capturing animals in their natural environment.
+  description: We are not alone.
   subprojects:
-    - name: Birds
-      slug: birds
     - name: Aqua Life
       slug: aqua_life
     - name: Mammals
@@ -21,7 +33,7 @@
 
 - title: Portrait
   slug: portrait
-  description: Portraits capturing the essence of people and their stories, from environmental to studio work.
+  description: To be continued...
   subprojects:
     - name: Environmental
       slug: environmental
