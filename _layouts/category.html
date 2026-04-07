@@ -74,7 +74,7 @@ body_class: category-page
            tabindex="0"
            aria-label="View {{ photo.title }}">
         <div class="photo-card-inner">
-          <img src="{{ photo.image }}" alt="{{ photo.title }}" loading="lazy">
+          <img data-src="{{ photo.image }}" alt="{{ photo.title }}" decoding="async">
           <div class="photo-overlay">
             <span class="photo-title">{{ photo.title }}</span>
             <span class="photo-location">{{ photo.location }}</span>

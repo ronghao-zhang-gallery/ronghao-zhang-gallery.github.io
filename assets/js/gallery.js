@@ -2,6 +2,37 @@
   'use strict';
 
   /* =============================================
+     LAZY IMAGE LOADING (Intersection Observer)
+     ============================================= */
+  var lazyImgs = Array.from(document.querySelectorAll('img[data-src]'));
+
+  if (lazyImgs.length) {
+    function revealImg(img) {
+      img.src = img.dataset.src;
+      img.addEventListener('load', function () {
+        img.classList.add('img-loaded');
+        var inner = img.closest('.photo-card-inner');
+        if (inner) inner.classList.add('img-ready');
+      }, { once: true });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var imgObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          revealImg(entry.target);
+          imgObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '300px 0px' }); // start loading 300px before entering viewport
+
+      lazyImgs.forEach(function (img) { imgObserver.observe(img); });
+    } else {
+      // Fallback for old browsers
+      lazyImgs.forEach(revealImg);
+    }
+  }
+
+  /* =============================================
      MOBILE MENU
      ============================================= */
   var menuToggle = document.getElementById('menu-toggle');

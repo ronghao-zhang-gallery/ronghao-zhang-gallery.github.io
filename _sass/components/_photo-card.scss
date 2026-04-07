@@ -1,3 +1,9 @@
+// ─── Shimmer keyframe (skeleton placeholder while image loads) ────────────────
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
 // ─── Photo card (gallery grid item) ──────────────────────────────────────────
 
 .photo-card {
@@ -15,7 +21,11 @@
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0;
+    transition: opacity 0.45s ease,
+                transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &.img-loaded { opacity: 1; }
   }
 
   &:hover img,
@@ -25,6 +35,27 @@
 .photo-card-inner {
   width: 100%; height: 100%;
   position: relative;
+
+  // Shimmer shown until the image loads
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #1c1c1c 25%,
+      #2a2a2a 50%,
+      #1c1c1c 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite linear;
+    z-index: 0;
+  }
+
+  img { position: relative; z-index: 1; }
+
+  // Once image is loaded hide the shimmer
+  &.img-ready::before { display: none; }
 }
 
 // ── Hover overlay (title + location) ────────────────────────────────────────
