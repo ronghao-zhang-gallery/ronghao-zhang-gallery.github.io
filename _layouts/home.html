@@ -48,7 +48,12 @@ body_class: home-page
           <div class="category-card-overlay"></div>
           <div class="category-card-content">
             <h3 class="category-card-title">{{ cat.title }}</h3>
-            <span class="category-card-meta">{{ cat_photos.size }} Photos</span>
+            {% if cat.count_species %}
+              {% assign species_count = cat_photos | map: "title" | uniq | size %}
+              <span class="category-card-meta">{{ species_count }} Species &middot; {{ cat_photos.size }} Photos</span>
+            {% else %}
+              <span class="category-card-meta">{{ cat_photos.size }} Photos</span>
+            {% endif %}
           </div>
         </a>
       {% endfor %}

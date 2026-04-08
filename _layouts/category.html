@@ -9,6 +9,9 @@ body_class: category-page
 
 {% assign cat_def = site.data.categories | where: "slug", page.slug | first %}
 {% assign cat_photos = site.data.photos | where: "category", page.slug %}
+{% if cat_def.count_species %}
+  {% assign cat_species_count = cat_photos | map: "title" | uniq | size %}
+{% endif %}
 
 <div class="category-container">
 
@@ -28,21 +31,38 @@ body_class: category-page
             <li>
               <a href="#" class="sidebar-link active"
                  data-subproject="all"
-                 data-category="{{ nav_cat.slug }}">All</a>
+                 data-category="{{ nav_cat.slug }}">All{% if cat_def.count_species %} <span class="sidebar-count">{{ cat_species_count }}</span>{% endif %}</a>
             </li>
             {% for sub in cat_def.subprojects %}
             <li>
+              {% if cat_def.count_species %}
+                {% assign sub_photos = cat_photos | where: "subproject_slug", sub.slug %}
+                {% assign sub_species = sub_photos | map: "title" | uniq | size %}
+              {% endif %}
               <a href="#" class="sidebar-link"
                  data-subproject="{{ sub.slug }}"
-                 data-category="{{ nav_cat.slug }}">{{ sub.name }}</a>
+                 data-category="{{ nav_cat.slug }}">{{ sub.name }}{% if cat_def.count_species %} <span class="sidebar-count">{{ sub_species }}</span>{% endif %}</a>
             </li>
             {% endfor %}
           {% else %}
+            {% assign nav_cat_photos = site.data.photos | where: "category", nav_cat.slug %}
+            {% if nav_cat.count_species %}
+              {% assign nav_cat_species_count = nav_cat_photos | map: "title" | uniq | size %}
+            {% endif %}
+            <li>
+              <a href="{{ nav_cat.slug | prepend: '/' | append: '/' | relative_url }}"
+                 class="sidebar-link"
+                 data-category="{{ nav_cat.slug }}">All{% if nav_cat.count_species %} <span class="sidebar-count">{{ nav_cat_species_count }}</span>{% endif %}</a>
+            </li>
             {% for sub in nav_cat.subprojects %}
             <li>
+              {% if nav_cat.count_species %}
+                {% assign nav_sub_photos = nav_cat_photos | where: "subproject_slug", sub.slug %}
+                {% assign nav_sub_species = nav_sub_photos | map: "title" | uniq | size %}
+              {% endif %}
               <a href="{{ nav_cat.slug | prepend: '/' | append: '/' | relative_url }}?sub={{ sub.slug }}"
                  class="sidebar-link"
-                 data-category="{{ nav_cat.slug }}">{{ sub.name }}</a>
+                 data-category="{{ nav_cat.slug }}">{{ sub.name }}{% if nav_cat.count_species %} <span class="sidebar-count">{{ nav_sub_species }}</span>{% endif %}</a>
             </li>
             {% endfor %}
           {% endif %}
@@ -54,6 +74,9 @@ body_class: category-page
   <div class="gallery-main">
     <div class="gallery-header">
       <h1 class="gallery-title" id="gallery-title">{{ cat_def.title }}</h1>
+      {% if cat_def.count_species %}
+        <p class="gallery-species-count" id="gallery-species-count"></p>
+      {% endif %}
       <p class="gallery-description" id="gallery-description">{{ cat_def.description }}</p>
     </div>
 

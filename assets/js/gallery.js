@@ -145,17 +145,38 @@
   var allSidebarLinks  = Array.from(document.querySelectorAll('.sidebar-link'));
   var photoCards       = Array.from(document.querySelectorAll('.photo-card'));
   var galleryTitleEl   = document.getElementById('gallery-title');
+  var speciesCountEl   = document.getElementById('gallery-species-count');
+
+  function updateSpeciesCount() {
+    if (!speciesCountEl) return;
+    var visible = photoCards.filter(function (c) { return !c.classList.contains('hidden'); });
+    var titles  = visible.map(function (c) { return c.dataset.title; });
+    var unique  = titles.filter(function (t, i) { return t && titles.indexOf(t) === i; });
+    speciesCountEl.textContent = unique.length + ' Species';
+  }
 
   function activateFilter(target) {
     photoCards.forEach(function (card) {
       card.classList.toggle('hidden', target !== 'all' && card.dataset.subproject !== target);
     });
+    updateSpeciesCount();
   }
 
   function setActiveLink(link) {
     allSidebarLinks.forEach(function (l) { l.classList.remove('active'); });
     link.classList.add('active');
   }
+
+  // Returns the visible label of a sidebar link without the count badge
+  function linkLabel(link) {
+    return Array.from(link.childNodes)
+      .filter(function (n) { return n.nodeType === Node.TEXT_NODE; })
+      .map(function (n) { return n.textContent; })
+      .join('').trim();
+  }
+
+  // Show initial species count (all visible on load)
+  updateSpeciesCount();
 
   // Read URL param on load to pre-filter (used when navigating from another category)
   if (photoCards.length) {
@@ -174,7 +195,7 @@
 
         // Update title
         if (galleryTitleEl) {
-          galleryTitleEl.textContent = matchingLink.textContent.trim();
+          galleryTitleEl.textContent = linkLabel(matchingLink);
         }
 
         // Ensure the section containing this link is open
@@ -203,7 +224,7 @@
         if (galleryTitleEl) {
           galleryTitleEl.textContent = (target === 'all')
             ? link.closest('.sidebar-section').querySelector('.sidebar-section-toggle span').textContent.trim()
-            : link.textContent.trim();
+            : linkLabel(link);
         }
 
         // Clean the URL param so it doesn't confuse future state

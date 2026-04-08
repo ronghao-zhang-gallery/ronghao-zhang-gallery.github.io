@@ -37,6 +37,16 @@ body:not(.home-page) main {
   line-height: 1.2;
 }
 
+.gallery-species-count {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  opacity: 0.85;
+}
+
 .gallery-description {
   font-size: 0.97rem;
   font-weight: 300;

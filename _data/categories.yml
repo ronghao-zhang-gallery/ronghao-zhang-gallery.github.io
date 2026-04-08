@@ -10,7 +10,8 @@
 
 - title: Avians
   slug: avians
-  description: Appreciate the Diversity of Birds. 
+  count_species: true
+  description: Appreciate the Diversity of Birds.
   subprojects:
     - name: Raptors
       slug: raptors
@@ -24,6 +25,7 @@
     
 - title: Wildlife
   slug: wildlife
+  count_species: true
   description: We are not alone.
   subprojects:
     - name: Aqua Life
