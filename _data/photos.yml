@@ -23,7 +23,20 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-19"
 
-- title: Overlook of the Brooks Range
+- title: The Finger Rock
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-04-54_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div400SEC_ISO200.jpg
+  location: Dalton Highway at mile 97.5, AK, U.S.A.
+  iso: 200
+  aperture: "F/8.0"
+  exposure: "1/400S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Overlook of the Brooks Range I
   category: landscape
   subproject_slug: Alaska
   featured: true
@@ -35,6 +48,45 @@
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-19"
+
+- title: Overlook of Tundra II
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 1250
+  aperture: "F/6.3"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Overlook of Tundra I
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-42-11_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO640.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 640
+  aperture: "F/5.6"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Devonian Skajit Limestone, Mount Sukakpak with Bettles River
+  category: landscape
+  subproject_slug: Alaska
+  featured: true
+  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-28_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100.jpg
+  location: Mount Sukakpak, AK, U.S.A.
+  iso: 100
+  aperture: "F/5.0" 
+  exposure: "1/400S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-20"
 
 - title: Alaska Pipeline & Dalton Highway II
   category: landscape
@@ -75,30 +127,30 @@
   lens: RF 50mm F1.8 STM
   date: "2025-09-19"
 
-- title: Devonian Skajit Limestone, Mount Sukakpak with Bettles River
-  category: landscape
-  subproject_slug: Alaska
-  featured: true
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-28_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100.jpg
-  location: Mount Sukakpak, AK, U.S.A.
-  iso: 100
-  aperture: "F/5.0" 
-  exposure: "1/400S"
-  camera: Canon EOS RP
-  lens: RF 24-105mm F/4-7.1 IS STM
-  date: "2025-09-20"
-
-- title: Alaska Pipeline & Mount Sukakpak
+- title: Overlook of the Brooks Range II
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_13-51-08_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_95MM_F8.0_1div500SEC_ISO200.jpg
-  location: Mount Sukakpak, AK, U.S.A.
-  iso: 200
-  aperture: "F/8.0"
-  exposure: "1/500S"
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-52_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_165MM_F7.1_1div125SEC_ISO250.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 250
+  aperture: "F/7.1"
+  exposure: "1/125S"
   camera: Canon EOS RP
-  lens: RF 24-105mm F/4-7.1 IS STM
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: Overlook of Gates of the Arctic National Park
+  category: landscape
+  subproject_slug: Alaska
+  featured: true
+  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-18-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1000SEC_ISO800.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 800
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
 - title: South Fork of the Koyukuk River
@@ -127,32 +179,6 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-19"
 
-- title: Yukon River
-  category: landscape
-  subproject_slug: Alaska
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_18-39-01_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div500SEC_ISO200.jpg
-  location: Yukon River Camp, AK, U.S.A.
-  iso: 200
-  aperture: "F/7.1"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-19"
-
-- title: Overlook of Gates of the Arctic National Park
-  category: landscape
-  subproject_slug: Alaska
-  featured: true
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-18-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1000SEC_ISO800.jpg
-  location: Dalton Highway, AK, U.S.A.
-  iso: 800
-  aperture: "F/8.0"
-  exposure: "1/1000S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-20"
-
 - title: Dusk on Dalton Highway II
   category: landscape
   subproject_slug: Alaska
@@ -165,6 +191,21 @@
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-19"
+
+- title: Alaska Pipeline & Mount Sukakpak
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_13-51-08_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_95MM_F8.0_1div500SEC_ISO200.jpg
+  location: Mount Sukakpak, AK, U.S.A.
+  iso: 200
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-20"
+
+- title: Chandalar Shelf Overlook
 
 - title: Crossing Treeline to Chandalar Shelf
   category: landscape
@@ -179,7 +220,7 @@
   lens: RF 24-105mm F/4-7.1 IS STM
   date: "2025-09-20"
 
-- title: Chandalar Shelf Overlook
+
   category: landscape
   subproject_slug: Alaska
   featured: false
@@ -191,7 +232,7 @@
   camera: Canon EOS RP
   lens: RF 24-105mm F/4-7.1 IS STM
   date: "2025-09-20"
-
+  
 - title: Way to Atigun Pass
   category: landscape
   subproject_slug: Alaska
@@ -204,6 +245,19 @@
   camera: Canon EOS RP
   lens: RF 24-105mm F/4-7.1 IS STM
   date: "2025-09-20"
+
+- title: Yukon River
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_18-39-01_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div500SEC_ISO200.jpg
+  location: Yukon River Camp, AK, U.S.A.
+  iso: 200
+  aperture: "F/7.1"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
 
 - title: Oversize Truck Climbing Atigun Pass From North Slope
   category: landscape
@@ -231,13 +285,13 @@
   lens: RF 24-105mm F/4-7.1 IS STM
   date: "2025-09-20"
 
-- title: Atigun River Valley
+- title: Dalton Highway in Atigun River Valley
   category: landscape
   subproject_slug: Alaska
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-15-43_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-38-13_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F7.1_1div2000SEC_ISO200.jpg
+  location: Atigun River Valley, AK, U.S.A.
+  iso: 200
   aperture: "F/7.1"
   exposure: "1/2000S"
   camera: Canon EOS RP
@@ -257,6 +311,19 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
+- title: Atigun River Valley
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-15-43_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO1600.jpg
+  location: Atigun River Valley, AK, U.S.A.
+  iso: 1600
+  aperture: "F/7.1"
+  exposure: "1/2000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
 - title: Alaska Pipeline @ Atigun Pass
   category: landscape
   subproject_slug: Alaska
@@ -268,19 +335,6 @@
   exposure: "1/1250S"
   camera: Canon EOS RP
   lens: RF 24-105mm F/4-7.1 IS STM
-  date: "2025-09-20"
-
-- title: Atigun River Valley
-  category: landscape
-  subproject_slug: Alaska
-  featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-38-13_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F7.1_1div2000SEC_ISO200.jpg
-  location: Atigun River Valley, AK, U.S.A.
-  iso: 200
-  aperture: "F/7.1"
-  exposure: "1/2000S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
 - title: Driving down South Slope of Atigun Pass
@@ -387,6 +441,19 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
+- title: First Snow in 2025 I
+  category: landscape
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-04-50_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 200
+  aperture: "F/5.6"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-22"
+
 - title: Sukakpak Mountain in Detail 
   category: landscape
   subproject_slug: Alaska
@@ -400,7 +467,150 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
-# ─── WILDLIFE ──────────────────────────────────────────────────────────────
+- title: Trial in Denali National Park
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_17-57-51_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO100.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 100
+  aperture: "F/5.6"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-22"
+
+# ─── TRACES ──────────────────────────────────────────────────────────────
+- title: Road Sign at Wiseman
+  category: traces
+  subproject_slug: north_america
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-23-48_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO125.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 125
+  aperture: "F/4.0"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: Moose Antlers, Hunted by Local 
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-29-44_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2500.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 2500
+  aperture: "F/4.0"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+  
+- title: Town Plaza in Wiseman
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-22-30_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO200.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 200
+  aperture: "F/4.0"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: Moose Foot (Left) & Reindeer Foot (Right)
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-32_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO8000.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 8000
+  aperture: "F/4.0"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: Cloven hoof of a Dall Sheep
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-32-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div125SEC_ISO1600.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 1600
+  aperture: "F/4.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: Lichen & Female Grizzly Bear Skull
+  category: traces
+  subproject_slug: north_america
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2000.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 2000
+  aperture: "F/4.0"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: Location Sign in Wiseman 
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-45-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div500SEC_ISO100.jpg
+  location: Wiseman, AK, U.S.A.
+  iso: 100
+  aperture: "F/4.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: Denali Park Bus I
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-08-24_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_24MM_F4.0_1div25SEC_ISO12800.jpg
+  location: Fairbanks, AK, U.S.A.
+  iso: 12800
+  aperture: "F/4.0"
+  exposure: "1/25S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-22"
+
+- title: Denali Park Bus II
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO1600.jpg
+  location: Fairbanks, AK, U.S.A.
+  iso: 1600
+  aperture: "F/4.5"
+  exposure: "1/8S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-22"
+
+- title: Denali Park Bus III
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-58_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO100.jpg
+  location: Fairbanks, AK, U.S.A.
+  iso: 100
+  aperture: "F/4.5"
+  exposure: "1/8S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-22"
+# ─── AVIANS ──────────────────────────────────────────────────────────────
 
 - title: Spruce Grouse (Canachites canadensis)
   category: avians
@@ -419,10 +629,10 @@
   category: avians
   subproject_slug: strigiformes
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-53-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div125SEC_ISO400.jpg
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-50-53_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250.jpg
   location: Coldfoot, AK, U.S.A.
-  iso: 400
-  aperture: "F/7.1"
+  iso: 250
+  aperture: "F/8.0"
   exposure: "1/125S"
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
@@ -611,3 +821,523 @@
   camera: Canon EOS RP
   lens: RF 24-105mm F/4-7.1 IS STM
   date: "2025-09-20"
+
+- title: "Dalton Highway Sign - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_15-34-59_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F6.3_1div800SEC_ISO800.jpg
+  location: ""
+  iso: 800
+  aperture: "F/6.3"
+  exposure: "1/800S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-19"
+
+- title: "The Finger Rock - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-07-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_113MM_F6.3_1div320SEC_ISO200.jpg
+  location: ""
+  iso: 200
+  aperture: "F/6.3"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: "Alaska Pipeline on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250.jpg
+  location: ""
+  iso: 250
+  aperture: "F/7.1"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: "Alaska Pipeline on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_118MM_F6.3_1div1000SEC_ISO1250.jpg
+  location: ""
+  iso: 1250
+  aperture: "F/6.3"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: "Dusk on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-47_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div125SEC_ISO250.jpg
+  location: ""
+  iso: 250
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: "Northern Hawk Owl (Surnia ulula) - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-53-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div125SEC_ISO400.jpg
+  location: Coldfoot, AK, U.S.A.
+  iso: 400
+  aperture: "F/7.1"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: "Dusk on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-15-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO500.jpg
+  location: ""
+  iso: 500
+  aperture: "F/5.6"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-19"
+
+- title: "Dusk on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-23-49_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_30MM_F5.6_1div500SEC_ISO800.jpg
+  location: ""
+  iso: 800
+  aperture: "F/5.6"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-19"
+
+- title: "Terminal Dust - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div320SEC_ISO400.jpg
+  location: ""
+  iso: 400
+  aperture: "F/8.0"
+  exposure: "1/320S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
+- title: "Terminal Dust - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_156MM_F8.0_1div200SEC_ISO200.jpg
+  location: ""
+  iso: 200
+  aperture: "F/8.0"
+  exposure: "1/200S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
+- title: "Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-33-56_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div2500SEC_ISO500.jpg
+  location: ""
+  iso: 500
+  aperture: "F/8.0"
+  exposure: "1/2500S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-20"
+
+- title: "Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-39-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400.jpg
+  location: ""
+  iso: 400
+  aperture: "F/8.0"
+  exposure: "1/1250S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-20"
+
+- title: "Oversize Truck on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-40-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_85MM_F8.0_1div2000SEC_ISO400.jpg
+  location: ""
+  iso: 400
+  aperture: "F/8.0"
+  exposure: "1/2000S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-20"
+
+- title: "Mountain View on Dalton Highway - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-48-21_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1000SEC_ISO800.jpg
+  location: ""
+  iso: 800
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-20"
+
+- title: "Wiseman Bone Collection - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-39-09_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO3200.jpg
+  location: ""
+  iso: 3200
+  aperture: "F/4.0"
+  exposure: "1/30S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: "Wiseman Bone Collection - Not Implemented"
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-40-28_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO1000.jpg
+  location: ""
+  iso: 1000
+  aperture: "F/4.0"
+  exposure: "1/30S"
+  camera: Canon EOS RP
+  lens: RF 50mm F/1.8 STM
+  date: "2025-09-20"
+
+- title: First Snow in 2025 II - Not Implemented
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-05-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 200
+  aperture: "F/5.6"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-22"
+
+- title: Common Raven (Corvus corax)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-57-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO2000.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 2000
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-22"
+
+- title: Late Autumn on the George Parks Highway 
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-23_11-19-48_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_65MM_F6.3_1div160SEC_ISO800.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 800
+  aperture: "F/6.3"
+  exposure: "1/160S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-23"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_14-32-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO6400.jpg
+  location: ""
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/200S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-24"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_17-45-14_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO200.jpg
+  location: ""
+  iso: 200
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-24"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_18-03-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div100SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/100S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-24"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-01-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO250.jpg
+  location: ""
+  iso: 250
+  aperture: "F/5.6"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-08-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO400.jpg
+  location: ""
+  iso: 400
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-45_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-27-28_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-36-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO2000.jpg
+  location: ""
+  iso: 2000
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-28-05_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO1600.jpg
+  location: ""
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-39-15_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div250SEC_ISO400.jpg
+  location: ""
+  iso: 400
+  aperture: "F/7.1"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-51-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_225MM_F7.1_1div125SEC_ISO800.jpg
+  location: ""
+  iso: 800
+  aperture: "F/7.1"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-42-16_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO3200.jpg
+  location: ""
+  iso: 3200
+  aperture: "F/8.0"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-44-24_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO6400.jpg
+  location: ""
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200.jpg
+  location: ""
+  iso: 3200
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: ""
+  category: ""
+  subproject_slug: ""
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-27_14-16-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div1000SEC_ISO100.jpg
+  location: ""
+  iso: 100
+  aperture: "F/4.5"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-27"

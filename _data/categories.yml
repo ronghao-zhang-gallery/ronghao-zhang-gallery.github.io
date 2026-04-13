@@ -8,6 +8,13 @@
     - name: Alaska
       slug: Alaska
 
+- title: Traces
+  slug: traces
+  description: Places I have been. World heritage sites, cityscapes, and more. 
+  subprojects:
+    - name: North America
+      slug: north_america
+
 - title: Avians
   slug: avians
   count_species: true
