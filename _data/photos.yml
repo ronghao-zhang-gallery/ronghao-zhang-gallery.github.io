@@ -480,6 +480,19 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-22"
 
+- title: Late Autumn on the George Parks Highway 
+  category: landscape
+  subproject_slug: Alaska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-23_11-19-48_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_65MM_F6.3_1div160SEC_ISO800.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 800
+  aperture: "F/6.3"
+  exposure: "1/160S"
+  camera: Canon EOS RP
+  lens: RF 24-105mm F/4-7.1 IS STM
+  date: "2025-09-23"
+
 # ─── TRACES ──────────────────────────────────────────────────────────────
 - title: Road Sign at Wiseman
   category: traces
@@ -610,6 +623,32 @@
   camera: Canon EOS RP
   lens: RF 24-105mm F/4-7.1 IS STM
   date: "2025-09-22"
+
+- title: Seward Boat Harbor 
+  category: traces
+  subproject_slug: north_america
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-01-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO250.jpg
+  location: Seward, AK, U.S.A.
+  iso: 250
+  aperture: "F/5.6"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Kenai Fjords National Park
+  category: landscape
+  subproject_slug: alska
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-39-15_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div250SEC_ISO400.jpg
+  location: Kenai Fjords National Park, AK, U.S.A.
+  iso: 400
+  aperture: "F/7.1"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
 # ─── AVIANS ──────────────────────────────────────────────────────────────
 
 - title: Spruce Grouse (Canachites canadensis)
@@ -621,6 +660,45 @@
   iso: 6400
   aperture: "F/8.0"
   exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
+- title: Spruce Grouse (Canachites canadensis)
+  category: avians
+  subproject_slug: landfowl
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div1000SEC_ISO6400.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
+- title: Spruce Grouse (Canachites canadensis)
+  category: avians
+  subproject_slug: landfowl
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
+- title: Spruce Grouse (Canachites canadensis)
+  category: avians
+  subproject_slug: landfowl
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div2000SEC_ISO6400.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/2000S"
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
@@ -651,6 +729,19 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
+- title: Canada Jay (Perisoreus canadensis)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-21-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO3200.jpg
+  location: Dalton Highway, AK, U.S.A.
+  iso: 3200
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-20"
+
 - title: Willow Ptarmigan (Lagopus lagopus)
   category: avians
   subproject_slug: landfowl
@@ -664,59 +755,229 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-20"
 
-# ─── Not Implemented ────────────────────────────────────────────────
-
-- title: "Canada Jay (Perisoreus canadensis) - Not Implemented"
-  category: ""
-  subproject_slug: ""
+- title: Black-Billed Magpie (Pica hudsonia)
+  category: avians
+  subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-21-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO3200.jpg
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_14-32-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO6400.jpg
+  location: Gridwood, AK, U.S.A.
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/200S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-24"
+
+- title: Common Raven (Corvus corax)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-57-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO2000.jpg
+  location: Denali National Park, AK, U.S.A.
+  iso: 2000
+  aperture: "F/8.0"
+  exposure: "1/1000S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-22"
+
+- title: Bald Eagle (Haliaeetus leucocephalus)
+  category: avians
+  subproject_slug: accipiters_falcons
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: Kenai Fjords National Park, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: American Crow (Corvus brachyrhynchos)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
+  location: Seward, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Steller's jay (Cyanocitta stelleri)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-42-16_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO3200.jpg
+  location: Cooper Landing, AK, U.S.A.
+  iso: 3200
+  aperture: "F/8.0"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: American Crow (Corvus brachyrhynchos)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
+  location: Seward, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Steller's jay (Cyanocitta stelleri)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-44-24_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO6400.jpg
+  location: Cooper Landing, AK, U.S.A.
+  iso: 6400
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Steller's jay (Cyanocitta stelleri)
+  category: avians
+  subproject_slug: passerines
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200.jpg
   location: ""
   iso: 3200
   aperture: "F/8.0"
-  exposure: "1/1000S"
+  exposure: "1/500S"
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-20"
+  date: "2025-09-25"
 
-- title: "Spruce Grouse (Canachites canadensis) - Not Implemented"
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div1000SEC_ISO6400.jpg
-  location: ""
-  iso: 6400
+# ─── WILDLIFE ─────────────────────────────────────────────────────────────
+- title: Mother Moose and her Calf
+  category: wildlife
+  subproject_slug: mammals
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_18-03-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div100SEC_ISO1600.jpg
+  location: Exit Glacier, AK, U.S.A.
+  iso: 1600
   aperture: "F/8.0"
-  exposure: "1/1000S"
+  exposure: "1/100S"
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-20"
+  date: "2025-09-24"
 
-- title: "Spruce Grouse (Canachites canadensis) - Not Implemented"
-  category: ""
-  subproject_slug: ""
+- title: Harbor seals (Phoca vitulina)
+  category: wildlife
+  subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
-  location: ""
-  iso: 6400
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-08-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO400.jpg
+  location: Seward, AK, U.S.A.
+  iso: 400
   aperture: "F/8.0"
-  exposure: "1/1000S"
+  exposure: "1/125S"
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-20"
+  date: "2025-09-25"
 
-- title: "Spruce Grouse (Canachites canadensis) - Not Implemented"
-  category: ""
-  subproject_slug: ""
+- title: Harbor seals (Phoca vitulina)
+  category: wildlife
+  subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div2000SEC_ISO6400.jpg
-  location: ""
-  iso: 6400
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: Seward, AK, U.S.A.
+  iso: 1600
   aperture: "F/8.0"
-  exposure: "1/2000S"
+  exposure: "1/500S"
   camera: Canon EOS RP
   lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-20"
+  date: "2025-09-25"
+
+- title: Harbor seals (Phoca vitulina)
+  category: wildlife
+  subproject_slug: mammals
+  featured: true
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: Seward, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Sea Otters (Enhydra lutris)
+  category: wildlife
+  subproject_slug: mammals
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-45_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: Seward, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Sea Otters (Enhydra lutris)
+  category: wildlife
+  subproject_slug: mammals
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  location: Seward, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Sea Otters (Enhydra lutris)
+  category: wildlife
+  subproject_slug: mammals
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-28-05_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO1600.jpg
+  location: Kenai Fjords National Park, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/250S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title:  Mountain Goat (Oreamnos americanus)
+  category: wildlife
+  subproject_slug: mammals
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-27-28_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO1600.jpg
+  location: Kenai Fjords National Park, AK, U.S.A.
+  iso: 1600
+  aperture: "F/8.0"
+  exposure: "1/125S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+- title: Mountain Goat (Oreamnos americanus)
+  category: wildlife
+  subproject_slug: mammals
+  featured: false
+  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-36-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO2000.jpg
+  location: Kenai Fjords National Park, AK, U.S.A.
+  iso: 2000
+  aperture: "F/8.0"
+  exposure: "1/500S"
+  camera: Canon EOS RP
+  lens: RF 100-400mm F/5.6-8 IS USM
+  date: "2025-09-25"
+
+# ─── Not Implemented ────────────────────────────────────────────────
 
 - title: "Chandalar Shelf Overlook - Not Implemented"
   category: ""
@@ -1030,7 +1291,7 @@
   lens: RF 50mm F/1.8 STM
   date: "2025-09-20"
 
-- title: First Snow in 2025 II - Not Implemented
+- title: "First Snow in 2025 II - Not Implemented"
   category: ""
   subproject_slug: ""
   featured: false
@@ -1043,46 +1304,7 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-22"
 
-- title: Common Raven (Corvus corax)
-  category: avians
-  subproject_slug: passerines
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-57-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO2000.jpg
-  location: Denali National Park, AK, U.S.A.
-  iso: 2000
-  aperture: "F/8.0"
-  exposure: "1/1000S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-22"
-
-- title: Late Autumn on the George Parks Highway 
-  category: landscape
-  subproject_slug: Alaska
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-23_11-19-48_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_65MM_F6.3_1div160SEC_ISO800.jpg
-  location: Denali National Park, AK, U.S.A.
-  iso: 800
-  aperture: "F/6.3"
-  exposure: "1/160S"
-  camera: Canon EOS RP
-  lens: RF 24-105mm F/4-7.1 IS STM
-  date: "2025-09-23"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_14-32-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO6400.jpg
-  location: ""
-  iso: 6400
-  aperture: "F/8.0"
-  exposure: "1/200S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-24"
-
-- title: ""
+- title: "Exit Glacier - Not Implemented"
   category: ""
   subproject_slug: ""
   featured: false
@@ -1095,189 +1317,7 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-24"
 
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_18-03-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div100SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/100S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-24"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-01-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO250.jpg
-  location: ""
-  iso: 250
-  aperture: "F/5.6"
-  exposure: "1/125S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/125S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/125S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-08-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO400.jpg
-  location: ""
-  iso: 400
-  aperture: "F/8.0"
-  exposure: "1/125S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-45_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-27-28_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/125S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-36-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO2000.jpg
-  location: ""
-  iso: 2000
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-28-05_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO1600.jpg
-  location: ""
-  iso: 1600
-  aperture: "F/8.0"
-  exposure: "1/250S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-39-15_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div250SEC_ISO400.jpg
-  location: ""
-  iso: 400
-  aperture: "F/7.1"
-  exposure: "1/250S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
+- title: Jelly Fish - Not Implemented
   category: ""
   subproject_slug: ""
   featured: false
@@ -1290,46 +1330,7 @@
   lens: RF 100-400mm F/5.6-8 IS USM
   date: "2025-09-25"
 
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-42-16_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO3200.jpg
-  location: ""
-  iso: 3200
-  aperture: "F/8.0"
-  exposure: "1/250S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-44-24_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO6400.jpg
-  location: ""
-  iso: 6400
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
-  category: ""
-  subproject_slug: ""
-  featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200.jpg
-  location: ""
-  iso: 3200
-  aperture: "F/8.0"
-  exposure: "1/500S"
-  camera: Canon EOS RP
-  lens: RF 100-400mm F/5.6-8 IS USM
-  date: "2025-09-25"
-
-- title: ""
+- title: Cooper Landing Autumn - Not Implemented
   category: ""
   subproject_slug: ""
   featured: false

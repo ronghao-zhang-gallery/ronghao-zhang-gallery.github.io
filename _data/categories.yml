@@ -20,13 +20,13 @@
   count_species: true
   description: Appreciate the Diversity of Birds.
   subprojects:
-    - name: Raptors
-      slug: raptors
+    - name: Accipiters & Falcons
+      slug: accipiters_falcons
     - name: Passerines
       slug: passerines
     - name: Landfowl
       slug: landfowl
-    - name: Strigiformes & Owls
+    - name: Owls & Strigiformes
       slug: strigiformes 
 
     
