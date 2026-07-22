@@ -8,7 +8,7 @@ body_class: home-page
   <div class="hero-slideshow" id="hero-slideshow">
     {% for photo in featured_photos %}
     <div class="hero-slide"
-         style="background-image: url('{{ photo.image }}')"
+         style="background-image: url('{{ photo['image-raw'] }}')"
          data-title="{{ photo.title }}"
          data-category="{{ photo.category }}">
     </div>
@@ -44,7 +44,7 @@ body_class: home-page
         {% assign cat_photos = site.data.photos | where: "category", cat.slug %}
         {% assign cover_photo = cat_photos | first %}
         <a href="{{ cat.slug | prepend: '/' | append: '/' | relative_url }}" class="category-card">
-          <div class="category-card-bg" style="background-image: url('{{ cover_photo.image }}')"></div>
+          <div class="category-card-bg" style="background-image: url('{{ cover_photo['image-low-res'] }}')"></div>
           <div class="category-card-overlay"></div>
           <div class="category-card-content">
             <h3 class="category-card-title">{{ cat.title }}</h3>

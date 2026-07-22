@@ -1,9 +1,10 @@
 # All photos in one place.
-# Each entry requires: category, subproject_slug, image, title, location, iso, aperture, exposure, camera, lens, date
+# Each entry requires: category, subproject_slug, image-low-res, image-raw, title, location, iso, aperture, exposure, camera, lens, date
 # - category:        must match a slug in categories.yml
 # - subproject_slug: must match a subproject slug inside that category
-# - image:           single URL used for both the gallery grid and the lightbox (full resolution)
-# - featured: true   (optional) show this photo in the home page hero slideshow
+# - image-low-res:   compressed URL used for gallery grid thumbnails (and home page previews)
+# - image-raw:       full-resolution URL used for the lightbox detail view (and featured home page hero slides)
+# - featured: true   (optional) show this photo in the home page hero slideshow, displayed at raw quality
 #
 # To add a photo: paste a new block below with the correct category/subproject_slug.
 # To feature a photo on the home page: add "featured: true" to its entry.
@@ -14,7 +15,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_16-35-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F6.3_1div1000SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_16-35-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F6.3_1div1000SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_16-35-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F6.3_1div1000SEC_ISO400.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 400
   aperture: "F/6.3"
@@ -27,7 +29,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-04-54_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div400SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-04-54_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div400SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-04-54_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div400SEC_ISO200.jpg
   location: Dalton Highway at mile 97.5, AK, U.S.A.
   iso: 200
   aperture: "F/8.0"
@@ -40,7 +43,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 250
   aperture: "F/8.0"
@@ -53,7 +57,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 1250
   aperture: "F/6.3"
@@ -66,7 +71,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-42-11_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO640.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-42-11_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO640_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-42-11_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO640.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 640
   aperture: "F/5.6"
@@ -79,7 +85,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-28_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-28_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-28_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100.jpg
   location: Mount Sukakpak, AK, U.S.A.
   iso: 100
   aperture: "F/5.0" 
@@ -92,7 +99,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_183MM_F7.1_1div1000SEC_ISO1250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_183MM_F7.1_1div1000SEC_ISO1250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_183MM_F7.1_1div1000SEC_ISO1250.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 1250
   aperture: "F/7.1"
@@ -105,7 +113,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-56_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_325MM_F8.0_1div125SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-56_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_325MM_F8.0_1div125SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-56_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_325MM_F8.0_1div125SEC_ISO250.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 250
   aperture: "F/8.0"
@@ -118,7 +127,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_21-25-33_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F5.6_1div1000SEC_ISO1250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_21-25-33_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F5.6_1div1000SEC_ISO1250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_21-25-33_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F5.6_1div1000SEC_ISO1250.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 1250
   aperture: "F/5.6"
@@ -131,7 +141,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-52_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_165MM_F7.1_1div125SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-52_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_165MM_F7.1_1div125SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-17-52_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_165MM_F7.1_1div125SEC_ISO250.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 250
   aperture: "F/7.1"
@@ -144,7 +155,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-18-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-18-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-18-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/8.0"
@@ -157,7 +169,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-05-21_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-05-21_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-05-21_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO1600.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 1600
   aperture: "F/5.6"
@@ -170,7 +183,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-14-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-14-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-14-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div250SEC_ISO1600.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 1600
   aperture: "F/5.6"
@@ -183,7 +197,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-20-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO3200.jpg 
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-20-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO3200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-20-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO3200.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 3200
   aperture: "F/5.6"
@@ -196,7 +211,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_13-51-08_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_95MM_F8.0_1div500SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_13-51-08_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_95MM_F8.0_1div500SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_13-51-08_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_95MM_F8.0_1div500SEC_ISO200.jpg
   location: Mount Sukakpak, AK, U.S.A.
   iso: 200
   aperture: "F/8.0"
@@ -211,7 +227,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-56-36_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_37MM_F8.0_1div500SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-56-36_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_37MM_F8.0_1div500SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-56-36_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_37MM_F8.0_1div500SEC_ISO200.jpg
   location: Chandalar Shelf, AK, U.S.A.
   iso: 200
   aperture: "F/8.0"
@@ -224,7 +241,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-04_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_73MM_F8.0_1div1000SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-04_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_73MM_F8.0_1div1000SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-04_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_73MM_F8.0_1div1000SEC_ISO100.jpg
   location: Chandalar Shelf, AK, U.S.A.
   iso: 100
   aperture: "F/8.0"
@@ -237,7 +255,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_60MM_F8.0_1div1000SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_60MM_F8.0_1div1000SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_60MM_F8.0_1div1000SEC_ISO100.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 100
   aperture: "F/8.0"
@@ -250,7 +269,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_18-39-01_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div500SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_18-39-01_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div500SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_18-39-01_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div500SEC_ISO200.jpg
   location: Yukon River Camp, AK, U.S.A.
   iso: 200
   aperture: "F/7.1"
@@ -263,7 +283,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-49-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F8.0_1div1250SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-49-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F8.0_1div1250SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-49-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F8.0_1div1250SEC_ISO400.jpg
   location: Atigun Pass, AK, U.S.A.
   iso: 400
   aperture: "F/8.0"
@@ -276,7 +297,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-33-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1250SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-33-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1250SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-33-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1250SEC_ISO400.jpg
   location: Atigun Pass, AK, U.S.A.
   iso: 400
   aperture: "F/8.0"
@@ -289,7 +311,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-38-13_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F7.1_1div2000SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-38-13_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F7.1_1div2000SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-38-13_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_123MM_F7.1_1div2000SEC_ISO200.jpg
   location: Atigun River Valley, AK, U.S.A.
   iso: 200
   aperture: "F/7.1"
@@ -302,7 +325,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-51-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1250SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-51-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1250SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-51-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div1250SEC_ISO400.jpg
   location: Atigun River Valley, AK, U.S.A.
   iso: 400
   aperture: "F/8.0"
@@ -315,7 +339,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-15-43_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-15-43_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-15-43_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO1600.jpg
   location: Atigun River Valley, AK, U.S.A.
   iso: 1600
   aperture: "F/7.1"
@@ -328,7 +353,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-37-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-37-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-37-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400.jpg
   location: Atigun Pass, AK, U.S.A.
   iso: 400
   aperture: "F/8.0"
@@ -341,7 +367,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_18-01-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_18-01-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_18-01-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO200.jpg
   location: Atigun Pass, AK, U.S.A.
   iso: 200
   aperture: "F/7.1"
@@ -354,7 +381,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_18-09-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_135MM_F7.1_1div1000SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_18-09-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_135MM_F7.1_1div1000SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_18-09-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_135MM_F7.1_1div1000SEC_ISO400.jpg
   location: Chandalar Shelf, AK, U.S.A.
   iso: 400
   aperture: "F/7.1"
@@ -367,7 +395,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-16-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-16-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-16-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -380,7 +409,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-16-17_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-16-17_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-16-17_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -393,7 +423,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-25-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-25-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-25-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -406,7 +437,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-18-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-18-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-18-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -419,7 +451,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-21-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-21-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-21-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -432,7 +465,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-18-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-18-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-18-31_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div1000SEC_ISO800.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -445,7 +479,8 @@
   category: landscape
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-04-50_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-04-50_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-04-50_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200.jpg
   location: Denali National Park, AK, U.S.A.
   iso: 200
   aperture: "F/5.6"
@@ -458,7 +493,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-42-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div1000SEC_ISO640.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-42-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div1000SEC_ISO640_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-42-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div1000SEC_ISO640.jpg
   location: Mount Sukakpak, AK, U.S.A.
   iso: 640
   aperture: "F/5.6"
@@ -471,7 +507,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_17-57-51_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_17-57-51_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_17-57-51_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO100.jpg
   location: Denali National Park, AK, U.S.A.
   iso: 100
   aperture: "F/5.6"
@@ -484,7 +521,8 @@
   category: landscape
   subproject_slug: Alaska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-23_11-19-48_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_65MM_F6.3_1div160SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-23_11-19-48_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_65MM_F6.3_1div160SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-23_11-19-48_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_65MM_F6.3_1div160SEC_ISO800.jpg
   location: Denali National Park, AK, U.S.A.
   iso: 800
   aperture: "F/6.3"
@@ -498,7 +536,8 @@
   category: traces
   subproject_slug: north_america
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-23-48_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO125.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-23-48_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO125_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-23-48_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO125.jpg
   location: Wiseman, AK, U.S.A.
   iso: 125
   aperture: "F/4.0"
@@ -511,7 +550,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-29-44_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2500.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-29-44_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2500_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-29-44_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2500.jpg
   location: Wiseman, AK, U.S.A.
   iso: 2500
   aperture: "F/4.0"
@@ -524,7 +564,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-22-30_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-22-30_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-22-30_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO200.jpg
   location: Wiseman, AK, U.S.A.
   iso: 200
   aperture: "F/4.0"
@@ -537,7 +578,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-32_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO8000.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-32_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO8000_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-32_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO8000.jpg
   location: Wiseman, AK, U.S.A.
   iso: 8000
   aperture: "F/4.0"
@@ -550,7 +592,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-32-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div125SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-32-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div125SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-32-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div125SEC_ISO1600.jpg
   location: Wiseman, AK, U.S.A.
   iso: 1600
   aperture: "F/4.0"
@@ -563,7 +606,8 @@
   category: traces
   subproject_slug: north_america
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2000.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2000_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-30-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div320SEC_ISO2000.jpg
   location: Wiseman, AK, U.S.A.
   iso: 2000
   aperture: "F/4.0"
@@ -576,7 +620,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-45-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div500SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-45-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div500SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-45-50_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div500SEC_ISO100.jpg
   location: Wiseman, AK, U.S.A.
   iso: 100
   aperture: "F/4.0"
@@ -589,7 +634,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-08-24_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_24MM_F4.0_1div25SEC_ISO12800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-08-24_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_24MM_F4.0_1div25SEC_ISO12800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-08-24_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_24MM_F4.0_1div25SEC_ISO12800.jpg
   location: Fairbanks, AK, U.S.A.
   iso: 12800
   aperture: "F/4.0"
@@ -602,7 +648,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO1600.jpg
   location: Fairbanks, AK, U.S.A.
   iso: 1600
   aperture: "F/4.5"
@@ -615,7 +662,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-58_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-58_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_00-10-58_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div8SEC_ISO100.jpg
   location: Fairbanks, AK, U.S.A.
   iso: 100
   aperture: "F/4.5"
@@ -628,7 +676,8 @@
   category: traces
   subproject_slug: north_america
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-01-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-01-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-01-55_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO250.jpg
   location: Seward, AK, U.S.A.
   iso: 250
   aperture: "F/5.6"
@@ -641,7 +690,8 @@
   category: landscape
   subproject_slug: alska
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-39-15_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div250SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-39-15_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div250SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-39-15_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div250SEC_ISO400.jpg
   location: Kenai Fjords National Park, AK, U.S.A.
   iso: 400
   aperture: "F/7.1"
@@ -655,7 +705,8 @@
   category: avians
   subproject_slug: landfowl
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-20_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-20_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-20_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 6400
   aperture: "F/8.0"
@@ -668,7 +719,8 @@
   category: avians
   subproject_slug: landfowl
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div1000SEC_ISO6400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div1000SEC_ISO6400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div1000SEC_ISO6400.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 6400
   aperture: "F/8.0"
@@ -681,7 +733,8 @@
   category: avians
   subproject_slug: landfowl
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 6400
   aperture: "F/8.0"
@@ -694,7 +747,8 @@
   category: avians
   subproject_slug: landfowl
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div2000SEC_ISO6400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div2000SEC_ISO6400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_15-31-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div2000SEC_ISO6400.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 6400
   aperture: "F/8.0"
@@ -707,7 +761,8 @@
   category: avians
   subproject_slug: strigiformes
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-50-53_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-50-53_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-50-53_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO250.jpg
   location: Coldfoot, AK, U.S.A.
   iso: 250
   aperture: "F/8.0"
@@ -720,7 +775,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image:  https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-20-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO500.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-20-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO500_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-20-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO500.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 500
   aperture: "F/8.0"
@@ -733,7 +789,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-21-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO3200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-21-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO3200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-21-26_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO3200.jpg
   location: Dalton Highway, AK, U.S.A.
   iso: 3200
   aperture: "F/8.0"
@@ -746,7 +803,8 @@
   category: avians
   subproject_slug: landfowl
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-41-30_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div2000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-41-30_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div2000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-41-30_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_236MM_F7.1_1div2000SEC_ISO800.jpg
   location: Atigun River Valley, AK, U.S.A.
   iso: 800
   aperture: "F/7.1"
@@ -759,7 +817,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_14-32-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO6400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_14-32-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO6400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_14-32-06_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO6400.jpg
   location: Gridwood, AK, U.S.A.
   iso: 6400
   aperture: "F/8.0"
@@ -772,7 +831,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-57-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO2000.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-57-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO2000_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-57-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO2000.jpg
   location: Denali National Park, AK, U.S.A.
   iso: 2000
   aperture: "F/8.0"
@@ -785,7 +845,8 @@
   category: avians
   subproject_slug: accipiters_falcons
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
   location: Kenai Fjords National Park, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -798,7 +859,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
   location: Seward, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -811,7 +873,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-42-16_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO3200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-42-16_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO3200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-42-16_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO3200.jpg
   location: Cooper Landing, AK, U.S.A.
   iso: 3200
   aperture: "F/8.0"
@@ -824,7 +887,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_13-16-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_335MM_F8.0_1div125SEC_ISO1600.jpg
   location: Seward, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -837,7 +901,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-44-24_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO6400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-44-24_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO6400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-44-24_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO6400.jpg
   location: Cooper Landing, AK, U.S.A.
   iso: 6400
   aperture: "F/8.0"
@@ -850,7 +915,8 @@
   category: avians
   subproject_slug: passerines
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200.jpg
   location: ""
   iso: 3200
   aperture: "F/8.0"
@@ -864,7 +930,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_18-03-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div100SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_18-03-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div100SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_18-03-36_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div100SEC_ISO1600.jpg
   location: Exit Glacier, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -877,7 +944,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-08-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-08-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-08-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO400.jpg
   location: Seward, AK, U.S.A.
   iso: 400
   aperture: "F/8.0"
@@ -890,7 +958,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-10_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
   location: Seward, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -903,7 +972,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: true
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-09-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
   location: Seward, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -916,7 +986,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-45_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-45_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-45_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
   location: Seward, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -929,7 +1000,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_14-46-57_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
   location: Seward, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -942,7 +1014,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-28-05_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-28-05_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-28-05_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div250SEC_ISO1600.jpg
   location: Kenai Fjords National Park, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -955,7 +1028,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-27-28_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO1600.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-27-28_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO1600_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-27-28_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO1600.jpg
   location: Kenai Fjords National Park, AK, U.S.A.
   iso: 1600
   aperture: "F/8.0"
@@ -968,7 +1042,8 @@
   category: wildlife
   subproject_slug: mammals
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-36-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO2000.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-36-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO2000_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_15-36-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO2000.jpg
   location: Kenai Fjords National Park, AK, U.S.A.
   iso: 2000
   aperture: "F/8.0"
@@ -983,7 +1058,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-08-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_46MM_F8.0_1div1000SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-08-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_46MM_F8.0_1div1000SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-08-41_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_46MM_F8.0_1div1000SEC_ISO400.jpg
   location: ""
   iso: 400
   aperture: "F/8.0"
@@ -996,7 +1072,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-46_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_70MM_F8.0_1div1000SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-46_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_70MM_F8.0_1div1000SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-46_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_70MM_F8.0_1div1000SEC_ISO100.jpg
   location: ""
   iso: 100
   aperture: "F/8.0"
@@ -1009,7 +1086,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-54_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div1000SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-54_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div1000SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-10-54_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div1000SEC_ISO100.jpg
   location: ""
   iso: 100
   aperture: "F/8.0"
@@ -1022,7 +1100,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-17-42_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO320.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-17-42_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO320_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-17-42_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO320.jpg
   location: ""
   iso: 320
   aperture: "F/8.0"
@@ -1035,7 +1114,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-48-02_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div320SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-48-02_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div320SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_16-48-02_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div320SEC_ISO100.jpg
   location: ""
   iso: 100
   aperture: "F/7.1"
@@ -1048,7 +1128,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-07-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO640.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-07-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO640_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-07-42_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F7.1_1div2000SEC_ISO640.jpg
   location: ""
   iso: 640
   aperture: "F/7.1"
@@ -1061,7 +1142,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-37-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F7.1_1div2000SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-37-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F7.1_1div2000SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_17-37-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_149MM_F7.1_1div2000SEC_ISO200.jpg
   location: Atigun River Valley, AK, U.S.A.
   iso: 200
   aperture: "F/7.1"
@@ -1074,7 +1156,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-32_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-32_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_19-38-32_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F5.0_1div400SEC_ISO100.jpg
   location: ""
   iso: 100
   aperture: "F/5.0"
@@ -1087,7 +1170,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_15-34-59_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F6.3_1div800SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_15-34-59_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F6.3_1div800SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_15-34-59_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F6.3_1div800SEC_ISO800.jpg
   location: ""
   iso: 800
   aperture: "F/6.3"
@@ -1100,7 +1184,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-07-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_113MM_F6.3_1div320SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-07-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_113MM_F6.3_1div320SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-07-58_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_113MM_F6.3_1div320SEC_ISO200.jpg
   location: ""
   iso: 200
   aperture: "F/6.3"
@@ -1113,7 +1198,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-41-35_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_200MM_F7.1_1div250SEC_ISO250.jpg
   location: ""
   iso: 250
   aperture: "F/7.1"
@@ -1126,7 +1212,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_118MM_F6.3_1div1000SEC_ISO1250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_118MM_F6.3_1div1000SEC_ISO1250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_20-48-44_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_118MM_F6.3_1div1000SEC_ISO1250.jpg
   location: ""
   iso: 1250
   aperture: "F/6.3"
@@ -1139,7 +1226,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-47_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div125SEC_ISO250.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-47_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div125SEC_ISO250_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-49-47_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_300MM_F8.0_1div125SEC_ISO250.jpg
   location: ""
   iso: 250
   aperture: "F/8.0"
@@ -1152,7 +1240,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-53-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div125SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-53-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div125SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_22-53-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_214MM_F7.1_1div125SEC_ISO400.jpg
   location: Coldfoot, AK, U.S.A.
   iso: 400
   aperture: "F/7.1"
@@ -1165,7 +1254,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-15-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO500.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-15-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO500_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-15-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div500SEC_ISO500.jpg
   location: ""
   iso: 500
   aperture: "F/5.6"
@@ -1178,7 +1268,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-23-49_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_30MM_F5.6_1div500SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-23-49_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_30MM_F5.6_1div500SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-19_23-23-49_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_30MM_F5.6_1div500SEC_ISO800.jpg
   location: ""
   iso: 800
   aperture: "F/5.6"
@@ -1191,7 +1282,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div320SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div320SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-18_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F8.0_1div320SEC_ISO400.jpg
   location: ""
   iso: 400
   aperture: "F/8.0"
@@ -1204,7 +1296,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_156MM_F8.0_1div200SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_156MM_F8.0_1div200SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-06-48_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_156MM_F8.0_1div200SEC_ISO200.jpg
   location: ""
   iso: 200
   aperture: "F/8.0"
@@ -1217,7 +1310,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-33-56_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div2500SEC_ISO500.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-33-56_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div2500SEC_ISO500_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-33-56_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_105MM_F8.0_1div2500SEC_ISO500.jpg
   location: ""
   iso: 500
   aperture: "F/8.0"
@@ -1230,7 +1324,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-39-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-39-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-39-22_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_50MM_F8.0_1div1250SEC_ISO400.jpg
   location: ""
   iso: 400
   aperture: "F/8.0"
@@ -1243,7 +1338,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-40-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_85MM_F8.0_1div2000SEC_ISO400.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-40-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_85MM_F8.0_1div2000SEC_ISO400_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-40-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_85MM_F8.0_1div2000SEC_ISO400.jpg
   location: ""
   iso: 400
   aperture: "F/8.0"
@@ -1256,7 +1352,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-48-21_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1000SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-48-21_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1000SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_14-48-21_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_54MM_F8.0_1div1000SEC_ISO800.jpg
   location: ""
   iso: 800
   aperture: "F/8.0"
@@ -1269,7 +1366,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-39-09_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO3200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-39-09_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO3200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-39-09_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO3200.jpg
   location: ""
   iso: 3200
   aperture: "F/4.0"
@@ -1282,7 +1380,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-40-28_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO1000.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-40-28_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO1000_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-20_20-40-28_Canon-EOS-RP_RF50mm-F1.8-STM_50MM_F4.0_1div30SEC_ISO1000.jpg
   location: ""
   iso: 1000
   aperture: "F/4.0"
@@ -1295,7 +1394,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-05-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-05-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-22_18-05-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_100MM_F5.6_1div125SEC_ISO200.jpg
   location: Denali National Park, AK, U.S.A.
   iso: 200
   aperture: "F/5.6"
@@ -1308,7 +1408,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_17-45-14_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO200.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_17-45-14_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO200_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-24_17-45-14_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div125SEC_ISO200.jpg
   location: ""
   iso: 200
   aperture: "F/8.0"
@@ -1321,7 +1422,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-51-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_225MM_F7.1_1div125SEC_ISO800.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-51-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_225MM_F7.1_1div125SEC_ISO800_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-25_16-51-03_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_225MM_F7.1_1div125SEC_ISO800.jpg
   location: ""
   iso: 800
   aperture: "F/7.1"
@@ -1334,7 +1436,8 @@
   category: ""
   subproject_slug: ""
   featured: false
-  image: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-27_14-16-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div1000SEC_ISO100.jpg
+  image-low-res: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-27_14-16-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div1000SEC_ISO100_low-res.jpg
+  image-raw: https://raw.githubusercontent.com/ronghao-zhang-gallery/G001A_Alaska/main/2025-09-27_14-16-25_Canon-EOS-RP_RF24-105mm-F4-7.1-IS-STM_35MM_F4.5_1div1000SEC_ISO100.jpg
   location: ""
   iso: 100
   aperture: "F/4.5"

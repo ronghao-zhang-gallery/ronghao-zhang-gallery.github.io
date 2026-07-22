@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -viE \"\\\\.jpg$\")",
+      "Bash(sed -E 's/^\\( image: +https:\\\\/\\\\/raw\\\\.githubusercontent\\\\.com\\\\/.*\\)\\\\.jpg$/\\\\1_low-res.jpg/' _data/photos.yml)",
+      "Read(//tmp/**)",
+      "Bash(diff _data/photos.yml /tmp/photos_lowres_preview.yml | grep -c \"^<\")",
+      "Read(//private/tmp/**)",
+      "Bash(sed -E 's/^\\( image: +https:\\\\/\\\\/raw\\\\.githubusercontent\\\\.com\\\\/.*\\)\\\\.jpg[[:space:]]*$/\\\\1_low-res.jpg/' _data/photos.yml)",
+      "Bash(cp /tmp/photos_lowres_preview2.yml _data/photos.yml && grep -c \"_low-res.jpg\" _data/photos.yml)"
+    ],
+    "additionalDirectories": [
+      "/private/tmp"
+    ]
+  }
+}

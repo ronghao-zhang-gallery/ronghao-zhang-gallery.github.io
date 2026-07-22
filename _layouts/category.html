@@ -92,12 +92,12 @@ body_class: category-page
            data-camera="{{ photo.camera }}"
            data-lens="{{ photo.lens }}"
            data-date="{{ photo.date }}"
-           data-full="{{ photo.image }}"
+           data-full="{{ photo['image-raw'] }}"
            role="button"
            tabindex="0"
            aria-label="View {{ photo.title }}">
         <div class="photo-card-inner">
-          <img data-src="{{ photo.image }}" alt="{{ photo.title }}" decoding="async">
+          <img data-src="{{ photo['image-low-res'] }}" alt="{{ photo.title }}" decoding="async">
           <div class="photo-overlay">
             <span class="photo-title">{{ photo.title }}</span>
             <span class="photo-location">{{ photo.location }}</span>
