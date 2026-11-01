@@ -1,0 +1,51 @@
+{% comment %}
+  Sets the page language on <html> before the first paint, so the page never flashes another
+  language. Three languages (user, 2026-10-23): English, Simplified Chinese, Traditional Chinese.
+  Uses the visitor's saved choice (lang-switch.js), otherwise their browser language: Chinese
+  for Taiwan, Hong Kong and Macau (or any zh-Hant) gets Traditional, other Chinese gets Simplified.
+  Inline on purpose: an external script would run too late.
+
+  Each Chinese script has its own web font, loaded only once that language is chosen (the font
+  lists are 100–170 KB each; the fonts themselves come in small pieces from jsDelivr, so only the
+  characters on the page download). The lists are local copies with font-display: block
+  (scripts/make_cjk_font_css.py) and load render-blocking, so a new page never first draws its
+  Chinese in a stand-in font (user, 2026-10-25). window.siteLang.apply() is also used by
+  lang-switch.js.
+{% endcomment %}
+<script>
+  (function () {
+    // ---- Languages and their Chinese fonts (font names are set in _language.scss) ----
+    var FONTS = {
+      'en': null,
+      'zh-Hans': '{{ "/assets/fonts/lxgw-wenkai.css" | relative_url }}',     // 霞鹜文楷
+      'zh-Hant': '{{ "/assets/fonts/huiwen-mincho.css" | relative_url }}'    // 汇文明朝体
+    };
+    var root = document.documentElement;
+    var loaded = {};
+
+    function apply(lang) {
+      root.setAttribute('data-lang', lang);
+      root.setAttribute('lang', lang);
+      if (FONTS[lang] && !loaded[FONTS[lang]]) {
+        loaded[FONTS[lang]] = true;
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = FONTS[lang];
+        // Added while the head is parsed: hold the first paint until the font list is in.
+        if (document.readyState === 'loading') link.setAttribute('blocking', 'render');
+        document.head.appendChild(link);
+      }
+    }
+
+    // ---- Pick the language ----
+    var lang = null;
+    try { lang = localStorage.getItem('lang'); } catch (e) { /* storage blocked */ }
+    if (lang === 'zh') lang = 'zh-Hans';   // saved by the earlier two-language switch
+    if (!FONTS.hasOwnProperty(lang)) {
+      var browser = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      lang = /^zh-(hant|tw|hk|mo)\b/i.test(browser) ? 'zh-Hant' : /^zh\b/i.test(browser) ? 'zh-Hans' : 'en';
+    }
+    apply(lang);
+    window.siteLang = { apply: apply };
+  })();
+</script>

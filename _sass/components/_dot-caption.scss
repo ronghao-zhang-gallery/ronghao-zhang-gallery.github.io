@@ -1,0 +1,53 @@
+// Captions under the homepage's dot pictures (_includes/home/dot-story.html): a line of
+// classical poetry, then one small line "name · place · date". Each line stays on one line.
+// dot-morph.js hangs each caption from its picture's edge (left, right or centre, data-align)
+// and fades it in while the picture is on screen; until then it is invisible.
+
+.dot-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.dot-caption--left { justify-items: start; text-align: left; }
+.dot-caption--right { justify-items: end; text-align: right; }
+.dot-caption--center { justify-items: center; text-align: center; }
+
+.dot-caption p { margin: 0; white-space: nowrap; }
+
+// The poem: the story's serif (its Chinese font follows the page language, _language.scss).
+.dot-caption__poem {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+// The English translations are much longer than the Chinese lines: they wrap, within the
+// picture's width (--pic-w, set by dot-morph.js), in even lines.
+:root[data-lang="en"] .dot-caption__poem {
+  max-width: var(--pic-w, 30rem);
+  white-space: normal;
+  text-wrap: balance;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.dot-caption__detail {
+  font-family: var(--font-text);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+
+// Phones: pictures are centred, so are their captions.
+@media (max-width: 760px) {
+  .dot-caption--left,
+  .dot-caption--right { justify-items: center; text-align: center; }
+}

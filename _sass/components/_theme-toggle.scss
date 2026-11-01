@@ -1,0 +1,41 @@
+// Light/dark switch in the top bar. Shows the moon in light mode and the sun in dark mode,
+// i.e. the mode you would switch to.
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--float-border);
+  border-radius: 50%;
+  background: var(--float-bg);      // floats like the other header segments (_tokens.scss)
+  box-shadow: var(--float-shadow);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  &:hover { background: var(--surface); }
+}
+
+.theme-toggle__icon {
+  grid-area: 1 / 1;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.3s ease, transform 0.5s var(--ease-out);
+}
+
+// ---- Which icon shows ----
+.theme-toggle__icon--sun { opacity: 0; transform: rotate(-60deg) scale(0.6); }
+
+[data-theme="dark"] {
+  .theme-toggle__icon--moon { opacity: 0; transform: rotate(60deg) scale(0.6); }
+  .theme-toggle__icon--sun { opacity: 1; transform: none; }
+}

@@ -1,0 +1,396 @@
+# Bird sightings on the Avians page (avians.html, user 2026-10-25): the same map, continent bar
+# and list as the Traces page, but every dot is a place where a bird was observed. The page
+# reuses the Traces template (_includes/places/places-map.html, page="avians").
+#
+# places: one dot each.
+#   id         short name, used by visits below
+#   name       { en, zh, zh_hant }, in the same style as the captions
+#   continent  an id from _data/continents.yml
+#   lat, lon   ROUNDED to about 0.1° (~10 km): never the exact spot (so nests aren't given away)
+# visits: one row per sighting in the dated list, newest first on the page. Added by
+#   scripts/add_sighting.py from the photo's EXIF (only the place and species by hand):
+#   place      a place id
+#   species    an id from _data/species.yml (its name, and its range map if there is one)
+#   photo      the photo's file name: in the image repo bird-<year> (large/ and thumb/), or,
+#              for photos not imported there yet, a local export (preview from local-photos/).
+#              Leave it out for a bird seen but not photographed (user, 2026-10-30): it still
+#              gets its card ("No photo yet") and its dot, but nothing in the gallery. Such a
+#              row needs only place, species, date and taken (the date, or "YYYY-MM-DDTHH:MM"
+#              if the time is known: the page sorts by it)
+#   export     the original export's file name, for photos in the image repo
+#   cover      optional, true: the species' cover photo, on its card and in front of its gallery
+#              stack (same bird, day and place); without one, the newest photo is used
+#   date       the day it was taken ("YYYY-MM-DD"), shown on the page
+#   taken      date and time to the hundredth of a second ("YYYY-MM-DDTHH:MM:SS.ss"): the page
+#              sorts by it (bursts put several photos in one second)
+#   camera, lens, focal (mm), aperture (f-number), exposure (seconds, "1/500"), iso
+#
+# (The Cape May Warbler sighting from the homepage caption was removed, user 2026-10-25.)
+
+places:
+  # Atlanta-area parks (user, 2026-10-31: the photos' place was "Atlanta GA" until then; the
+  # image repo's file names still say atlanta-ga, since published names never change)
+  - id: murphey-candler           # all of 2026-10-17
+    continent: north-america
+    name: { en: "Murphey Candler Park, Atlanta GA", zh: 美国佐治亚州亚特兰大墨菲坎德勒公园, zh_hant: 美國喬治亞州亞特蘭大墨菲坎德勒公園 }
+    lat: 33.9
+    lon: -84.3
+  - id: legacy-park               # all of 2026-10-25
+    continent: north-america
+    name: { en: "Legacy Park, Decatur GA", zh: 美国佐治亚州迪凯特传承公园, zh_hant: 美國喬治亞州迪凱特傳承公園 }
+    lat: 33.8
+    lon: -84.3
+  - id: savannah-nwr              # Laurel Hill Wildlife Drive, Jasper County SC (user, 2026-10-31)
+    continent: north-america
+    name: { en: Savannah NWR SC, zh: 美国南卡罗来纳州萨凡纳国家野生动物保护区, zh_hant: 美國南卡羅來納州薩凡納國家野生動物保護區 }
+    lat: 32.2
+    lon: -81.1
+  - id: fort-pulaski              # Fort Pulaski National Monument, Chatham County GA (user, 2026-10-31)
+    continent: north-america
+    name: { en: Fort Pulaski NM GA, zh: 美国佐治亚州普拉斯基堡国家纪念地, zh_hant: 美國喬治亞州普拉斯基堡國家紀念地 }
+    lat: 32.0
+    lon: -80.9
+
+visits:
+  - place: legacy-park
+    species: carolina-wren
+    photo: 20261025-007_carolina-wren_2026_atlanta-ga.webp
+    export: IM8A1985.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T09:00:05.82"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/500"
+    iso: 400
+  - place: legacy-park
+    species: eastern-bluebird
+    photo: 20261025-002_eastern-bluebird_2026_atlanta-ga.webp
+    export: IM8A1051.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:00:52.01"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/2000"
+    iso: 1600
+  - place: legacy-park
+    species: eastern-bluebird
+    photo: 20261025-003_eastern-bluebird_2026_atlanta-ga.webp
+    cover: true          # the bluebird's cover (user, 2026-10-26: not the flying 005 or the dark 004)
+    export: IM8A1069.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:00:56.06"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/2000"
+    iso: 1600
+  - place: legacy-park
+    species: carolina-wren
+    photo: 20261025-006_carolina-wren_2026_atlanta-ga.webp
+    export: IM8A1966.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T09:00:02.54"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/500"
+    iso: 400
+  - place: legacy-park
+    species: chipping-sparrow
+    photo: 20261025-008_chipping-sparrow_2026_atlanta-ga.webp
+    export: IM8A1220.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:11:56.97"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/3200"
+    iso: 3200
+  - place: legacy-park
+    species: chipping-sparrow
+    photo: 20261025-010_chipping-sparrow_2026_atlanta-ga.webp
+    export: IM8A1238.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:11:58.52"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/3200"
+    iso: 3200
+  - place: legacy-park
+    species: house-finch
+    photo: 20261025-011_house-finch_2026_atlanta-ga.webp
+    export: IM8A1444.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:20:49.35"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/3200"
+    iso: 1600
+  - place: legacy-park
+    species: northern-cardinal
+    photo: 20261025-012_northern-cardinal_2026_atlanta-ga.webp
+    cover: true          # the cardinal's cover (Claude's pick, 2026-10-27: the singing male among the cones)
+    export: IM8A1677.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:35:09.13"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/2000"
+    iso: 3200
+  - place: legacy-park
+    species: northern-cardinal
+    photo: 20261025-014_northern-cardinal_2026_atlanta-ga.webp
+    export: IM8A1842.jpg
+    date: "2026-10-25"
+    taken: "2026-10-25T08:37:59.11"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM +1.4x III
+    focal: 700
+    aperture: 5.6
+    exposure: "1/500"
+    iso: 400
+  - place: murphey-candler
+    species: downy-woodpecker
+    photo: 20261017-001_downy-woodpecker_2026_atlanta-ga.webp
+    export: IM8A0718.jpg
+    date: "2026-10-17"
+    taken: "2026-10-17T07:58:08.33"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM
+    focal: 500
+    aperture: 4
+    exposure: "1/1000"
+    iso: 3200
+  - place: murphey-candler
+    species: eastern-phoebe
+    photo: 20261017-002_eastern-phoebe_2026_atlanta-ga.webp
+    export: IM8A0775.jpg
+    date: "2026-10-17"
+    taken: "2026-10-17T08:05:27.51"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM
+    focal: 500
+    aperture: 4
+    exposure: "1/2000"
+    iso: 3200
+  - place: murphey-candler
+    species: eastern-phoebe
+    photo: 20261017-003_eastern-phoebe_2026_atlanta-ga.webp
+    export: IM8A0777.jpg
+    date: "2026-10-17"
+    taken: "2026-10-17T08:05:27.61"
+    camera: Canon EOS R5
+    lens: EF500mm f/4L IS II USM
+    focal: 500
+    aperture: 4
+    exposure: "1/2000"
+    iso: 3200
+  - place: legacy-park           # seen, no photo (user, 2026-10-31)
+    species: american-goldfinch
+    date: "2026-10-25"
+    taken: "2026-10-25"
+  - place: murphey-candler       # seen, no photo (user, 2026-10-31)
+    species: grey-catbird
+    date: "2026-10-17"
+    taken: "2026-10-17"
+  # (Common Gallinule and Boat-tailed Grackle: their photo-less rows were replaced by the photo
+  #  rows at the end, user 2026-10-31: 2 grackle photos, 1 gallinule.)
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: black-necked-stilt
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: killdeer
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: spotted-sandpiper
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: solitary-sandpiper
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: forsters-tern
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: wood-stork
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: anhinga
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: glossy-ibis
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: white-faced-ibis
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: tricolored-heron
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: snowy-egret
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: great-egret
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: great-blue-heron
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
+    species: osprey
+    date: "2026-04-18"
+    taken: "2026-04-18"
+  # (Red-winged Blackbird: its photo-less row was replaced by the photo row at the end, user
+  #  2026-10-31.)
+  - place: savannah-nwr
+    species: boat-tailed-grackle
+    photo: 20260418-001_boat-tailed-grackle_2026_savannah-nwr-sc.webp
+    cover: true                   # the user's pick, 2026-10-31 (not the newest, 002)
+    export: IM8A3070.jpg
+    date: "2026-04-18"
+    taken: "2026-04-18T07:17:20.74"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 183
+    aperture: 7.1
+    exposure: "1/4000"
+    iso: 1600
+  - place: savannah-nwr
+    species: boat-tailed-grackle
+    photo: 20260418-002_boat-tailed-grackle_2026_savannah-nwr-sc.webp
+    export: IM8A3191.jpg
+    date: "2026-04-18"
+    taken: "2026-04-18T07:39:20.74"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/4000"
+    iso: 1600
+  - place: savannah-nwr
+    species: common-gallinule
+    photo: 20260418-003_common-gallinule_2026_savannah-nwr-sc.webp
+    export: IM8A3342.jpg
+    date: "2026-04-18"
+    taken: "2026-04-18T08:12:44.13"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/2000"
+    iso: 1600
+  - place: savannah-nwr
+    species: red-winged-blackbird
+    photo: 20260418-004_red-winged-blackbird_2026_savannah-nwr-sc.webp
+    export: IM8A3725.jpg
+    date: "2026-04-18"
+    taken: "2026-04-18T09:35:34.01"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/4000"
+    iso: 2000
+  # ---- Fort Pulaski NM GA, 2026-04-19, seen, no photos (user, 2026-10-31), in the user's
+  #      checklist order (Brown Pelican was listed twice: one row). ----
+  - place: fort-pulaski
+    species: black-bellied-plover
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: semipalmated-plover
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: hudsonian-whimbrel
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: ruddy-turnstone
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: laughing-gull
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: western-cattle-egret
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: brown-pelican
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: red-bellied-woodpecker
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: fort-pulaski
+    species: northern-cardinal
+    date: "2026-04-19"
+    taken: "2026-04-19"
+  - place: murphey-candler
+    species: eastern-bluebird
+    photo: 20251227-001_eastern-bluebird_2025_murphey-candler-park.webp
+    export: IM8A0095.jpg
+    date: "2025-12-27"
+    taken: "2025-12-27T08:17:12.29"
+    camera: Canon EOS R5
+    lens: RF200-800mm F6.3-9 IS USM
+    focal: 800
+    aperture: 9
+    exposure: "1/250"
+    iso: 2000
+  - place: murphey-candler
+    species: red-tailed-hawk
+    photo: 20251227-002_red-tailed-hawk_2025_murphey-candler-park.webp
+    cover: true          # the hawk's cover (user, 2026-10-31: the one on the ground, not the newest 003)
+    export: IM8A0229.jpg
+    date: "2025-12-27"
+    taken: "2025-12-27T09:16:03.78"
+    camera: Canon EOS R5
+    lens: RF200-800mm F6.3-9 IS USM
+    focal: 455
+    aperture: 7.1
+    exposure: "1/500"
+    iso: 2500
+  - place: murphey-candler
+    species: red-tailed-hawk
+    photo: 20251227-003_red-tailed-hawk_2025_murphey-candler-park.webp
+    export: IM8A0277.jpg
+    date: "2025-12-27"
+    taken: "2025-12-27T09:25:44.88"
+    camera: Canon EOS R5
+    lens: RF200-800mm F6.3-9 IS USM
+    focal: 400
+    aperture: 7.1
+    exposure: "1/500"
+    iso: 2500
+  - place: murphey-candler        # seen, no photo (user, 2026-10-31: same day as the hawks)
+    species: red-bellied-woodpecker
+    date: "2025-12-27"
+    taken: "2025-12-27"

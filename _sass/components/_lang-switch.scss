@@ -1,0 +1,82 @@
+// Language switch in the top bar: EN | 简 | 繁, a pill of three buttons beside the light/dark
+// switch, the same height and outline. The current language is filled in. It is marked from
+// data-lang on <html> (set before the first paint by lang-init.html), so it is right even before
+// lang-switch.js runs.
+//
+// Each label is set in its own language's font on every page (user, 2026-10-23): EN in EB
+// Garamond, 简 in 霞鹜文楷, 繁 in 汇文明朝体. For 简 and 繁 only the one piece of each web font
+// that holds the character is loaded (about 50 KB each, from the same files the full fonts use,
+// so a Chinese page doesn't download it twice).
+
+// ---- The two label characters ----
+@font-face {
+  font-family: "Lang Label Hans";
+  src: url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/files/lxgwwenkai-regular-subset-117.woff2") format("woff2");
+  unicode-range: U+7B80;   // 简
+  font-display: block;   // wait, don't flash a stand-in (see _fonts.scss)
+}
+
+@font-face {
+  font-family: "Lang Label Hant";
+  src: url("https://cdn.jsdelivr.net/npm/@chinese-fonts/hwmct@3.0.0/dist/%E6%B1%87%E6%96%87%E6%98%8E%E6%9C%9D%E4%BD%93/9da02ff78bb228195f3a19ffd11663d1.woff2") format("woff2");
+  unicode-range: U+7E41;   // 繁
+  font-display: block;
+}
+
+// Floats like the other header segments (--float-*, _tokens.scss).
+.lang-switch {
+  display: flex;
+  height: 2.5rem;
+  padding: 0.2rem;
+  border: 1px solid var(--float-border);
+  border-radius: 999px;
+  background: var(--float-bg);
+  box-shadow: var(--float-shadow);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.lang-switch__option {
+  display: grid;
+  place-items: center;
+  min-width: 2.1rem;
+  padding: 0 0.45rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover { background: var(--surface); color: var(--ink); }
+}
+
+.lang-switch__option[data-lang-set="en"] {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1rem;          // Garamond runs small
+  letter-spacing: 0.04em;
+}
+
+.lang-switch__option[data-lang-set="zh-Hans"] {
+  font-family: "Lang Label Hans", "LXGW WenKai", "Kaiti SC", "STKaiti", serif;
+  font-size: 0.95rem;
+  font-weight: 400;         // the font has one weight; don't fake bold
+}
+
+.lang-switch__option[data-lang-set="zh-Hant"] {
+  font-family: "Lang Label Hant", "Huiwen-mincho", "Songti TC", "PMingLiU", serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+:root[data-lang="en"] .lang-switch__option[data-lang-set="en"],
+:root[data-lang="zh-Hans"] .lang-switch__option[data-lang-set="zh-Hans"],
+:root[data-lang="zh-Hant"] .lang-switch__option[data-lang-set="zh-Hant"] {
+  background: var(--ink);
+  color: var(--bg);
+  cursor: default;
+}

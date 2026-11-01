@@ -1,5 +1,16 @@
+# Files git should never track: build output, caches, local gems, and photos (they live in the image repo).
 _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
 vendor
+inbox/
+# Photo exports dropped in the repo root (e.g. a test photo for scripts/add_sighting.py): never committed.
+/*.jpg
+/*.jpeg
+/*.JPG
+# Local preview thumbnails (scripts/add_sighting.py) until the image repo exists: never committed.
+local-photos/
+# Python caches from the scripts, and Claude Code's per-machine settings.
+__pycache__/
+.claude/settings.local.json

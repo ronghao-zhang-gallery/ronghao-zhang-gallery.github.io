@@ -1,0 +1,13 @@
+{% comment %}
+  Footer on every page: who and where, and how to get in touch. "Contact Me" in the top bar
+  jumps here (#contact).
+  The email is plain text on purpose: mailto links don't work for every visitor.
+{% endcomment %}
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner">
+    <p class="site-footer__name">{{ site.title }}</p>
+    <p>{% include t.html en=site.location zh=site.location_zh zh_hant=site.location_zh_hant %}</p>
+    <p class="site-footer__email">{{ site.email }}</p>
+    <p class="site-footer__year">© {{ site.time | date: "%Y" }}</p>
+  </div>
+</footer>

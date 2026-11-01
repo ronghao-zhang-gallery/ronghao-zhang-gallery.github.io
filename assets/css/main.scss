@@ -1,0 +1,27 @@
+---
+# Front matter tells Jekyll to compile this file. Keep it empty.
+---
+// Main stylesheet: imports every partial in _sass/, base first, then one file per component.
+
+// ---- Base ----
+@use "base/fonts";
+@use "base/tokens";
+@use "base/reset";
+@use "base/elements";
+@use "base/language";
+
+// ---- Components ----
+@use "components/site-header";
+@use "components/theme-toggle";
+@use "components/lang-switch";
+@use "components/dot-stage";
+@use "components/dot-caption";
+@use "components/places";
+@use "components/iucn";
+@use "components/card-tools";
+@use "components/photo-gallery";
+@use "components/gallery-side";
+@use "components/photo-viewer";
+@use "components/page-transitions";
+@use "components/signature";
+@use "components/site-footer";

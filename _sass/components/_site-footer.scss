@@ -1,0 +1,23 @@
+// Footer on every page: name, place, email, year.
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  max-width: var(--content-w);
+  margin-inline: auto;
+  padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.site-footer__name { font-weight: 600; color: var(--ink); }
+
+// Long address: allow it to break on narrow screens instead of widening the page.
+.site-footer__email { overflow-wrap: anywhere; user-select: all; }
+
+.site-footer__year { margin-left: auto; }

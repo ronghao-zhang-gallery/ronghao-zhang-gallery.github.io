@@ -1,0 +1,31 @@
+# Continents for the Traces page's continent bar (user, 2026-10-25), in the bar's order.
+#   id     used by places.yml (`continent:`) and the page
+#   name   { en, zh, zh_hant }
+#   box    [west lon, south lat, east lon, north lat]: what the map zooms to.
+#          scripts/make_world_map.py projects it into the map's units (it reads this file),
+#          so rerun the script after changing a box.
+#   polar  true for Antarctica: Equal Earth squashes it into a thin strip, so it gets its own
+#          polar map instead of a zoom.
+# Which land belongs to which continent comes from Natural Earth's country table (see the script).
+
+- id: north-america
+  name: { en: North America, zh: 北美洲, zh_hant: 北美洲 }
+  box: [-170, 7, -12, 84]
+- id: south-america
+  name: { en: South America, zh: 南美洲, zh_hant: 南美洲 }
+  box: [-92, -56, -34, 13]
+- id: europe
+  name: { en: Europe, zh: 欧洲, zh_hant: 歐洲 }
+  box: [-25, 34, 60, 72]
+- id: africa
+  name: { en: Africa, zh: 非洲, zh_hant: 非洲 }
+  box: [-18, -35, 52, 38]
+- id: asia
+  name: { en: Asia, zh: 亚洲, zh_hant: 亞洲 }
+  box: [26, -11, 180, 78]
+- id: oceania
+  name: { en: Oceania, zh: 大洋洲, zh_hant: 大洋洲 }
+  box: [110, -48, 180, 0]
+- id: antarctica
+  name: { en: Antarctica, zh: 南极洲, zh_hant: 南極洲 }
+  polar: true

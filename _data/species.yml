@@ -1,0 +1,192 @@
+# Bird species for the Avians page (user, 2026-10-25), keyed by a short id that sightings in
+# _data/avians.yml use (`species:`).
+#   name   { en, zh, zh_hant }
+#   scientific  scientific name (IOC World Bird List, as in the sticker library); shown in
+#          italics under the name on the bird card
+#   iucn   optional: the IUCN category by hand, only where the sticker library has none
+#          (scripts/fetch_stickers.py otherwise takes it from the library)
+#   ebird  eBird species code: names the range map in _data/ranges.yml (scripts/make_ranges.py
+#          fetches it from eBird Status & Trends)
+# Chinese names: Claude's choice from common usage; check them. From the Savannah NWR birds on
+# (2026-10-31), Simplified is the IOC Chinese name and Traditional its character conversion.
+
+carolina-wren:
+  name: { en: Carolina Wren, zh: 卡罗苇鹪鹩, zh_hant: 卡羅葦鷦鷯 }
+  scientific: Thryothorus ludovicianus
+  ebird: carwre
+
+eastern-bluebird:
+  name: { en: Eastern Bluebird, zh: 东蓝鸲, zh_hant: 東藍鴝 }
+  scientific: Sialia sialis
+  ebird: easblu
+
+chipping-sparrow:
+  name: { en: Chipping Sparrow, zh: 棕顶雀鹀, zh_hant: 棕頂雀鵐 }
+  scientific: Spizella passerina
+  ebird: chispa
+
+house-finch:
+  name: { en: House Finch, zh: 家朱雀, zh_hant: 家朱雀 }
+  scientific: Haemorhous mexicanus
+  ebird: houfin
+
+northern-cardinal:
+  name: { en: Northern Cardinal, zh: 主红雀, zh_hant: 主紅雀 }
+  scientific: Cardinalis cardinalis
+  ebird: norcar
+
+downy-woodpecker:
+  name: { en: Downy Woodpecker, zh: 绒啄木鸟, zh_hant: 絨啄木鳥 }
+  scientific: Dryobates pubescens
+  ebird: dowwoo
+
+eastern-phoebe:
+  name: { en: Eastern Phoebe, zh: 灰胸长尾霸鹟, zh_hant: 灰胸長尾霸鶲 }
+  scientific: Sayornis phoebe
+  ebird: easpho
+
+american-goldfinch:
+  name: { en: American Goldfinch, zh: 北美金翅雀, zh_hant: 北美金翅雀 }
+  scientific: Spinus tristis
+  ebird: amegfi
+
+grey-catbird:
+  name: { en: Grey Catbird, zh: 灰嘲鸫, zh_hant: 灰嘲鶇 }
+  scientific: Dumetella carolinensis
+  ebird: grycat
+
+common-gallinule:
+  name: { en: Common Gallinule, zh: 美洲黑水鸡, zh_hant: 美洲黑水雞 }
+  scientific: Gallinula galeata
+  ebird: comgal1
+
+black-necked-stilt:
+  name: { en: Black-necked Stilt, zh: 黑颈长脚鹬, zh_hant: 黑頸長腳鷸 }
+  scientific: Himantopus mexicanus
+  iucn: LC                 # not in the sticker library; IUCN Red List
+  ebird: bknsti
+
+killdeer:
+  name: { en: Killdeer, zh: 双领鸻, zh_hant: 雙領鴴 }
+  scientific: Charadrius vociferus
+  ebird: killde
+
+spotted-sandpiper:
+  name: { en: Spotted Sandpiper, zh: 斑腹矶鹬, zh_hant: 斑腹磯鷸 }
+  scientific: Actitis macularius
+  ebird: sposan
+
+solitary-sandpiper:
+  name: { en: Solitary Sandpiper, zh: 褐腰草鹬, zh_hant: 褐腰草鷸 }
+  scientific: Tringa solitaria
+  ebird: solsan
+
+forsters-tern:
+  name: { en: "Forster's Tern", zh: 弗氏燕鸥, zh_hant: 弗氏燕鷗 }
+  scientific: Sterna forsteri
+  ebird: forter
+
+wood-stork:
+  name: { en: Wood Stork, zh: 黑头鹮鹳, zh_hant: 黑頭鹮鸛 }
+  scientific: Mycteria americana
+  ebird: woosto
+
+anhinga:
+  name: { en: Anhinga, zh: 美洲蛇鹈, zh_hant: 美洲蛇鵜 }
+  scientific: Anhinga anhinga
+  ebird: anhing
+
+glossy-ibis:
+  name: { en: Glossy Ibis, zh: 彩鹮, zh_hant: 彩鹮 }
+  scientific: Plegadis falcinellus
+  ebird: gloibi
+
+white-faced-ibis:
+  name: { en: White-faced Ibis, zh: 白脸彩鹮, zh_hant: 白臉彩鹮 }
+  scientific: Plegadis chihi
+  ebird: whfibi
+
+tricolored-heron:
+  name: { en: Tricolored Heron, zh: 三色鹭, zh_hant: 三色鷺 }
+  scientific: Egretta tricolor
+  ebird: triher
+
+snowy-egret:
+  name: { en: Snowy Egret, zh: 雪鹭, zh_hant: 雪鷺 }
+  scientific: Egretta thula
+  ebird: snoegr
+
+great-egret:
+  name: { en: Great Egret, zh: 大白鹭, zh_hant: 大白鷺 }
+  scientific: Ardea alba
+  ebird: greegr
+
+great-blue-heron:
+  name: { en: Great Blue Heron, zh: 大蓝鹭, zh_hant: 大藍鷺 }
+  scientific: Ardea herodias
+  ebird: grbher3
+
+osprey:
+  name: { en: Osprey, zh: 鹗, zh_hant: 鶚 }
+  scientific: Pandion haliaetus carolinensis   # the user's subspecies (IOC species: Pandion haliaetus)
+  ebird: osprey
+
+red-winged-blackbird:
+  name: { en: Red-winged Blackbird, zh: 红翅黑鹂, zh_hant: 紅翅黑鸝 }
+  scientific: Agelaius phoeniceus
+  ebird: rewbla
+
+boat-tailed-grackle:
+  name: { en: Boat-tailed Grackle, zh: 宽尾拟八哥, zh_hant: 寬尾擬八哥 }
+  scientific: Quiscalus major
+  ebird: botgra
+
+# ---- Fort Pulaski NM, Chatham County GA, 2026-04-19 (user, 2026-10-31) ----
+black-bellied-plover:
+  name: { en: Black-bellied Plover, zh: 灰斑鸻, zh_hant: 灰斑鴴 }   # IOC English: Grey Plover
+  scientific: Pluvialis squatarola
+  ebird: bkbplo
+
+semipalmated-plover:
+  name: { en: Semipalmated Plover, zh: 半蹼鸻, zh_hant: 半蹼鴴 }
+  scientific: Charadrius semipalmatus
+  ebird: semplo
+
+hudsonian-whimbrel:
+  name: { en: Hudsonian Whimbrel, zh: 哈德森杓鹬, zh_hant: 哈德森杓鷸 }
+  scientific: Numenius hudsonicus
+  iucn: LC                 # the Red List still lumps it in Whimbrel (Numenius phaeopus), LC
+  ebird: whimbr            # eBird Status & Trends 2023 has it only under this code
+
+ruddy-turnstone:
+  name: { en: Ruddy Turnstone, zh: 翻石鹬, zh_hant: 翻石鷸 }
+  scientific: Arenaria interpres
+  ebird: rudtur
+
+laughing-gull:
+  name: { en: Laughing Gull, zh: 笑鸥, zh_hant: 笑鷗 }
+  scientific: Leucophaeus atricilla
+  iucn: LC                 # not in the sticker library; IUCN Red List
+  ebird: laugul
+
+western-cattle-egret:
+  name: { en: Western Cattle-Egret, zh: 西牛背鹭, zh_hant: 西牛背鷺 }
+  scientific: Ardea ibis
+  ebird: categr1           # not in the sticker library's ids; matched there by scientific name
+
+brown-pelican:
+  name: { en: Brown Pelican, zh: 褐鹈鹕, zh_hant: 褐鵜鶘 }
+  scientific: Pelecanus occidentalis
+  ebird: brnpel
+
+red-bellied-woodpecker:
+  name: { en: Red-bellied Woodpecker, zh: 红腹啄木鸟, zh_hant: 紅腹啄木鳥 }
+  scientific: Melanerpes carolinus
+  ebird: rebwoo
+
+# ---- Murphey Candler Park, Atlanta GA, 2025-12-27 (user, 2026-10-31) ----
+# (briefly changed to Red-shouldered Hawk, then back to Red-tailed: user, 2026-10-31)
+red-tailed-hawk:
+  name: { en: Red-tailed Hawk, zh: 红尾鵟, zh_hant: 紅尾鵟 }   # a juvenile, with a squirrel
+  scientific: Buteo jamaicensis
+  ebird: rethaw

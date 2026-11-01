@@ -1,0 +1,96 @@
+{% comment %}
+  Homepage opening: one field of coloured dots that changes from shape to shape as you scroll
+  (portrait, warbler, moment, landscape), with one line of text per shape: beside the shape, or at
+  the top for a full-width shape (`place: top`). Every text is there in English, Simplified and Traditional Chinese.
+  The dots are drawn by dot-morph.js from the shapes in dot-shapes.js; the lines come from
+  `story` in _data/home.yml. The first line is the page title (the signed name, see signature.svg).
+  Under each line after the title, a short line pointing to a page (`go`, story-go.html); the two are wrapped in
+  .dot-step__line so they move and centre as one.
+
+  Lines that move on their own (the title, and lines with `enter` / `leave` in the data) sit in
+  the sticky layer with the dots, not in their scrolling step, so the browser holds them level
+  while you scroll; line-moves.js only slides them in and out (data-pin = the page they belong
+  to). Their step stays, empty, so the scroll is just as long.
+{% endcomment %}
+{%- assign story = site.data.home.story %}
+{%- assign title = story.first %}
+<section class="dot-stage" data-dot-stage aria-label="Introduction">
+  <div class="dot-stage__canvas">
+    <canvas aria-hidden="true"></canvas>
+    <p class="dot-stage__fallback">{% include t.html en="This browser can't draw the dots (WebGL is off)." zh="此浏览器无法显示点阵图（WebGL 未开启）。" zh_hant="此瀏覽器無法顯示點陣圖（WebGL 未開啟）。" %}</p>
+    {%- comment -%}
+      The name signed by hand (signature.svg, drawn on load), "Photography" under it. The title
+      stays in English on the Chinese page too (user, 2026-10-23), so it is not run through t.html.
+      Screen readers get the plain text; the drawing is hidden from them.
+    {%- endcomment %}
+    <div class="dot-step dot-step--pinned dot-step--title" data-pin="0" data-leave="{{ title.leave }}">
+      <h1 class="dot-step__text dot-step__text--title">
+        <span class="visually-hidden" lang="en">{{ title.text }}</span>
+        {% include home/signature.svg %}
+        <span class="title-kind" aria-hidden="true">{{ title.kind }}</span>
+      </h1>
+    </div>
+
+    {%- comment -%}
+      The other moving lines. Odd pages have their text on the left, flush with the site name;
+      even pages on the right, flush with the light/dark switch (user, 2026-10-23); a `place: top`
+      line sits centred over the full-width shape instead.
+    {%- endcomment %}
+    {%- for line in story offset: 1 %}
+    {%- if line.enter or line.leave %}
+    {%- assign side = forloop.index | modulo: 2 %}
+    {%- if line.place == 'top' %}{% assign layout = ' dot-step--top' %}{% elsif side == 1 %}{% assign layout = ' dot-step--text-left' %}{% else %}{% assign layout = ' dot-step--text-right' %}{% endif %}
+    <div class="dot-step dot-step--pinned{{ layout }}" data-pin="{{ forloop.index }}" data-enter="{{ line.enter }}" data-leave="{{ line.leave }}">
+      <div class="dot-step__line">
+        <p class="dot-step__text" data-scroll-words data-l="en">{{ line.text }}</p>
+        <p class="dot-step__text" data-scroll-words data-l="zh-Hans" lang="zh-Hans">{{ line.text_zh }}</p>
+        <p class="dot-step__text" data-scroll-words data-l="zh-Hant" lang="zh-Hant">{{ line.text_zh_hant }}</p>
+        {%- if line.go %}{% include home/story-go.html go=line.go %}{% endif %}
+      </div>
+    </div>
+    {%- endif %}
+    {%- endfor %}
+
+    {%- comment -%}
+      Captions under the pictures (user, 2026-10-23): a line of poetry in quotation marks (English
+      translation on the English page; the Chinese original on the Chinese pages, 「」 on 繁), then
+      one line "name · place · date" in the page's own language. dot-morph.js puts each one under its
+      picture and fades it in while that picture is on screen. Aligned like the picture: left
+      pictures (even pages) on their left edge, right ones on their right edge, the full-width one
+      centred.
+    {%- endcomment %}
+    {%- for line in story %}
+    {%- if line.caption %}
+    {%- assign side = forloop.index0 | modulo: 2 %}
+    {%- if line.place == 'top' %}{% assign align = 'center' %}{% elsif side == 0 %}{% assign align = 'left' %}{% else %}{% assign align = 'right' %}{% endif %}
+    {%- assign c = line.caption %}
+    {%- capture date_zh %}{% include date-zh.html date=c.date %}{% endcapture %}
+    {%- capture en %}{% if c.name %}{{ c.name.en }} · {% endif %}{{ c.place.en }} · {{ c.date }}{% endcapture %}
+    {%- capture zh %}{% if c.name %}{{ c.name.zh }} · {% endif %}{{ c.place.zh }} · {{ date_zh }}{% endcapture %}
+    {%- capture zh_hant %}{% if c.name %}{{ c.name.zh_hant }} · {% endif %}{{ c.place.zh_hant }} · {{ date_zh }}{% endcapture %}
+    <div class="dot-caption dot-caption--{{ align }}" data-caption="{{ forloop.index0 }}" data-align="{{ align }}">
+      {%- capture poem_en %}“{{ c.poem_en }}”{% endcapture %}
+      {%- capture poem_zh %}“{{ c.poem }}”{% endcapture %}
+      {%- capture poem_zh_hant %}「{{ c.poem_zh_hant }}」{% endcapture %}
+      <p class="dot-caption__poem">{% include t.html en=poem_en zh=poem_zh zh_hant=poem_zh_hant %}</p>
+      <p class="dot-caption__detail">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <div class="dot-stage__steps">
+    {%- for line in story %}
+    <div class="dot-step{% if line.place == 'top' %} dot-step--top{% endif %}" data-dot-step>
+      {%- unless forloop.first or line.enter or line.leave %}
+      <div class="dot-step__line">
+        <p class="dot-step__text" data-scroll-words data-l="en">{{ line.text }}</p>
+        <p class="dot-step__text" data-scroll-words data-l="zh-Hans" lang="zh-Hans">{{ line.text_zh }}</p>
+        <p class="dot-step__text" data-scroll-words data-l="zh-Hant" lang="zh-Hant">{{ line.text_zh_hant }}</p>
+        {%- if line.go %}{% include home/story-go.html go=line.go %}{% endif %}
+      </div>
+      {%- endunless %}
+    </div>
+    {%- endfor %}
+  </div>
+</section>

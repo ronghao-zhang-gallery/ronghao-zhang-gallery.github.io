@@ -1,0 +1,399 @@
+{% comment %}
+  Traces and Avians pages (one template, include.page = "traces" or "avians"): title with the
+  continent bar beside it, the world map with one marker per place, then the list (none on
+  Traces for now, see show_list below; its map then zooms to a continent on its own).
+  Traces: places visited, routes, the landscape map with its legend (_data/places.yml).
+  Avians (user, 2026-10-25: "exactly the design of Traces", without landscape information): one
+  dot per place a bird was observed, the plain map (land, water, borders), sightings in the list
+  (_data/avians.yml) with the camera settings read from the photo's EXIF, and the species' range
+  map (_data/ranges.yml, from eBird Status & Trends) in Birds of the World's season colours,
+  shown only while its card is hovered. Picking a continent (user, 2026-10-25) zooms the map to
+  it, hides the other continents, and moves the list beside the map, showing only that
+  continent's visits; Antarctica swaps in its own polar map. places-map.js does the zooming and
+  puts each marker on the map from its data-lat / data-lon (same projection as world-map.svg),
+  and links markers and list rows: hover or tap one, and the other markers pause and the rest
+  dims. Every text is in three languages (t.html).
+{% endcomment %}
+{%- assign avians = false %}
+{%- if include.page == "avians" %}{% assign avians = true %}{% endif %}
+{%- comment -%}
+  The list under / beside the map. Traces shows none for now (user, 2026-10-31: "do not include
+  the list so far"); its rows below stay, so setting show_list to true brings them back.
+{%- endcomment %}
+{%- assign show_list = avians %}
+{%- if avians %}{% assign data = site.data.avians %}{% else %}{% assign data = site.data.places %}{% endif %}
+{%- assign places = data.places %}
+{%- comment -%}
+  Newest first: Avians by the moment it was taken (several photos a day), Traces by date.
+  Avians is built time by time, so rows with the same `taken` (a day's checklist without times,
+  user 2026-10-31) keep their order in avians.yml; Liquid's sort would shuffle them.
+{%- endcomment %}
+{%- if avians %}
+{%- assign takens = data.visits | map: "taken" | uniq | sort | reverse %}
+{%- assign visits = "" | split: "" %}
+{%- for t in takens %}{% assign same = data.visits | where: "taken", t %}{% assign visits = visits | concat: same %}{% endfor %}
+{%- else %}{% assign visits = data.visits | sort: "date" | reverse %}{% endif %}
+{%- comment -%}
+  Avians: a sighting row without `photo` is a bird seen but not photographed (user, 2026-10-30:
+  the cards list every bird seen). It gets a card and its dots; the gallery and the photo count
+  use only the rows with a photo.
+{%- endcomment %}
+{%- if avians %}{% assign photo_visits = visits | where_exp: "v", "v.photo" %}{% endif %}
+<section class="places{% if avians %} places--plain{% endif %}{% unless show_list %} places--no-list{% endunless %}" data-places>
+  <header class="places__head">
+    {%- if avians %}
+    <h1 class="places__title">{% include t.html en="Avians" zh="鸟类" zh_hant="鳥類" %}</h1>
+    {%- else %}
+    <h1 class="places__title">{% include t.html en="Traces" zh="足迹" zh_hant="足跡" %}</h1>
+    {%- endif %}
+    {%- comment -%} Count line: "1 place · 3 sightings" (singular when one). {%- endcomment %}
+    {%- if places.size == 1 %}{% assign place_word = "place" %}{% else %}{% assign place_word = "places" %}{% endif %}
+    {%- if avians %}
+    {%- comment -%} Avians counts places, every species seen, and photos (rows with a photo). {%- endcomment %}
+    {%- assign species_count = visits | map: "species" | uniq | size %}
+    {%- if photo_visits.size == 1 %}{% assign visit_word = "photo" %}{% else %}{% assign visit_word = "photos" %}{% endif %}
+    {%- capture en %}{{ places.size }} {{ place_word }} · {{ species_count }} species · {{ photo_visits.size }} {{ visit_word }}{% endcapture %}
+    {%- capture zh %}{{ places.size }} 个地方 · {{ species_count }} 种鸟 · {{ photo_visits.size }} 张照片{% endcapture %}
+    {%- capture zh_hant %}{{ places.size }} 個地方 · {{ species_count }} 種鳥 · {{ photo_visits.size }} 張照片{% endcapture %}
+    {%- else %}
+    {%- if visits.size == 1 %}{% assign visit_word = "visit" %}{% else %}{% assign visit_word = "visits" %}{% endif %}
+    {%- capture en %}{{ places.size }} {{ place_word }} · {{ visits.size }} {{ visit_word }}{% endcapture %}
+    {%- capture zh %}{{ places.size }} 个地方 · {{ visits.size }} 次{% endcapture %}
+    {%- capture zh_hant %}{{ places.size }} 個地方 · {{ visits.size }} 次{% endcapture %}
+    {%- endif %}
+    <p class="places__count">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+
+    {%- comment -%}
+      ---- Continent bar: World, then the continents of _data/continents.yml, on the title's
+      line, separated by dots. A line under the chosen one slides to it (places-map.js). ----
+    {%- endcomment %}
+    <span class="visually-hidden" id="continent-bar-label">{% include t.html en="Continents" zh="大洲" zh_hant="大洲" %}</span>
+    <div class="continent-bar" role="group" aria-labelledby="continent-bar-label" data-continent-bar>
+      <span class="continent-bar__line" aria-hidden="true"></span>
+      <button class="continent-bar__option" type="button" data-continent="" aria-pressed="true">{% include t.html en="World" zh="世界" zh_hant="世界" %}</button>
+      {%- for c in site.data.continents %}
+      <span class="continent-bar__dot" aria-hidden="true">·</span>
+      <button class="continent-bar__option" type="button" data-continent="{{ c.id }}" aria-pressed="false">{% include t.html en=c.name.en zh=c.name.zh zh_hant=c.name.zh_hant %}</button>
+      {%- endfor %}
+    </div>
+  </header>
+
+  {%- comment -%}
+    ---- Stage: the map column, and the list. The list sits under the map for the world, and
+    beside it once a continent is chosen (_places.scss). ----
+  {%- endcomment %}
+  <div class="places-stage">
+    <div class="places-mapcol">
+      {%- comment -%} ---- Map: land, then the routes, then the markers on top ---- {%- endcomment %}
+      <div class="places-map" data-places-map>
+        {%- if avians %}
+        {% include places/world-map-plain.svg %}
+        <div class="places-polar" data-polar>{% include places/antarctica-map-plain.svg %}</div>
+        {%- else %}
+        {% include places/world-map.svg %}
+        <div class="places-polar" data-polar>{% include places/antarctica-map.svg %}</div>
+        {%- endif %}
+        {%- comment -%}
+          Ranges (Avians): one group per species that has a range in _data/ranges.yml, its seasons
+          already in map units (scripts/make_ranges.py). places-map.js gives the layer the map's
+          viewBox and shows a group only while its species' card is hovered.
+        {%- endcomment %}
+        {%- if avians and site.data.ranges %}
+        {%- assign drawn = "" %}
+        {%- assign seasons = "year_round,breeding,nonbreeding,migration" | split: "," %}
+        <svg class="places-ranges" aria-hidden="true" focusable="false" data-ranges>
+          {%- comment -%} Clipped to the land (the map's own clip shape), so ranges never tint the sea. {%- endcomment %}
+          <g data-range-layer clip-path="url(#world-map-land)">
+            {%- for v in visits %}
+            {%- assign sp = site.data.species[v.species] %}
+            {%- assign range = site.data.ranges[sp.ebird] %}
+            {%- if range == nil %}{% continue %}{% endif %}
+            {%- if drawn contains v.species %}{% continue %}{% endif %}
+            {%- assign drawn = drawn | append: " " | append: v.species %}
+            <g class="range" data-species="{{ v.species }}">
+              {%- for season in seasons %}
+              {%- if range[season] %}<path class="range__{{ season | replace: '_', '-' }}" d="{{ range[season] }}"/>{% endif %}
+              {%- endfor %}
+            </g>
+            {%- endfor %}
+          </g>
+        </svg>
+        {%- endif %}
+        {%- comment -%}
+          Routes: places-map.js gives this layer the map's viewBox and draws each line from its
+          data-path ("lon,lat;lon,lat;…", "|" where the line breaks): the road path from _data/route_paths.yml
+          (scripts/make_routes.py), or straight from stop to stop if the route has none yet.
+          Screen readers get the stops as text instead.
+        {%- endcomment %}
+        {%- assign routes = data.routes %}
+        {%- if routes %}
+        <svg class="places-routes" aria-hidden="true" focusable="false" data-routes>
+          {%- for r in routes %}
+          {%- assign road = site.data.route_paths[r.id] %}
+          {%- assign on_route = places | where: "route", r.id | map: "id" | join: " " %}
+          {%- if road %}
+          <path class="route" data-route="{{ r.id }}" data-continent="{{ r.continent }}" data-places="{{ on_route }}" data-path="{% for piece in road %}{% for pt in piece %}{{ pt[0] }},{{ pt[1] }}{% unless forloop.last %};{% endunless %}{% endfor %}{% unless forloop.last %}|{% endunless %}{% endfor %}"/>
+          {%- else %}
+          <path class="route" data-route="{{ r.id }}" data-continent="{{ r.continent }}" data-places="{{ on_route }}" data-path="{% for s in r.stops %}{% unless forloop.first %}{% if s.gap_before %}|{% else %};{% endif %}{% endunless %}{{ s.lon }},{{ s.lat }}{% endfor %}"/>
+          {%- endif %}
+          {%- endfor %}
+        </svg>
+        {%- for r in routes %}
+        {%- capture en %}Route: {% for s in r.stops %}{{ s.name.en }}{% unless forloop.last %} → {% endunless %}{% endfor %}{% endcapture %}
+        {%- capture zh %}路线：{% for s in r.stops %}{{ s.name.zh }}{% unless forloop.last %} → {% endunless %}{% endfor %}{% endcapture %}
+        {%- capture zh_hant %}路線：{% for s in r.stops %}{{ s.name.zh_hant }}{% unless forloop.last %} → {% endunless %}{% endfor %}{% endcapture %}
+        <p class="visually-hidden">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+        {%- endfor %}
+        {%- endif %}
+        {%- for p in places %}
+        {%- if p.route %}{% continue %}{% endif %}
+        {%- assign own = visits | where: "place", p.id %}
+        <button class="place-marker" type="button" data-place="{{ p.id }}" data-continent="{{ p.continent }}"{% if own[0].species %} data-species="{{ own[0].species }}"{% endif %} data-lat="{{ p.lat }}" data-lon="{{ p.lon }}">
+          <span class="place-marker__dot" aria-hidden="true"></span>
+          {%- comment -%}
+            The label pops up over the dot on Traces. Avians shows none (user, 2026-10-25: the
+            card already gives place and date), so there it is for screen readers only.
+          {%- endcomment %}
+          <span class="{% if avians %}visually-hidden{% else %}place-marker__label{% endif %}">
+            <span class="place-marker__name">{% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}</span>
+            <span class="place-marker__dates">
+              {%- for v in own %}
+              {%- capture date_zh %}{% include date-zh.html date=v.date %}{% endcapture %}
+              <span>{% include t.html en=v.date zh=date_zh zh_hant=date_zh %}</span>
+              {%- endfor %}
+            </span>
+          </span>
+        </button>
+        {%- endfor %}
+      </div>
+
+      {%- if avians %}
+      {%- comment -%}
+        ---- Range legend (Birds of the World's seasons), when any range is drawn; then the
+        credit: land, water (HydroRIVERS asks for it) and, with ranges, eBird Status & Trends
+        (free for non-commercial use with credit). ----
+      {%- endcomment %}
+      {%- if drawn != "" and drawn %}
+      <ul class="map-legend">
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--year-round" aria-hidden="true"></span>{% include t.html en="Year-round" zh="全年" zh_hant="全年" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--breeding" aria-hidden="true"></span>{% include t.html en="Breeding" zh="繁殖" zh_hant="繁殖" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--nonbreeding" aria-hidden="true"></span>{% include t.html en="Nonbreeding" zh="非繁殖" zh_hant="非繁殖" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--migration" aria-hidden="true"></span>{% include t.html en="Migration" zh="迁徙" zh_hant="遷徙" %}</li>
+      </ul>
+      {%- comment -%}
+        Zoomed into a continent, while a card's range shows: the other continents it reaches
+        (user, 2026-10-31), names copied from the continent bar by places-map.js.
+      {%- endcomment %}
+      <p class="range-beyond" data-range-beyond aria-live="polite">
+        <span class="range-beyond__text">{% include t.html en="Its range also reaches" zh="分布还延伸至" zh_hant="分布還延伸至" %} <span data-range-beyond-list></span></span>
+      </p>
+      {%- endif %}
+      {%- capture hydro %}<a href="https://www.hydrosheds.org">HydroRIVERS</a> (Lehner &amp; Grill 2013){% endcapture %}
+      {%- capture ebird %}{% if drawn != "" and drawn %}; ranges: <a href="https://science.ebird.org/en/status-and-trends">eBird Status &amp; Trends</a>, Cornell Lab of Ornithology{% endif %}{% endcapture %}
+      {%- capture ebird_zh %}{% if drawn != "" and drawn %}；分布：<a href="https://science.ebird.org/en/status-and-trends">eBird Status &amp; Trends</a>，Cornell Lab of Ornithology{% endif %}{% endcapture %}
+      {%- comment -%} The stickers' licence (PolyForm Shield 1.0.0) asks for its Required Notice and the terms' URL. {%- endcomment %}
+      {%- capture stickers %}<a href="https://github.com/alchaincyf/huashu-bird-sticker">huashu-bird-sticker</a>, © 2026 Huashu (alchaincyf), <a href="https://polyformproject.org/licenses/shield/1.0.0/">PolyForm Shield 1.0.0</a>{% endcapture %}
+      {%- comment -%} The cards' measurements are AVONET's (CC BY 4.0, which asks for credit); IUCN categories via Wikidata. {%- endcomment %}
+      {%- capture avonet %}<a href="https://doi.org/10.1111/ele.13898">AVONET</a> (Tobias et al. 2022, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>){% endcapture %}
+      {%- capture en %}Map data: Natural Earth; rivers: {{ hydro }}{{ ebird }}; bird stickers: {{ stickers }}; measurements: {{ avonet }}; IUCN status via Wikidata.{% endcapture %}
+      {%- capture zh %}地图数据：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鸟类贴纸：{{ stickers }}；形态数据：{{ avonet }}；IUCN等级来自Wikidata。{% endcapture %}
+      {%- capture zh_hant %}地圖資料：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鳥類貼紙：{{ stickers }}；形態資料：{{ avonet }}；IUCN等級來自Wikidata。{% endcapture %}
+      <p class="map-credit">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+      {%- else %}
+      {%- comment -%} ---- Legend: what the map's colours mean ---- {%- endcomment %}
+      <ul class="map-legend">
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--mountain" aria-hidden="true"></span>{% include t.html en="Mountains" zh="山地" zh_hant="山地" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--forest" aria-hidden="true"></span>{% include t.html en="Forest" zh="森林" zh_hant="森林" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--grassland" aria-hidden="true"></span>{% include t.html en="Grassland" zh="草原" zh_hant="草原" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--desert" aria-hidden="true"></span>{% include t.html en="Desert" zh="沙漠" zh_hant="沙漠" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--tundra" aria-hidden="true"></span>{% include t.html en="Tundra" zh="苔原" zh_hant="凍原" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--ice" aria-hidden="true"></span>{% include t.html en="Ice" zh="冰原" zh_hant="冰原" %}</li>
+        <li class="map-legend__item"><span class="map-legend__swatch map-legend__swatch--water" aria-hidden="true"></span>{% include t.html en="Rivers and lakes" zh="河流与湖泊" zh_hant="河流與湖泊" %}</li>
+      </ul>
+      {%- capture resolve %}<a href="https://ecoregions.appspot.com/">RESOLVE Ecoregions 2017</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>){% endcapture %}
+      {%- capture hydro %}<a href="https://www.hydrosheds.org">HydroRIVERS</a> (Lehner &amp; Grill 2013){% endcapture %}
+      {%- capture en %}Map data: Natural Earth, NOAA ETOPO; landscape: {{ resolve }}; rivers: {{ hydro }}.{% endcapture %}
+      {%- capture zh %}地图数据：Natural Earth、NOAA ETOPO；地貌：{{ resolve }}；河流：{{ hydro }}。{% endcapture %}
+      {%- capture zh_hant %}地圖資料：Natural Earth、NOAA ETOPO；地貌：{{ resolve }}；河流：{{ hydro }}。{% endcapture %}
+      <p class="map-credit">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+      {%- endif %}
+    </div>
+
+    {%- comment -%}
+      ---- The list. Traces: one row per visit, newest first. Avians: one card per species seen
+      (user, 2026-10-25; photographed or not, 2026-10-30): first the birds with photos, then
+      those without (user, 2026-10-31), each group newest sighting first. On a card: the species'
+      name; "Last seen" with its latest date · place below; its sticker, which links to the
+      species' cover photo in the gallery when it has photos. Hovering a card (or, on phones, the
+      card at the reading line) shows the species' range. A continent shows only its own rows /
+      cards. ----
+    {%- endcomment %}
+    {%- if show_list %}
+    <div class="places-side">
+      {%- if avians %}
+      {%- comment -%}
+        ---- Card tools (user, 2026-10-31: "a sort button (by time, by name) and a search
+        textbox"): search by bird or place, in any language; sort Recent (the order above:
+        birds with photos first, each group newest sighting first) or A–Z by the name in the
+        page's language. bird-cards.js; they work alongside the continent bar. ----
+      {%- endcomment %}
+      <div class="card-tools" data-card-tools>
+        <label class="card-tools__search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+          <span class="visually-hidden">{% include t.html en="Search birds" zh="搜索鸟种" zh_hant="搜尋鳥種" %}</span>
+          <input type="search" autocomplete="off" spellcheck="false" data-card-search
+                 data-placeholder-en="Search birds or places" data-placeholder-zh-hans="搜索鸟种或地点" data-placeholder-zh-hant="搜尋鳥種或地點">
+        </label>
+        <div class="card-tools__sort" role="group" aria-labelledby="card-sort-label">
+          <span class="visually-hidden" id="card-sort-label">{% include t.html en="Sort birds" zh="鸟种排序" zh_hant="鳥種排序" %}</span>
+          <button type="button" class="card-tools__option" data-card-sort="recent" aria-pressed="true">{% include t.html en="Recent" zh="最近" zh_hant="最近" %}</button>
+          <button type="button" class="card-tools__option" data-card-sort="name" aria-pressed="false">{% include t.html en="A–Z" zh="名称" zh_hant="名稱" %}</button>
+        </div>
+      </div>
+      {%- endif %}
+      <ol class="visit-list">
+        {%- if avians %}
+        {%- assign shot_species = photo_visits | map: "species" | uniq %}
+        {%- assign card_order = shot_species %}
+        {%- assign seen_species = visits | map: "species" | uniq %}
+        {%- for sid in seen_species %}{% unless shot_species contains sid %}{% assign card_order = card_order | push: sid %}{% endunless %}{% endfor %}
+        {%- for sid in card_order %}
+        {%- assign v = visits | where: "species", sid | first %}
+        {%- assign sightings = visits | where: "species", v.species %}
+        {%- assign sp = site.data.species[v.species] %}
+        {%- assign p = places | where: "id", v.place | first %}
+        {%- comment -%}
+          Every place and continent this species was seen in, and the words the card search
+          matches (bird-cards.js): its names in all three languages, its scientific name and its
+          places' names. data-range: the continents its range reaches (_data/range_continents.yml),
+          so a continent view can point to the others (places-map.js).
+        {%- endcomment %}
+        {%- assign range_continents = site.data.range_continents[sp.ebird] | join: " " %}
+        {%- assign seen_places = "" %}{% assign seen_continents = "" %}
+        {%- capture search_words %}{{ sp.name.en }} {{ sp.name.zh }} {{ sp.name.zh_hant }} {{ sp.scientific }}{% endcapture %}
+        {%- for s in sightings %}
+        {%- assign sp_place = places | where: "id", s.place | first %}
+        {%- unless seen_places contains s.place %}{% assign seen_places = seen_places | append: " " | append: s.place %}{% capture search_words %}{{ search_words }} {{ sp_place.name.en }} {{ sp_place.name.zh }} {{ sp_place.name.zh_hant }}{% endcapture %}{% endunless %}
+        {%- unless seen_continents contains sp_place.continent %}{% assign seen_continents = seen_continents | append: " " | append: sp_place.continent %}{% endunless %}
+        {%- endfor %}
+        {%- capture date_zh %}{% include date-zh.html date=v.date %}{% endcapture %}
+        <li class="visit visit--bird" data-species="{{ v.species }}" data-places="{{ seen_places | strip }}" data-last-place="{{ v.place }}" data-continents="{{ seen_continents | strip }}" data-range="{{ range_continents }}"
+            data-search="{{ search_words | downcase | escape }}" data-name-en="{{ sp.name.en | escape }}" data-name-zh-hans="{{ sp.name.zh }}" data-name-zh-hant="{{ sp.name.zh_hant }}">
+          {%- comment -%}
+            The species' photos, if any: its cover (`cover: true` in avians.yml, else the
+            newest) and the gallery tile holding it (a tile is named after its stack's newest
+            photo: same bird, day and place). The camera by the name and the sticker link there.
+          {%- endcomment %}
+          {%- assign shots = sightings | where_exp: "s", "s.photo" %}
+          {%- if shots.size > 0 %}
+          {%- assign card_photo = shots | where: "cover", true | first | default: shots[0] %}
+          {%- assign tile_photo = shots | where: "date", card_photo.date | where: "place", card_photo.place | first %}
+          {%- capture tile_href %}#photo-{{ tile_photo.photo | split: '.' | first }}{% endcapture %}
+          {%- endif %}
+          <span class="visit__text">
+            {%- comment -%}
+              The name, and for a bird with photos a small camera after it that goes to its photo
+              in the gallery (user, 2026-10-31; gallery-filter.js handles data-gallery-jump).
+            {%- endcomment %}
+            <span class="visit__head">
+              <span class="visit__place">{% include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant %}</span>
+              {%- if shots.size > 0 %}
+              <a class="visit__camera" href="{{ tile_href }}" data-gallery-jump>
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 8h3l1.6-2.2h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <span class="visually-hidden">{% include t.html en="Show its photos in the gallery" zh="在相册中查看照片" zh_hant="在相簿中查看照片" %}</span>
+              </a>
+              {%- endif %}
+            </span>
+            {%- comment -%} The scientific name in italics, the same in every language (user, 2026-10-31). {%- endcomment %}
+            {%- if sp.scientific %}
+            <i class="visit__sci" lang="la">{{ sp.scientific }}</i>
+            {%- endif %}
+            {%- comment -%}
+              Field-guide facts, before the sighting (user, 2026-10-31), from _data/bird_facts.yml (made by
+              scripts/fetch_stickers.py): a morphology line (species' mean weight, wing and tail,
+              AVONET), and the IUCN Red List category as a bar of the seven categories in IUCN's
+              colours, this bird's lit. Each part breaks at a dot, never inside.
+            {%- endcomment %}
+            {%- assign facts = site.data.bird_facts[v.species] %}
+            {%- if facts.weight_g or facts.wing_mm %}
+            {%- capture m_en %}{% if facts.weight_g %}<span>Weight {{ facts.weight_g }} g</span>{% endif %}{% if facts.wing_mm %}<span aria-hidden="true"> · </span><span>Wing {{ facts.wing_mm }} mm</span>{% endif %}{% if facts.tail_mm %}<span aria-hidden="true"> · </span><span>Tail {{ facts.tail_mm }} mm</span>{% endif %}{% endcapture %}
+            {%- capture m_zh %}{% if facts.weight_g %}<span>体重 {{ facts.weight_g }} g</span>{% endif %}{% if facts.wing_mm %}<span aria-hidden="true"> · </span><span>翼长 {{ facts.wing_mm }} mm</span>{% endif %}{% if facts.tail_mm %}<span aria-hidden="true"> · </span><span>尾长 {{ facts.tail_mm }} mm</span>{% endif %}{% endcapture %}
+            {%- capture m_hant %}{% if facts.weight_g %}<span>體重 {{ facts.weight_g }} g</span>{% endif %}{% if facts.wing_mm %}<span aria-hidden="true"> · </span><span>翼長 {{ facts.wing_mm }} mm</span>{% endif %}{% if facts.tail_mm %}<span aria-hidden="true"> · </span><span>尾長 {{ facts.tail_mm }} mm</span>{% endif %}{% endcapture %}
+            <span class="visit__morph">{% include t.html en=m_en zh=m_zh zh_hant=m_hant %}</span>
+            {%- endif %}
+            {%- if facts.iucn %}
+            {%- assign iucn_name = site.data.iucn.names[facts.iucn] %}
+            <span class="visit__iucn">
+              <span class="visit__label" aria-hidden="true">IUCN</span>
+              <span class="iucn-bar" aria-hidden="true">
+                {%- for c in site.data.iucn.scale %}<span class="iucn-bar__cell iucn--{{ c | downcase }}{% if c == facts.iucn %} is-current{% endif %}">{{ c }}</span>{% endfor -%}
+              </span>
+              {%- capture iucn_en %}IUCN Red List: {{ iucn_name.en }}{% endcapture %}
+              {%- capture iucn_zh %}IUCN红色名录：{{ iucn_name.zh }}{% endcapture %}
+              {%- capture iucn_hant %}IUCN紅色名錄：{{ iucn_name.zh_hant }}{% endcapture %}
+              <span class="visually-hidden">{% include t.html en=iucn_en zh=iucn_zh zh_hant=iucn_hant %}</span>
+            </span>
+            {%- endif %}
+            {%- comment -%} "Last seen" heads the latest date and place (user, 2026-10-25: "Last Recorded"; Claude chose the birders' phrase). {%- endcomment %}
+            <span class="visit__label">{% include t.html en="Last seen" zh="最近观测" zh_hant="最近觀測" %}</span>
+            {%- comment -%} Date and place on one line, separated by a dot (user, 2026-10-25). {%- endcomment %}
+            <span class="visit__seen">
+              <span class="visit__date">{% include t.html en=v.date zh=date_zh zh_hant=date_zh %}</span>
+              <span aria-hidden="true"> · </span>
+              <span>{% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}</span>
+            </span>
+          </span>
+          {%- comment -%}
+            Preview: the species' sticker (user, 2026-10-31: Huashu's bird stickers in place of
+            the photo thumbnails; scripts/fetch_stickers.py copies them to
+            assets/images/stickers/<species id>.webp). A bird with photos links to the gallery
+            tile holding its cover photo (user, 2026-10-30: "go directly to the Gallery, at that
+            position"); gallery-filter.js scrolls there and marks it. Until a species' sticker is
+            fetched, its cover photo shows, or a quiet "No photo yet" box of the same size, so
+            the cards stay even.
+          {%- endcomment %}
+          {%- capture sticker_path %}/assets/images/stickers/{{ v.species }}.webp{% endcapture %}
+          {%- assign sticker = site.static_files | where: "path", sticker_path | first %}
+          {%- capture sticker_img %}<img class="visit__photo visit__photo--sticker" src="{{ sticker_path | relative_url }}" alt="" loading="lazy" decoding="async">{% endcapture %}
+          {%- if shots.size > 0 %}
+          <a class="visit__photos" href="{{ tile_href }}" data-gallery-jump>
+            {%- if sticker %}{{ sticker_img }}{% else %}
+            {% include avians/photo.html photo=card_photo.photo date=card_photo.date class="visit__photo" %}{% endif %}
+            <span class="visually-hidden">{% include t.html en="Show in the gallery" zh="在相册中查看" zh_hant="在相簿中查看" %}</span>
+          </a>
+          {%- elsif sticker %}
+          <span class="visit__photos">{{ sticker_img }}</span>
+          {%- else %}
+          <span class="visit__photos">
+            <span class="visit__photo visit__photo--none">{% include t.html en="No photo yet" zh="暂无照片" zh_hant="暫無照片" %}</span>
+          </span>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+        {%- else %}
+        {%- for v in visits %}
+        {%- assign p = places | where: "id", v.place | first %}
+        {%- capture date_zh %}{% include date-zh.html date=v.date %}{% endcapture %}
+        <li class="visit" data-place="{{ v.place }}" data-continent="{{ p.continent }}">
+          <span class="visit__date">{% include t.html en=v.date zh=date_zh zh_hant=date_zh %}</span>
+          <span class="visit__place">{% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}</span>
+          {%- if v.subject %}
+          <span class="visit__subject">{% include t.html en=v.subject.en zh=v.subject.zh zh_hant=v.subject.zh_hant %}</span>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+        {%- endif %}
+      </ol>
+      {%- if avians %}
+      <p class="visit-empty" hidden data-card-none>{% include t.html en="No birds match." zh="没有符合的鸟种。" zh_hant="沒有符合的鳥種。" %}</p>
+      {%- endif %}
+      <p class="visit-empty" hidden data-visit-empty>{% include t.html en="No places here yet." zh="这里还没有足迹。" zh_hant="這裡還沒有足跡。" %}</p>
+    </div>
+    {%- endif %}
+  </div>
+
+  {%- comment -%} ---- Avians: a gallery of every photo, under the cards ---- {%- endcomment %}
+  {%- if avians %}
+  {% include avians/gallery.html visits=photo_visits places=places %}
+  {%- endif %}
+</section>

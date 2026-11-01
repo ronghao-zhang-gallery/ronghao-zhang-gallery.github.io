@@ -1,0 +1,25 @@
+// Page language (user, 2026-10-23): English, Simplified Chinese, Traditional Chinese.
+// Text that exists in every language carries data-l="en", "zh-Hans" or "zh-Hant"
+// (_includes/t.html), and only the current language's version is shown. lang-init.html sets
+// data-lang on <html> before the first paint; lang-switch.js changes it.
+
+// ---- Show only the current language ----
+:root[data-lang="en"] [data-l]:not([data-l="en"]),
+:root[data-lang="zh-Hans"] [data-l]:not([data-l="zh-Hans"]),
+:root[data-lang="zh-Hant"] [data-l]:not([data-l="zh-Hant"]),
+:root:not([data-lang]) [data-l]:not([data-l="en"]) { display: none !important; }
+
+// ---- Chinese fonts ----
+// The Latin fonts have no Chinese characters, so every font stack in _tokens.scss has
+// var(--font-cjk) right after its Latin font: Latin letters keep their font, Chinese characters
+// use the font of the page's script. lang-init.html loads the web font for the chosen language.
+//   Simplified: 霞鹜文楷 (LXGW WenKai), a hand-written kai style.
+//   Traditional: 汇文明朝体 (Huiwen Mincho), a Ming woodblock-print style (明刻本), public domain.
+// Simplified (and the default; English pages show no Chinese apart from the switch's labels,
+// which have their own fonts, _lang-switch.scss).
+:root { --font-cjk: "LXGW WenKai", "Kaiti SC", "STKaiti", "PingFang SC"; }
+:root[data-lang="zh-Hant"] { --font-cjk: "Huiwen-mincho", "Songti TC", "PMingLiU", "PingFang TC"; }
+
+// Both Chinese fonts come in one upright weight only. Don't let the browser fake bold (smeared
+// strokes) or italic (slanted characters) Chinese; such text shows in the font's own style.
+:root[data-lang^="zh"] { font-synthesis: none; }

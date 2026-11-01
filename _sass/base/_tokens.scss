@@ -1,0 +1,92 @@
+// Design tokens: colours for light and dark mode, fonts, sizes and motion.
+// Components use only these custom properties, so every component works in both modes.
+//
+// Palette idea (first draft): a cool grey-green ground and fireweed magenta as the one accent.
+
+// ---- Dark palette (used twice below, so it lives in one mixin) ----
+@mixin dark-palette {
+  --bg: #282828;          // user's colour (2026-10-22); same as the dark pictures' backdrop
+  --surface: #333333;     // raised areas: hovered buttons
+  --ink: #ebe9e4;
+  --ink-soft: #aeaca6;    // secondary text, ≥ 4.5:1 on --bg (about 6:1)
+  --ink-faint: #4d4c49;   // words not yet read in scroll-read text
+  --line: #3b3b3a;
+  --accent: #f07aa6;      // fireweed, lightened for dark ground
+  --shadow: 0 0 0;
+  --float-bg: color-mix(in srgb, var(--surface) 82%, transparent);   // header segments
+  // World map (Traces page): land a step above the page, landforms barely tinted.
+  // Map colours a step lighter than at first (user, 2026-10-25: "shallower" in dark mode).
+  --map-land: #393938;
+  --map-border: #5e5e5a;   // on top of every block; kept soft (user, 2026-10-25: "shallow"; was #7b7b75)
+  --map-forest: #37463b;
+  --map-grassland: #414938;
+  --map-desert: #554c3b;   // warm sand, kept apart from the greener grassland and pinker mountains
+  --map-tundra: #404649;
+  --map-mountain: #554d49;
+  --map-ice: #4e5559;
+  --map-river: #6a8b9c;
+  // Range maps on the Avians page: Birds of the World's season colours, darkened for dark ground.
+  --range-year-round: #6f6aa9;
+  --range-breeding: #a9724f;
+  --range-nonbreeding: #5a84a8;
+  --range-migration: #a49544;
+  color-scheme: dark;
+}
+
+// ---- Light palette (default) ----
+:root {
+  --bg: #f1f3ef;
+  --surface: #e5e9e3;
+  --ink: #17201d;
+  --ink-soft: #4b5652;
+  --ink-faint: #bcc3bd;
+  --line: #d3d9d2;
+  --accent: #ad215a;      // fireweed
+  --shadow: 23 32 29;     // RGB triplet for rgb(var(--shadow) / alpha)
+  // Floating surfaces (the header's segments, user 2026-10-24): a little lighter than the page,
+  // slightly see-through (with a blur behind), a thin border and a soft shadow.
+  --float-bg: color-mix(in srgb, color-mix(in srgb, #fff 45%, var(--bg)) 80%, transparent);
+  --float-border: var(--line);
+  --float-shadow: 0 6px 22px rgb(var(--shadow) / 0.09), 0 1px 3px rgb(var(--shadow) / 0.07);
+  // World map (Traces page, user 2026-10-25): flat land like Ariel Mu's map, every part one
+  // low-saturation landscape colour, with water and the borders on top.
+  // A step darker than at first (user, 2026-10-25), still low-saturation.
+  --map-land: #f7f8f5;
+  --map-border: #b6bdb4;   // on top of every block; kept soft (user, 2026-10-25: "shallow"; was #959d93)
+  --map-forest: #c2d5c2;
+  --map-grassland: #dde2c3;
+  --map-desert: #eadbbd;
+  --map-tundra: #d2dad9;
+  --map-mountain: #dbc9b6;
+  --map-ice: #f8fafb;      // stays near white: ice should read as the palest land
+  --map-river: #84a3b3;
+  // Range maps on the Avians page (user, 2026-10-25): Birds of the World's season colours.
+  --range-year-round: #a9a6d9;
+  --range-breeding: #eeb08b;
+  --range-nonbreeding: #a5c8e8;
+  --range-migration: #f1e18b;
+  color-scheme: light;
+
+  // ---- Type ----
+  // var(--font-cjk) (_language.scss) gives Chinese characters the font of the page's script.
+  --font-display: "Bricolage Grotesque", var(--font-cjk), "Avenir Next", "Segoe UI", sans-serif;
+  --font-text: "Hanken Grotesk", var(--font-cjk), "Helvetica Neue", Arial, sans-serif;
+  // Scroll-read lines: EB Garamond (user, 2026-10-23; was Literata).
+  --font-serif: "EB Garamond", var(--font-cjk), Georgia, "Times New Roman", serif;
+
+  // ---- Layout ----
+  --header-h: 4rem;       // the floating segments (2.5rem) and the space around them
+  --content-w: 72rem;
+  --gutter: max(1rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px), 4vw);
+
+  // ---- Motion ----
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   // exponential ease-out
+}
+
+// No saved choice and JavaScript off: follow the system setting.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include dark-palette; }
+}
+
+// Saved choice or system setting, applied by theme-init.html.
+:root[data-theme="dark"] { @include dark-palette; }

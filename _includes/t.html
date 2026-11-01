@@ -1,0 +1,5 @@
+{%- comment -%}
+  One piece of page text in three languages; the language switch shows one (_language.scss).
+  Params: en, zh (Simplified Chinese), zh_hant (Traditional Chinese; falls back to zh if missing).
+{%- endcomment -%}
+<span data-l="en">{{ include.en }}</span><span data-l="zh-Hans" lang="zh-Hans">{{ include.zh }}</span><span data-l="zh-Hant" lang="zh-Hant">{{ include.zh_hant | default: include.zh }}</span>

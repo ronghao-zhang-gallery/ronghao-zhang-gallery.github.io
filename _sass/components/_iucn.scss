@@ -1,0 +1,46 @@
+// IUCN Red List bar on the Avians bird cards (user, 2026-10-31: "IUCN LC or what, make this as a
+// discrete color bar"). Seven cells in the Red List's order, EX → LC (_data/iucn.yml), each
+// tinted in a softened IUCN colour; the bird's category is filled in full. The same colours in
+// light and dark mode, so the scale stays recognisable.
+
+// ---- The bar ----
+.iucn-bar {
+  display: inline-flex;
+  gap: 1px;
+  vertical-align: middle;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+// ---- One category ----
+// Unlit: a light wash of its colour with a faint code. Lit: the full colour, bold code.
+.iucn-bar__cell {
+  display: grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 0.95rem;
+  background: color-mix(in srgb, var(--iucn) 28%, transparent);
+  font-family: var(--font-text);
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--ink) 45%, transparent);
+
+  &.is-current {
+    background: var(--iucn);
+    font-weight: 700;
+    color: var(--iucn-on);
+  }
+}
+
+// ---- Colours, and the code's colour on each when lit ----
+// IUCN's hues, toned down (user, 2026-10-31: "a more low saturating color series") to sit with
+// the site's soft map colours; the order still reads dark → red → orange → yellow → green.
+.iucn--ex { --iucn: #3f3f3d; --iucn-on: #ffffff; }
+.iucn--ew { --iucn: #6f5868; --iucn-on: #ffffff; }
+.iucn--cr { --iucn: #b2604f; --iucn-on: #ffffff; }
+.iucn--en { --iucn: #cf9467; --iucn-on: #1d1d1b; }
+.iucn--vu { --iucn: #d5c46d; --iucn-on: #1d1d1b; }
+.iucn--nt { --iucn: #b3bd77; --iucn-on: #1d1d1b; }
+.iucn--lc { --iucn: #86ad80; --iucn-on: #1d1d1b; }

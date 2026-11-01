@@ -1,0 +1,134 @@
+// Avians gallery sidebar (_includes/avians/gallery-sidebar.html, gallery-filter.js): search,
+// sort and filters to the left of the photos (user, 2026-10-27). It stays in view while the
+// gallery scrolls (sticky under the top bar). Under 900 px it sits above the photos, folded
+// behind a "Filter & sort" button.
+
+.gallery-side {
+  grid-area: side;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--header-h) + 1rem);
+  font-size: 0.85rem;
+}
+
+.gallery-side__toggle { display: none; }
+
+// ---- Search ----
+.gallery-side__search {
+  position: relative;
+  display: block;
+  margin-bottom: 1.25rem;
+
+  svg {
+    position: absolute;
+    left: 0.7rem;
+    top: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translateY(-50%);
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.55rem 0.75rem 0.55rem 2.1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+
+    &::placeholder { color: var(--ink-soft); opacity: 0.8; }
+    &:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+  }
+}
+
+// ---- Groups: a small spaced heading, then options ----
+.gallery-side__group {
+  margin: 0 0 1.1rem;
+  padding: 0 0 1.1rem;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+
+  legend {
+    margin-bottom: 0.45rem;
+    padding: 0;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+}
+
+.gallery-side__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  color: var(--ink);
+  cursor: pointer;
+
+  input { margin: 0; accent-color: var(--ink); }
+}
+
+.gallery-side__n {
+  margin-left: auto;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+// ---- Result count and Clear ----
+.gallery-side__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gallery-side__result {
+  margin: 0;
+  color: var(--ink-soft);
+
+  b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+}
+
+.gallery-side__clear {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+
+  &:hover { color: var(--ink); }
+}
+
+// ---- Narrow screens: above the photos, folded ----
+@media (max-width: 900px) {
+  .gallery-side { position: static; }
+
+  .gallery-side__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+
+    svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+  }
+
+  .gallery-side__panel { display: none; margin-top: 1rem; }
+  .gallery-side.is-open .gallery-side__panel { display: block; }
+}

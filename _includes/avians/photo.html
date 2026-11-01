@@ -1,0 +1,9 @@
+{% comment %}
+  One bird photo as an <img> (URL from avians/photo-src.html). If the image repo copy fails it
+  falls back to the local thumbnail (local preview only), then hides itself. Used by the Avians
+  cards and gallery. Params: photo, date, class, variant ("thumb" default / "large"), alt
+  (default empty: the name is shown beside).
+{% endcomment %}
+{%- capture ph_src %}{% include avians/photo-src.html photo=include.photo date=include.date variant=include.variant %}{% endcapture %}
+{%- capture ph_local %}{% include avians/photo-src.html photo=include.photo date=include.date local=true %}{% endcapture -%}
+<img class="{{ include.class }}" src="{{ ph_src | strip }}" alt="{{ include.alt }}" loading="lazy" decoding="async" data-local="{{ ph_local | strip }}" onerror="if (this.dataset.local && this.src.indexOf(this.dataset.local) === -1) { this.src = this.dataset.local; } else { this.hidden = true; }">

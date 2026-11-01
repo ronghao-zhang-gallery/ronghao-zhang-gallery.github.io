@@ -1,0 +1,17 @@
+{%- comment -%}
+  The URL of one bird photo, nothing else (use inside a capture). From the image repo
+  bird-<year> (photo_hosts in _config.yml); a photo not imported there yet gives its local
+  thumbnail in local-photos/ (local preview only). Params: photo (file name), date
+  ("YYYY-MM-DD"), variant ("thumb", default, or "large": large only in full-screen views),
+  local (true: always the local thumbnail, for fallbacks).
+  Not "size": include.size is Liquid's count of the params (it gave ".../bird-2026/3/…").
+{%- endcomment -%}
+{%- assign ps_variant = include.variant | default: "thumb" -%}
+{%- assign ps_year = include.date | slice: 0, 4 -%}
+{%- assign ps_repo = "bird-" | append: ps_year -%}
+{%- assign ps_host = site.photo_hosts[ps_repo] -%}
+{%- if ps_host and include.local != true -%}
+{{ ps_host }}/{{ ps_variant }}/{{ include.photo }}
+{%- else -%}
+{{ site.photo_local | append: "/" | append: ps_year | append: "/thumb/" | append: include.photo | relative_url }}
+{%- endif -%}

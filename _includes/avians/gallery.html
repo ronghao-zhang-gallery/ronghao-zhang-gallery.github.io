@@ -1,0 +1,77 @@
+{% comment %}
+  Avians gallery (user, 2026-10-26: "below the bird cards, do a gallery of all photos"):
+  every photo, newest first, as 3:2 thumbnail tiles, three to a row. Similar photos are merged
+  into one stack (user, 2026-10-26): the same bird, on the same day, at the same place (one
+  outing). A stack shows its cover (`cover: true` in avians.yml, else its newest photo) with card
+  edges behind it and a count badge; single photos are plain tiles. Hovering a tile shows the bird's name and date · place (and the count).
+  Clicking a tile opens the full-screen viewer (avians/viewer.html, photo-viewer.js) at its
+  cover; the viewer steps through every photo one by one. Each photo is a hidden
+  .photo-item inside its tile, carrying the viewer's data (large copy, EXIF) and its caption
+  in all three languages. Tiles carry their continent, so the continent bar filters them
+  (places-map.js), and their species, place, date, count and search text for the sidebar
+  (avians/gallery-sidebar.html, gallery-filter.js), which searches, filters and sorts them.
+  Each tile's id is "photo-" + its newest photo's name, the target of the bird cards' photos.
+  Params: visits (the rows with a photo, sorted newest first), places.
+{% endcomment %}
+<section class="photo-gallery" aria-labelledby="photo-gallery-title" data-gallery>
+  <h2 class="photo-gallery__title" id="photo-gallery-title">{% include t.html en="Gallery" zh="相册" zh_hant="相簿" %}</h2>
+  {% include avians/gallery-sidebar.html visits=include.visits places=include.places %}
+  <div class="photo-gallery__main">
+  <ul class="photo-gallery__grid" data-gallery-grid>
+    {%- assign done = "" %}
+    {%- for v in include.visits %}
+    {%- if v.photo == nil %}{% continue %}{% endif %}
+    {%- capture key %}|{{ v.species }}~{{ v.date }}~{{ v.place }}|{% endcapture %}
+    {%- if done contains key %}{% continue %}{% endif %}
+    {%- assign done = done | append: key %}
+    {%- comment -%} The stack: this photo and every later-listed one with the same bird, day and place. {%- endcomment %}
+    {%- assign stack = "" | split: "" %}
+    {%- for w in include.visits %}
+    {%- if w.photo and w.species == v.species and w.date == v.date and w.place == v.place %}{% assign stack = stack | push: w %}{% endif %}
+    {%- endfor %}
+    {%- comment -%} Its cover: the photo marked `cover: true`, else the newest. {%- endcomment %}
+    {%- assign cover = stack | where: "cover", true | first | default: v %}
+    {%- assign p = include.places | where: "id", v.place | first %}
+    {%- assign sp = site.data.species[v.species] %}
+    {%- capture date_zh %}{% include date-zh.html date=v.date %}{% endcapture %}
+    {%- capture search %}{{ sp.name.en }} {{ sp.name.zh }} {{ sp.name.zh_hant }} {{ p.name.en }} {{ p.name.zh }} {{ p.name.zh_hant }}{% endcapture %}
+    {%- comment -%} The id (its newest photo's name) is where a bird card's photo links to. {%- endcomment %}
+    <li class="photo-tile{% if stack.size > 1 %} photo-tile--stack{% endif %}" id="photo-{{ v.photo | split: '.' | first }}" data-continent="{{ p.continent }}"
+        data-species="{{ v.species }}" data-place="{{ v.place }}" data-year="{{ v.date | slice: 0, 4 }}"
+        data-taken="{{ v.taken }}" data-count="{{ stack.size }}" data-name="{{ sp.name.en | downcase }}"
+        data-search="{{ search | downcase | escape }}">
+      <button class="photo-tile__open" type="button" data-viewer-open>
+        {% include avians/photo.html photo=cover.photo date=cover.date class="photo-tile__img" %}
+        {%- if stack.size > 1 %}
+        <span class="photo-tile__count" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M3 7v12a2 2 0 0 0 2 2h12"/></svg>{{ stack.size }}
+        </span>
+        {%- endif %}
+        <span class="photo-tile__caption">
+          <span class="photo-tile__name">{% include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant %}</span>
+          <span class="photo-tile__meta">{% include t.html en=v.date zh=date_zh zh_hant=date_zh %} · {% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}
+            {%- if stack.size > 1 %}{% capture n_en %}{{ stack.size }} photos{% endcapture %}{% capture n_zh %}{{ stack.size }} 张{% endcapture %}{% capture n_hant %}{{ stack.size }} 張{% endcapture %} · {% include t.html en=n_en zh=n_zh zh_hant=n_hant %}{% endif %}</span>
+        </span>
+      </button>
+      {%- comment -%} ---- The stack's photos, one by one, for the viewer ---- {%- endcomment %}
+      {%- for s in stack %}
+      {%- capture s_date_zh %}{% include date-zh.html date=s.date %}{% endcapture %}
+      {%- capture large %}{% include avians/photo-src.html photo=s.photo date=s.date variant="large" %}{% endcapture %}
+      {%- capture local %}{% include avians/photo-src.html photo=s.photo date=s.date local=true %}{% endcapture %}
+      {%- capture thumb %}{% include avians/photo-src.html photo=s.photo date=s.date %}{% endcapture %}
+      <span class="photo-item{% if s.photo == cover.photo %} photo-item--cover{% endif %}" hidden
+            data-large="{{ large | strip }}" data-thumb="{{ thumb | strip }}" data-local="{{ local | strip }}"
+            data-taken="{{ s.taken }}" data-camera="{{ s.camera }}" data-lens="{{ s.lens }}"
+            data-focal="{{ s.focal }}" data-aperture="{{ s.aperture }}" data-exposure="{{ s.exposure }}" data-iso="{{ s.iso }}">
+        <span class="photo-item__name">{% include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant %}</span>
+        <span class="photo-item__date">{% include t.html en=s.date zh=s_date_zh zh_hant=s_date_zh %}</span>
+        <span class="photo-item__place">{% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}</span>
+      </span>
+      {%- endfor %}
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="photo-gallery__empty" hidden data-gallery-empty>{% include t.html en="No photos match." zh="没有符合的照片。" zh_hant="沒有符合的照片。" %}</p>
+  </div>
+  {% include avians/viewer.html %}
+</section>

@@ -1,0 +1,73 @@
+{% comment %}
+  Avians gallery sidebar (user, 2026-10-27: "a side bar allows search and filter and sort"):
+  search (bird or place names, any of the three languages), filters by species, place and
+  (with more than one) year, sorting, a result count and Clear. Driven by
+  assets/js/gallery-filter.js, which hides and reorders the gallery's tiles. Options are built
+  from the photos themselves, so a new bird or place appears here by itself.
+  Params: visits, places.
+{% endcomment %}
+{%- assign species_ids = include.visits | map: "species" | uniq %}
+{%- assign place_ids = include.visits | map: "place" | uniq %}
+{%- assign years = "" | split: "" %}
+{%- for v in include.visits %}{% assign y = v.date | slice: 0, 4 %}{% unless years contains y %}{% assign years = years | push: y %}{% endunless %}{% endfor %}
+<aside class="gallery-side" aria-label="Search, filter and sort" data-gallery-side>
+  {%- comment -%} Phones: the panel folds behind this button. {%- endcomment %}
+  <button class="gallery-side__toggle" type="button" aria-expanded="false" data-side-toggle>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+    {% include t.html en="Filter & sort" zh="筛选与排序" zh_hant="篩選與排序" %}
+  </button>
+
+  <div class="gallery-side__panel" data-side-panel>
+    {%- comment -%} ---- Search ---- {%- endcomment %}
+    <label class="gallery-side__search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+      <span class="visually-hidden">{% include t.html en="Search" zh="搜索" zh_hant="搜尋" %}</span>
+      <input type="search" autocomplete="off" spellcheck="false" data-filter-search
+             data-placeholder-en="Search birds or places" data-placeholder-zh-hans="搜索鸟种或地点" data-placeholder-zh-hant="搜尋鳥種或地點">
+    </label>
+
+    {%- comment -%} ---- Sort ---- {%- endcomment %}
+    <fieldset class="gallery-side__group">
+      <legend>{% include t.html en="Sort" zh="排序" zh_hant="排序" %}</legend>
+      <label class="gallery-side__option"><input type="radio" name="gallery-sort" value="newest" checked data-filter-sort> {% include t.html en="Newest first" zh="最新优先" zh_hant="最新優先" %}</label>
+      <label class="gallery-side__option"><input type="radio" name="gallery-sort" value="oldest" data-filter-sort> {% include t.html en="Oldest first" zh="最早优先" zh_hant="最早優先" %}</label>
+      <label class="gallery-side__option"><input type="radio" name="gallery-sort" value="name" data-filter-sort> {% include t.html en="Name A–Z" zh="按名称" zh_hant="按名稱" %}</label>
+      <label class="gallery-side__option"><input type="radio" name="gallery-sort" value="count" data-filter-sort> {% include t.html en="Most photos" zh="照片最多" zh_hant="照片最多" %}</label>
+    </fieldset>
+
+    {%- comment -%} ---- Filters: species, place, year; counts are photos ---- {%- endcomment %}
+    <fieldset class="gallery-side__group">
+      <legend>{% include t.html en="Species" zh="鸟种" zh_hant="鳥種" %}</legend>
+      {%- for id in species_ids %}
+      {%- assign sp = site.data.species[id] %}
+      {%- assign n = include.visits | where: "species", id | size %}
+      <label class="gallery-side__option"><input type="checkbox" value="{{ id }}" data-filter="species"> {% include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant %}<span class="gallery-side__n">{{ n }}</span></label>
+      {%- endfor %}
+    </fieldset>
+
+    <fieldset class="gallery-side__group">
+      <legend>{% include t.html en="Place" zh="地点" zh_hant="地點" %}</legend>
+      {%- for id in place_ids %}
+      {%- assign p = include.places | where: "id", id | first %}
+      {%- assign n = include.visits | where: "place", id | size %}
+      <label class="gallery-side__option"><input type="checkbox" value="{{ id }}" data-filter="place"> {% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}<span class="gallery-side__n">{{ n }}</span></label>
+      {%- endfor %}
+    </fieldset>
+
+    {%- if years.size > 1 %}
+    <fieldset class="gallery-side__group">
+      <legend>{% include t.html en="Year" zh="年份" zh_hant="年份" %}</legend>
+      {%- assign years = years | sort | reverse %}
+      {%- for y in years %}
+      <label class="gallery-side__option"><input type="checkbox" value="{{ y }}" data-filter="year"> {{ y }}</label>
+      {%- endfor %}
+    </fieldset>
+    {%- endif %}
+
+    {%- comment -%} ---- Result and reset ---- {%- endcomment %}
+    <div class="gallery-side__foot">
+      <p class="gallery-side__result" aria-live="polite">{% include t.html en='<b data-result-n></b> photos' zh='<b data-result-n></b> 张照片' zh_hant='<b data-result-n></b> 張照片' %}</p>
+      <button class="gallery-side__clear" type="button" data-filter-clear>{% include t.html en="Clear" zh="清除" zh_hant="清除" %}</button>
+    </div>
+  </div>
+</aside>

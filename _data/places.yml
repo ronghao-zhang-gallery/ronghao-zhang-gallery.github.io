@@ -1,0 +1,56 @@
+# Places on the map (traces.html, user 2026-10-24). An EXAMPLE for now: the places and dates from
+# the homepage captions (_data/home.yml). Later this can be filled from the photo data.
+#
+# places: one marker each, unless the place is on a route.
+#   id         short name, used by visits below
+#   name       { en, zh, zh_hant }, in the same style as the captions
+#   continent  an id from _data/continents.yml: the continent bar shows the place under it
+#   lat, lon   ROUNDED to about 0.1° (~10 km): a town or area, never the exact spot (privacy;
+#              for birds, also so nests aren't given away)
+#   route      optional route id: the place gets no dot (the route's line stands for it), and
+#              picking its row lights up that route (user, 2026-10-25: only Atlanta keeps a dot)
+# visits: one row each in the dated list, newest first on the page.
+#   place      a place id
+#   date       "YYYY-MM-DD" or "YYYY-MM" (quoted); Chinese pages write it in Chinese numerals
+#   subject    optional { en, zh, zh_hant }
+# routes: a trip drawn as a magenta line along the roads it took (user, 2026-10-25).
+#   id         short name
+#   continent  as for places
+#   stops      in travel order; each { name: { en, zh, zh_hant }, lat, lon }, rounded like places.
+#              After changing routes, rerun scripts/make_routes.py: it traces the roads between
+#              the stops into _data/route_paths.yml. Without that, the line runs straight.
+#              A stop with `gap_before: true` gets no line from the stop before it.
+
+places:
+  - id: atlanta
+    continent: north-america
+    name: { en: Atlanta GA, zh: 美国佐治亚州亚特兰大, zh_hant: 美國喬治亞州亞特蘭大 }
+    lat: 33.7
+    lon: -84.4
+  - id: dietrich-river
+    continent: north-america
+    name: { en: Dietrich River AK, zh: 美国阿拉斯加州迪特里希河, zh_hant: 美國阿拉斯加州迪特里希河 }
+    route: alaska-2025
+    lat: 68.0
+    lon: -149.7
+
+visits:
+  - place: atlanta
+    date: "2026-05-05"
+    subject: { en: Cape May Warbler, zh: 栗颊林莺, zh_hant: 栗頰林鶯 }
+  - place: atlanta
+    date: "2026-05"
+  - place: dietrich-river
+    date: "2025-09"
+
+routes:
+  - id: alaska-2025
+    continent: north-america
+    stops:
+      - { name: { en: Seward AK, zh: 苏厄德, zh_hant: 蘇厄德 }, lat: 60.1, lon: -149.4 }
+      - { name: { en: Anchorage AK, zh: 安克雷奇, zh_hant: 安克拉治 }, lat: 61.2, lon: -149.9 }
+      - { name: { en: Talkeetna AK, zh: 塔尔基特纳, zh_hant: 塔爾基特納 }, lat: 62.3, lon: -150.1 }
+      # No line from Talkeetna to Denali (user, 2026-10-25).
+      - { name: { en: Denali AK, zh: 德纳利, zh_hant: 德納利 }, lat: 63.7, lon: -148.9, gap_before: true }
+      - { name: { en: Fairbanks AK, zh: 费尔班克斯, zh_hant: 費爾班克斯 }, lat: 64.8, lon: -147.7 }
+      - { name: { en: Atigun Pass AK, zh: 阿蒂根山口, zh_hant: 阿蒂根山口 }, lat: 68.1, lon: -149.5 }

@@ -1,0 +1,62 @@
+{% comment %}
+  Full-screen photo viewer for the Avians gallery (user, 2026-10-26: "like Apple Finder's
+  gallery mode"): the large copy in the middle with ‹ › buttons, an Information sidebar with the
+  EXIF data on the right, and a strip of thumbnails at the bottom. Filled and driven by
+  assets/js/photo-viewer.js; labels in three languages (t.html), values from the tile.
+{% endcomment %}
+{%- comment -%} Not aria-modal: the site's top bar stays usable above it (theme, language). {%- endcomment %}
+<div class="viewer" role="dialog" aria-labelledby="viewer-title" hidden data-viewer>
+  {%- comment -%} ---- Top bar: bird's name, counter, info toggle, close ---- {%- endcomment %}
+  {%- comment -%} The ⓘ button shows on narrow windows only (the ‹ tab does it on wide ones). {%- endcomment %}
+  <header class="viewer__bar">
+    <h2 class="viewer__title" id="viewer-title" data-viewer-title></h2>
+    <span class="viewer__count" data-viewer-count></span>
+    <button class="viewer__icon" type="button" aria-pressed="true" data-viewer-info>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+      <span class="visually-hidden">{% include t.html en="Information" zh="简介" zh_hant="簡介" %}</span>
+    </button>
+    <button class="viewer__icon" type="button" data-viewer-close>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <span class="visually-hidden">{% include t.html en="Close" zh="关闭" zh_hant="關閉" %}</span>
+    </button>
+  </header>
+
+  {%- comment -%} ---- Stage: the photo, with ‹ › on its sides ---- {%- endcomment %}
+  <div class="viewer__stage" data-viewer-stage>
+    <img class="viewer__img" alt="" data-viewer-img>
+    {%- comment -%} A small tab on the right edge slides the Information panel in and out (user,
+    2026-10-27: "if someone wanna look, they can click"), labelled in the page's language, set
+    upright down the edge (user: "instead of <", "摄影参数"). Wide windows only; narrow ones use
+    the ⓘ button in the top bar. {%- endcomment %}
+    <button class="viewer__drawer" type="button" aria-expanded="false" aria-controls="viewer-info" data-viewer-drawer>
+      {% include t.html en="Photo Details" zh="摄影参数" zh_hant="攝影參數" %}
+    </button>
+    <button class="viewer__nav viewer__nav--prev" type="button" data-viewer-prev>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      <span class="visually-hidden">{% include t.html en="Previous photo" zh="上一张" zh_hant="上一張" %}</span>
+    </button>
+    <button class="viewer__nav viewer__nav--next" type="button" data-viewer-next>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      <span class="visually-hidden">{% include t.html en="Next photo" zh="下一张" zh_hant="下一張" %}</span>
+    </button>
+  </div>
+
+  {%- comment -%} ---- Sidebar: Information, from the photo's EXIF (scripts/add_sighting.py) ---- {%- endcomment %}
+  <aside class="viewer__info" id="viewer-info" data-viewer-panel>
+    <h3 class="viewer__info-title">{% include t.html en="Information" zh="简介" zh_hant="簡介" %}</h3>
+    <dl class="viewer__rows">
+      <div><dt>{% include t.html en="Species" zh="鸟种" zh_hant="鳥種" %}</dt><dd data-field="name"></dd></div>
+      <div><dt>{% include t.html en="Place" zh="地点" zh_hant="地點" %}</dt><dd data-field="place"></dd></div>
+      <div><dt>{% include t.html en="Taken" zh="拍摄时间" zh_hant="拍攝時間" %}</dt><dd data-field="taken"></dd></div>
+      <div><dt>{% include t.html en="Camera" zh="相机" zh_hant="相機" %}</dt><dd data-field="camera"></dd></div>
+      <div><dt>{% include t.html en="Lens" zh="镜头" zh_hant="鏡頭" %}</dt><dd data-field="lens"></dd></div>
+      <div><dt>{% include t.html en="Focal length" zh="焦距" zh_hant="焦距" %}</dt><dd data-field="focal"></dd></div>
+      <div><dt>{% include t.html en="F number" zh="光圈" zh_hant="光圈" %}</dt><dd data-field="aperture"></dd></div>
+      <div><dt>{% include t.html en="Exposure time" zh="快门" zh_hant="快門" %}</dt><dd data-field="exposure"></dd></div>
+      <div><dt>ISO</dt><dd data-field="iso"></dd></div>
+    </dl>
+  </aside>
+
+  {%- comment -%} ---- Bottom strip: every photo in view, the current one marked ---- {%- endcomment %}
+  <nav class="viewer__strip" aria-label="Photos" data-viewer-strip></nav>
+</div>

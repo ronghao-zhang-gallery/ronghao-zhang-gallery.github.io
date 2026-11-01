@@ -1,0 +1,17 @@
+# IUCN Red List categories for the Avians cards' status bar (user, 2026-10-31), in the Red
+# List's own order (extinct → least concern), as IUCN draws its scale. Each species' category
+# comes from _data/bird_facts.yml (`iucn:`). Names in the site's three languages; the colours
+# are IUCN's own, in _sass/components/_iucn.scss.
+# DD (Data Deficient) sits outside the scale: the bar then shows no category lit.
+
+scale: [EX, EW, CR, EN, VU, NT, LC]
+
+names:
+  EX: { en: Extinct, zh: 灭绝, zh_hant: 滅絕 }
+  EW: { en: Extinct in the Wild, zh: 野外灭绝, zh_hant: 野外滅絕 }
+  CR: { en: Critically Endangered, zh: 极危, zh_hant: 極危 }
+  EN: { en: Endangered, zh: 濒危, zh_hant: 瀕危 }
+  VU: { en: Vulnerable, zh: 易危, zh_hant: 易危 }
+  NT: { en: Near Threatened, zh: 近危, zh_hant: 近危 }
+  LC: { en: Least Concern, zh: 无危, zh_hant: 無危 }
+  DD: { en: Data Deficient, zh: 数据缺乏, zh_hant: 資料缺乏 }

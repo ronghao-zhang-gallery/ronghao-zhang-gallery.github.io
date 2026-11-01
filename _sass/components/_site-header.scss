@@ -1,0 +1,187 @@
+// Top bar: three floating segments that stay at the top while you scroll (user, 2026-10-24):
+// the site bar (name and page links), the language switch and the light/dark switch. The header
+// itself is transparent and lets clicks through, so the page shows (and works) in the gaps
+// between the segments as it scrolls underneath. Each segment has the floating surface from
+// _tokens.scss (--float-*); the switches' own styles are in _lang-switch.scss / _theme-toggle.scss.
+
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  max-width: var(--content-w);
+  height: var(--header-h);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+
+  > * { pointer-events: auto; }
+}
+
+.site-header__switches {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+// ---- The site bar: "Ronghao Zhang Photography | Home | Traces | Avians | Contact Me" ----
+.site-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 2.5rem;
+  padding: 0 0.2rem 0 1.15rem;   // right side like the language switch's inner gap
+  border: 1px solid var(--float-border);
+  border-radius: 999px;
+  background: var(--float-bg);
+  box-shadow: var(--float-shadow);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+// The name in EB Garamond, like the story's English lines (user, 2026-10-23). It stays in
+// English on every page, like the homepage title.
+.site-bar__brand {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;      // last resort on the smallest phones: never overlap the switches
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-bar__kind { font-weight: 500; }
+
+// The page links: pill options like the language switch's (user, 2026-10-24: no "|"
+// dividers), the current page filled in.
+.site-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 0.6rem;
+}
+
+.site-nav__link {
+  position: relative;
+  isolation: isolate;               // keeps the pill (z-index -1) behind the label, above the bar
+  display: flex;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0 0.8rem;
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover { background: var(--surface); color: var(--ink); }
+
+  &[aria-current="page"] { color: var(--bg); }
+}
+
+// Fallback slide (page-transitions.js): the labels swap colours as the pill moves.
+.site-nav__link.is-leaving { color: var(--ink-soft); transition: color 0.3s ease; }
+.site-nav__link.is-arriving { color: var(--bg); transition: color 0.3s ease; }
+
+// The filled pill behind the current page's link: its own element, so it can slide to the next
+// page's link (_page-transitions.scss).
+.site-nav__pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+// ---- Menu button (narrow screens only) ----
+.site-bar__menu {
+  display: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.35rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+
+  &:hover { background: var(--surface); }
+
+  svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+  }
+}
+
+// Narrow screens: the links fold into the menu button; open, they float in their own panel
+// under the site bar.
+@media (max-width: 860px) {
+  .site-bar { padding-right: 0.25rem; }
+  .site-bar__menu { display: grid; }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 11rem;
+    padding: 0.4rem;
+    border: 1px solid var(--float-border);
+    border-radius: 1rem;
+    background: var(--bg);          // solid: the page behind must not show through the links
+    box-shadow: var(--float-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.3rem);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s;
+  }
+
+  .site-bar.is-open .site-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .site-nav { margin-left: 0; }
+
+  .site-nav__link {
+    height: 2.5rem;
+    padding: 0 0.9rem;
+  }
+}
+
+// Very narrow screens: "Photography" goes, so the three segments fit on one row.
+@media (max-width: 520px) {
+  .site-bar__kind { display: none; }
+  .site-bar { padding-left: 0.9rem; }
+  .site-header__inner,
+  .site-header__switches { gap: 0.4rem; }
+}
+
+// The smallest phones (under ~400 px): the name a little smaller.
+@media (max-width: 400px) {
+  .site-bar { padding-left: 0.75rem; }
+  .site-bar__brand { font-size: 0.95rem; }
+  .site-bar__menu { margin-left: 0.15rem; }
+}

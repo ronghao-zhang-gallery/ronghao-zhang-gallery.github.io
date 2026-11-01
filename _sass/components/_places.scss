@@ -1,0 +1,944 @@
+// Traces page (_includes/places/places-map.html): title and continent bar, the world map with
+// pulsing markers, and the dated list of visits. places-map.js positions the markers and routes,
+// links markers to the list, and runs the continent bar (zoom, list beside the map).
+
+// ---- Page ----
+// The page spans the window (less its gutters) so the map can be wider than the text; the title
+// and the list keep to the content column, lined up with the top bar.
+.places {
+  padding: clamp(2rem, 6vw, 4.5rem) var(--gutter) clamp(3rem, 8vw, 6rem);
+}
+
+.places__head {
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+  margin: 0 auto clamp(1.5rem, 4vw, 3rem);
+  // The continent bar on the title's line, to its right, sitting on the title's baseline (user,
+  // 2026-10-25); the count under the title.
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "title bar" "count count";
+  align-items: baseline;
+  column-gap: 2rem;
+}
+
+.places__title {
+  grid-area: title;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.places__count {
+  grid-area: count;
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+// Narrow screens: the bar goes under the count, from the left.
+@media (max-width: 860px) {
+  .places__head {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "title" "count" "bar";
+  }
+
+  .continent-bar { justify-self: start; margin-top: 1.2rem; }
+}
+
+// ---- Continent bar ----
+// World and the seven continents as plain words separated by dots (user, 2026-10-25), the
+// chosen one in full ink with a line under it. The line is one element that slides to the
+// chosen word (places-map.js sets its width and position). On narrow screens the bar scrolls
+// sideways instead of wrapping.
+.continent-bar {
+  grid-area: bar;
+  justify-self: end;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  max-width: 100%;
+  padding-bottom: 0.35rem;          // room for the line
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.continent-bar__line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1.5px;
+  border-radius: 1px;
+  background: var(--ink);
+  transition: transform 0.45s var(--ease-out), width 0.45s var(--ease-out);
+}
+
+.continent-bar__option {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &[aria-pressed="true"] { color: var(--ink); }
+
+  // Avians, zoomed in, a bird's card hovered: the other continents its range reaches
+  // (places-map.js; user, 2026-10-31).
+  &.is-in-range { color: var(--accent); }
+}
+
+.continent-bar__dot {
+  flex: none;
+  padding: 0 0.6rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continent-bar__line { transition: none; }
+}
+
+// ---- Stage: map column and list ----
+// World: one wide column, the list under it (in the content column). A continent: the map on
+// the left, the list on the right (user, 2026-10-25). The columns glide between the two while
+// the map zooms (same 0.7 s as GLIDE in places-map.js); the list fades out before the change
+// and back in after it (.is-switching), since it jumps from under the map to beside it.
+.places-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+  column-gap: 0;
+  max-width: 100rem;
+  margin-inline: auto;
+  transition: grid-template-columns 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+    column-gap 0.7s cubic-bezier(0.65, 0, 0.35, 1), max-width 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.places-mapcol {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.places-side {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+  margin-inline: auto;
+  transition: opacity 0.2s ease;
+}
+
+// Zoomed in, map and list keep to the content column, lined up with the title and the bar.
+.places.is-zoomed .places-stage {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  column-gap: clamp(1.5rem, 4vw, 4rem);
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+}
+
+.places.is-zoomed .places-side {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  max-width: none;
+}
+
+.places.is-zoomed .visit-list { margin-top: 0; }
+.places.is-zoomed .map-legend,
+.places.is-zoomed .map-credit { max-width: none; }
+.places.is-switching .places-side { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .places-stage { transition: none; }
+}
+
+// Traces has no list for now (user, 2026-10-31): zoomed in, its map keeps the whole column.
+.places--no-list.is-zoomed .places-stage {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+  column-gap: 0;
+}
+
+// Phones: always one column; a continent's list stays under its map.
+@media (max-width: 760px) {
+  .places.is-zoomed .places-stage {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+    column-gap: 0;
+  }
+
+  .places.is-zoomed .places-side {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .places.is-zoomed .visit-list { margin-top: clamp(2rem, 5vw, 3.5rem); }
+}
+
+// ---- Map ----
+// Flat land like Ariel Mu's map (user, 2026-10-25), every part of it one landscape type in a
+// soft colour, no overlaps; then lakes, rivers and, on top of everything, the country borders.
+// The markers and routes, in the one accent colour, stand out over it. The map is wider than the text column, up to the whole window less its
+// gutters (user, 2026-10-24: "could be larger"), centred. Drawn by scripts/make_world_map.py;
+// the colours are the --map-* tokens.
+.places-map {
+  position: relative;
+  max-width: 100rem;
+  margin-inline: auto;
+  transition: max-width 0.7s cubic-bezier(0.65, 0, 0.35, 1);   // with the stage's zoom glide
+}
+
+// The world view's map a bit smaller, on Traces and Avians (user, 2026-10-31): 85% of the
+// space it had, centred. Phones keep the full width (the map is small enough there). Zoomed in,
+// the map fills its column as before, gliding there with the stage.
+@media (min-width: 761px) {
+  .places:not(.is-zoomed) .places-map { max-width: min(85rem, 85%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .places-map { transition: none; }
+}
+
+.world-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+// The land, with a faint coastline in the border colour (user, 2026-10-25: first on Avians, then
+// "apply that in Traces"). Non-scaling, so it stays the same thin line at every zoom. On Traces
+// the landscape blocks cover the inner half of the line, so it is drawn twice as wide there; the
+// half outside the land matches the Avians line.
+.world-map__land {
+  fill: var(--map-land);
+  stroke: var(--map-border);
+  stroke-width: 1.2px;
+  vector-effect: non-scaling-stroke;
+}
+
+// Avians' plain map (land and borders only): the land a touch whiter, so the continents read
+// without the landscape colours, like Ariel Mu's map; nothing covers its coastline.
+.places--plain .world-map__land {
+  fill: color-mix(in srgb, var(--map-land) 60%, #fff);
+  stroke-width: 0.6px;
+}
+
+:root[data-theme="dark"] .places--plain .world-map__land { fill: var(--map-land); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .places--plain .world-map__land { fill: var(--map-land); }
+}
+
+// Landscape blocks. Neighbours share their edges; a hairline of each block's own colour hides
+// the sub-pixel slivers that simplifying the outlines leaves between them.
+.world-map__blocks path {
+  fill: var(--block);
+  stroke: var(--block);
+  stroke-width: 0.6px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  fill-rule: evenodd;
+}
+
+.world-map__forest { --block: var(--map-forest); }
+.world-map__grassland { --block: var(--map-grassland); }
+.world-map__desert { --block: var(--map-desert); }
+.world-map__tundra { --block: var(--map-tundra); }
+.world-map__mountain { --block: var(--map-mountain); }
+.world-map__ice { --block: var(--map-ice); }
+
+// Lakes in the rivers' own colour, so both read as the same water (user, 2026-10-25: lakes
+// were too pale beside the rivers).
+.world-map__lakes { fill: var(--map-river); }
+
+// Lines keep their width in screen pixels at every map size.
+.world-map__rivers,
+.world-map__borders {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+// Rivers from HydroRIVERS: the great rivers a little heavier than their branches.
+.world-map__rivers {
+  stroke: var(--map-river);
+  stroke-width: 0.7px;
+}
+
+.world-map__rivers--major { stroke-width: 1.2px; }
+
+// Country borders, drawn last so they stay on top of every block (user, 2026-10-25). Disputed, indefinite and
+// line-of-control borders are dashed, as Natural Earth marks them.
+.world-map__borders {
+  stroke: var(--map-border);
+  stroke-width: 0.75px;
+}
+
+.world-map__borders--disputed { stroke-dasharray: 3 2; }
+
+// Focus mask (zoomed in only): one white shape per continent; the others fade to nothing.
+.world-map__focus {
+  fill: #fff;
+  transition: opacity 0.6s ease;
+
+  &.is-out { opacity: 0; }
+}
+
+// Antarctica: its own polar map over the world map's box; they cross-fade.
+.world-map:not(.polar-map) { transition: opacity 0.5s ease; }
+
+.places-polar {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+
+  .polar-map { width: 100%; height: 100%; }
+}
+
+.places.is-polar {
+  .places-polar { opacity: 1; }
+  .world-map:not(.polar-map) { opacity: 0; }
+}
+
+// ---- Legend: what the colours mean, under the map, in the content column, then the credit ----
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+  margin: 1rem auto 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+// Data credit (RESOLVE Ecoregions is CC BY and HydroRIVERS asks for a citation): small and quiet.
+.map-credit {
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+  margin: 0.5rem auto 0;
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  opacity: 0.8;
+
+  a { color: inherit; }
+}
+
+// ---- Avians, zoomed in: "Its range also reaches …" while a bird's card is hovered ----
+// (user, 2026-10-31; filled by places-map.js.) It keeps its line when empty, so the map column,
+// which the card list beside it is measured from, doesn't change height on hover. Not in the
+// world view, where the whole range is on the map.
+.range-beyond {
+  display: none;
+  min-height: 1.3em;
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.is-shown { opacity: 1; }
+}
+
+.places.is-zoomed .range-beyond { display: block; }
+.range-beyond__name { color: var(--accent); }
+
+.map-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.map-legend__swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--map-border);
+}
+
+.map-legend__swatch--mountain { background: var(--map-mountain); }
+.map-legend__swatch--forest { background: var(--map-forest); }
+.map-legend__swatch--grassland { background: var(--map-grassland); }
+.map-legend__swatch--desert { background: var(--map-desert); }
+.map-legend__swatch--tundra { background: var(--map-tundra); }
+.map-legend__swatch--ice { background: var(--map-ice); }
+.map-legend__swatch--year-round { background: var(--range-year-round); }
+.map-legend__swatch--breeding { background: var(--range-breeding); }
+.map-legend__swatch--nonbreeding { background: var(--range-nonbreeding); }
+.map-legend__swatch--migration { background: var(--range-migration); }
+.map-legend__swatch--water { background: var(--map-river); border-color: var(--map-river); }
+
+// ---- Ranges (Avians) ----
+// The species' range from eBird Status & Trends in Birds of the World's colours, one season per
+// spot (scripts/make_ranges.py), over the land, a little see-through so borders and rivers show.
+// Only the range of the sighting picked (else the newest) is shown; it fades between species.
+.places-ranges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.places.is-polar .places-ranges { opacity: 0; }
+
+.range {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  &.is-shown { opacity: 1; }
+
+  // A hairline of each season's colour hides the slivers between neighbouring seasons.
+  path {
+    fill-opacity: 0.7;
+    stroke-opacity: 0.7;
+    stroke-width: 0.6px;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+.range__year-round { fill: var(--range-year-round); stroke: var(--range-year-round); }
+.range__breeding { fill: var(--range-breeding); stroke: var(--range-breeding); }
+.range__nonbreeding { fill: var(--range-nonbreeding); stroke: var(--range-nonbreeding); }
+.range__migration { fill: var(--range-migration); stroke: var(--range-migration); }
+
+// ---- Routes ----
+// A trip's way along the roads it took, in the accent magenta (user, 2026-10-25: following the
+// highways' bends, no dots at the stops), laid over the map and under the markers. The width is
+// in screen pixels (non-scaling), so the line keeps its weight at every map size. When a place is
+// picked it dims with the rest, unless the place is on it (a place with `route:` has no dot).
+.places-routes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.25px;   // user, 2026-10-25: narrower (was 2px)
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 0.25s ease;
+}
+
+.places-map.is-paused .route:not(.is-active) { opacity: 0.35; }
+// Not on the chosen continent: gone, even while a place is picked (the dimming above weighs more).
+.route.is-off { opacity: 0 !important; }
+
+// ---- Markers ----
+// A small accent dot with a ring that slowly swells and fades. Hovering or tapping a marker (or
+// its row in the list) pauses every ring and shows that marker's label; the others dim.
+.place-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  margin: -0.875rem 0 0 -0.875rem;   // centred on its point (left / top set by places-map.js)
+  border: 0;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  visibility: hidden;                 // until places-map.js has placed it
+  transition: opacity 0.25s ease, visibility 0s;
+
+  &.is-placed { visibility: visible; }
+  // Not on the chosen continent: gone, out of the way of the pointer and of Tab. It must beat
+  // every other opacity rule (user, 2026-10-29: on Avians, zoomed to South America, the Atlanta
+  // dot stayed: `.places--plain .place-marker` came later at the same weight, and a bird's card
+  // can light its dots on other continents), hence !important. Hidden once the fade is done.
+  &.is-off {
+    opacity: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0s 0.25s;
+  }
+}
+
+// Dot and ring are both centred on the marker's point with translate(-50%, -50%), not with
+// fractional margins / insets: those round to different pixels, and the ring sat off the dot's
+// centre (user, 2026-10-25), most visibly when the dot grows.
+.place-marker__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  // ~30% smaller than at first, on Traces and Avians (user, 2026-10-25; was 0.6rem).
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 1.5px var(--map-land);   // a thin gap from the map behind it
+  transform: translate(-50%, -50%);
+
+  &::after {                          // the pulse
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-sizing: border-box;
+    width: calc(100% + 0.22rem);
+    height: calc(100% + 0.22rem);
+    border-radius: 50%;
+    border: 2px solid currentColor;   // user, 2026-10-25: thicker than 1.5px; scaled down with the dot
+    transform: translate(-50%, -50%);
+    animation: place-pulse 2.6s ease-out infinite;
+  }
+}
+
+// Swells to ~1.1rem across (user, 2026-10-25: 3.4×, then 2.2×, spread too far; now 1.7×).
+@keyframes place-pulse {
+  from { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+  to   { transform: translate(-50%, -50%) scale(1.7); opacity: 0; }
+}
+
+.places-map.is-paused .place-marker__dot::after { animation-play-state: paused; }
+.places-map.is-paused .place-marker:not(.is-active) { opacity: 0.35; }
+
+// Avians (user, 2026-10-25): the dots rest small, half see-through and still, with no outer
+// ring at all. Only a bird's card wakes its dots: all turn full colour, and the one where it was
+// last seen pops larger and beats gently (the dot itself, no ring; user: "do not have the
+// outer ring"). Hovering a dot
+// itself doesn't (places-map.js sets .is-card-picked only for cards).
+.places--plain {
+  .place-marker { opacity: 0.5; }
+  .place-marker__dot {
+    // Smaller than Traces' (user, 2026-10-31: "make the dots for avians smaller"; was 0.42rem,
+    // like Traces). The marker's hit area stays 1.75rem, so they are as easy to point at.
+    width: 0.3rem;
+    height: 0.3rem;
+    // The gap round the dot grows with the pop: kept thin so it never reads as a ring.
+    box-shadow: 0 0 0 0.6px var(--map-land);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .place-marker__dot::after { display: none; }
+
+  // Every place of the hovered bird turns solid; only where it was last seen grows and beats
+  // (user, 2026-10-25: "only the place last seen have dynamics").
+  .places-map.is-card-picked .place-marker.is-active { opacity: 1; }
+  .places-map.is-card-picked .place-marker.is-latest {
+    z-index: 1;                       // over nearby places of the same bird
+
+    .place-marker__dot { transform: translate(-50%, -50%) scale(1.5); }
+  }
+}
+
+@keyframes place-pop {
+  from { transform: translate(-50%, -50%) scale(1.5); }
+  to   { transform: translate(-50%, -50%) scale(2); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .places--plain .places-map.is-card-picked .place-marker.is-latest .place-marker__dot {
+    animation: place-pop 0.8s ease-in-out infinite alternate;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .place-marker__dot::after { animation: none; opacity: 0; }
+}
+
+// The label: hidden until its marker is active; above the marker, centred.
+.place-marker__label {
+  position: absolute;
+  bottom: calc(100% + 0.3rem);
+  left: 50%;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--bg);
+  box-shadow: 0 6px 20px rgb(var(--shadow) / 0.12);
+  color: var(--ink);
+  text-align: left;
+  white-space: nowrap;
+  transform: translate(-50%, 0.3rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.place-marker.is-active .place-marker__label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.place-marker__name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.place-marker__dates {
+  display: grid;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+// ---- Dated list ----
+.visit-list {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.visit {
+  display: grid;
+  grid-template-columns: minmax(7rem, 12rem) 1fr auto;
+  gap: 0.4rem 1.5rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  cursor: default;
+  transition: opacity 0.25s ease, color 0.25s ease;
+
+  // Rows of other continents (places-map.js sets hidden; display: grid would override it).
+  &[hidden] { display: none; }
+}
+
+.visit__date {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.visit__place {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+}
+
+.visit__subject {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+// ---- Avians: one card per species (user, 2026-10-25) ----
+// Compact framed cards (user, 2026-10-31: "too large… the thumbnail really small and to the right
+// of the text, each bird card should have an edge"): the species' name, "Last seen" and its
+// latest date · place on the left, a small 4:3 thumbnail on the right, a thin rounded border.
+// The cards are spaced apart instead of divided by rules.
+.places--plain .visit-list {
+  display: grid;
+  gap: 0.6rem;
+  border-top: 0;
+}
+
+// The photo fills the card's right end, top to bottom (user, 2026-10-31: "the photo should take
+// entire height of the bird card. the left edge should be a straight line"): no padding on that
+// side, and the card's rounded corners clip the photo's right corners.
+.visit--bird {
+  // Positioned, so its screen-reader-only labels (absolute) stay inside the card: without it they
+  // escaped the world row's sideways scroll and made the whole page ~14,000 px wide (2026-10-31).
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0 0 0 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  transition: opacity 0.25s ease, border-color 0.25s ease;
+}
+
+// The card in focus (hovered, or at the reading line on phones) gets a firmer edge.
+.visit--bird.is-active { border-color: color-mix(in srgb, var(--ink) 40%, transparent); }
+
+// Tight lines in every language (the Chinese pages' 1.7 would make the cards tall).
+.visit__text {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: 0.6rem 0;               // the text sets the card's height
+  line-height: 1.3;
+}
+
+.visit--bird .visit__place {
+  margin-bottom: 0.05rem;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+// The name, then (birds with photos) a small camera that goes to the photo in the gallery
+// (user, 2026-10-31). Soft until hovered or focused, then the accent.
+.visit__head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.visit__camera {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-bottom: 0.05rem;
+  border-radius: 50%;
+  color: var(--ink-soft);
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+}
+
+// The scientific name under the common name (user, 2026-10-31): italic serif, a step smaller
+// and softer, on one line (it is Latin on every page, so the Chinese line height doesn't apply).
+.visit__sci {
+  margin: -0.1rem 0 0.15rem;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// The latest date · place, one line; where it must wrap (Chinese, narrow list), it breaks at the
+// dot, never inside the date or the place's name.
+.visit__seen {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+
+  > span { white-space: nowrap; }
+}
+
+// Field-guide facts right under the names, before the sighting (user, 2026-10-31): the
+// morphology line, quiet and small, breaking only at its dots; then the IUCN label and bar
+// (_iucn.scss) on one line; then a little more room before "Last seen".
+.visit__morph {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+
+  span > span:not([aria-hidden]) { white-space: nowrap; }   // break only at the dots
+}
+
+.visit__iucn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+
+  .visit__label { line-height: 1; }
+}
+
+.visit__morph + .visit__label,
+.visit__iucn + .visit__label { margin-top: 0.55rem; }
+
+// "Last seen": a small, spaced label over the latest date and place.
+.visit__label {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.75;
+}
+
+// The photo's slot: the card's full height (stretched), a set width (about 4:3 at the card's
+// height). The photo is laid over it (absolute), so it fills the slot without adding height.
+.visit__photos {
+  position: relative;
+  align-self: stretch;
+  width: 6.25rem;
+}
+
+// The species' cover photo (shown only until its sticker is fetched). Square corners: the left
+// edge is a straight line.
+.visit__photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--surface);      // while loading
+}
+
+// The photo links to its tile in the gallery below (user, 2026-10-30); it dims a little on hover.
+// The focus ring sits inside, since the card clips anything outside it.
+a.visit__photos {
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible { outline-offset: -3px; }
+
+  .visit__photo { transition: opacity 0.2s ease; }
+  &:hover .visit__photo { opacity: 0.82; }
+}
+
+// The species' sticker (user, 2026-10-31): the whole bird, transparent around its white
+// outline, so it sits on the card itself (no tint, no crop) with a little room at the edges.
+.visit__photo--sticker {
+  padding: 0.3rem 0.45rem 0.3rem 0;
+  object-fit: contain;
+  background: none;
+}
+
+a.visit__photos:hover .visit__photo--sticker { opacity: 1; transform: scale(1.06); }
+a.visit__photos .visit__photo--sticker { transition: transform 0.25s ease; }
+
+// Bigger stickers beside a zoomed map and in the world row (user, 2026-10-31): off phones,
+// the slot is 40% of the card's own width (the card is a size container), 6.25–10rem.
+@media (min-width: 761px) {
+  .places--plain .visit--bird { container-type: inline-size; }
+  .places--plain .visit--bird .visit__photos { width: clamp(6.25rem, 40cqi, 10rem); }
+}
+
+// A bird seen but not photographed (user, 2026-10-30): the photo's slot, faintly tinted, with a
+// quiet "No photo yet", so the cards stay even.
+.visit__photo--none {
+  display: grid;
+  place-items: center;
+  padding: 0.3rem;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  font-size: 0.6rem;
+  line-height: 1.2;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+// While one place is picked, the other rows dim; the picked rows get the accent date.
+.visit-list.is-picking .visit:not(.is-active) { opacity: 0.35; }
+.visit.is-active .visit__date { color: var(--accent); }
+
+// Beside the map the list is narrower: date on its own line, then place and subject.
+.places.is-zoomed .visit:not(.visit--bird) {
+  grid-template-columns: 1fr auto;
+
+  .visit__date { grid-column: 1 / -1; }
+}
+
+// Phones: date above the place, subject under it (bird cards stay as they are).
+@media (max-width: 760px) {
+  .visit:not(.visit--bird),
+  .places.is-zoomed .visit:not(.visit--bird) { grid-template-columns: 1fr; }
+}
+
+// Avians: the cards get a set height and scroll inside it once the birds outgrow it (user,
+// 2026-10-26: "dedicate a certain length, and make a scroll bar"): under the world map about four
+// cards, less on a short window; beside a zoomed map, the map's own height. Phones keep plain page scrolling (a box scrolling inside the page is awkward to
+// thumb, and the reading-line pick follows the page's scroll).
+@media (min-width: 761px) {
+  .places--plain .visit-list {
+    max-height: min(38rem, 70vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;     // reaching the end doesn't start scrolling the page
+    scrollbar-gutter: stable;         // no sideways jump when the bar appears
+    padding-right: 0.6rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+
+    &::-webkit-scrollbar { width: 6px; }
+    &::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+
+    // More cards below: the bottom edge fades out, a hint that the list scrolls (macOS hides
+    // scroll bars until you scroll). places-map.js sets .has-more; gone at the end.
+    &.has-more {
+      mask-image: linear-gradient(to bottom, #000 calc(100% - 3.5rem), transparent);
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3.5rem), transparent);
+    }
+  }
+
+  // Beside the zoomed map: from the map's top edge down to the bottom of its legend and credit
+  // (user, 2026-10-28; was the map alone), less the card tools above the list (_card-tools.scss).
+  // --mapcol-h is the map column's live height, set by places-map.js as it zooms and resizes.
+  .places--plain.is-zoomed .visit-list { max-height: calc(var(--mapcol-h, min(38rem, 70vh)) - var(--card-tools-h, 0px)); }
+  // The column keeps its content's height (not stretched to the row the list makes), or the
+  // list's height would feed back into its own measure.
+  .places--plain.is-zoomed .places-mapcol { align-self: start; }
+
+  // The compact cards stack in that height and scroll inside it (2026-10-31; they used to be a
+  // third of it each, "3 bird cards", user 2026-10-27, before the user found them too large).
+
+  // ---- World view: one row of bird tiles right under the map, scrolling left and right ----
+  // (user, 2026-10-27: scrolling a list up and down hid the map, so the range couldn't be seen
+  // while hovering a card). The map column's pieces join the stage grid (display: contents) so
+  // they can be ordered: map, range legend and credit right above the cards (user, 2026-10-27),
+  // then the cards (user, 2026-10-31: cards above the map were tried and rejected, "I still
+  // like the bird cards to be placed below the world map"); zoomed in, the layout is as before.
+  .places--plain:not(.is-zoomed) {
+    .places-mapcol { display: contents; }
+    // width: 100% because auto margins on a grid item would shrink it to its contents.
+    .places-map { grid-column: 1 / -1; grid-row: 1; width: 100%; }
+    .map-legend { grid-column: 1 / -1; grid-row: 2; width: 100%; }
+    .map-credit { grid-column: 1 / -1; grid-row: 3; width: 100%; }
+    .places-side { grid-row: 4; margin-top: 1.25rem; }
+
+    .visit-list {
+      display: flex;
+      gap: 0.6rem;
+      max-height: none;
+      margin-top: 0;
+      padding: 0 0 0.6rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      // Up / down scrolling over the row passes on to the page (user, 2026-10-27); the column's
+      // `contain` above had stopped it. Sideways stays contained (no browser back-swipe).
+      overscroll-behavior: contain auto;
+      border-top: 0;
+      scroll-snap-type: x proximity;
+      scrollbar-gutter: auto;
+
+      &::-webkit-scrollbar { height: 6px; }
+
+      // More tiles to one side: that edge fades (places-map.js sets the classes).
+      &.has-more-right { mask-image: linear-gradient(to right, #000 calc(100% - 4rem), transparent); -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 4rem), transparent); }
+      &.has-more-left { mask-image: linear-gradient(to left, #000 calc(100% - 4rem), transparent); -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 4rem), transparent); }
+      &.has-more-left.has-more-right { mask-image: linear-gradient(to right, transparent, #000 4rem, #000 calc(100% - 4rem), transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 4rem, #000 calc(100% - 4rem), transparent); }
+    }
+
+    // The same card as everywhere (text left, sticker right), at a set width (user,
+    // 2026-10-31: "the bird card can be wider and the sticker can be bigger"; 25.5rem keeps the
+    // morphology line on one line beside a 10rem sticker for most birds). A short, wide
+    // two-column version was tried the same day and rejected ("too narrow, change it back").
+    .visit--bird {
+      flex: 0 0 25.5rem;
+      scroll-snap-align: start;
+    }
+  }
+}
+
+// A continent with no visits yet.
+.visit-empty {
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.places:not(.is-zoomed) .visit-empty { margin-top: clamp(2rem, 5vw, 3.5rem); border-top: 1px solid var(--line); }

@@ -1,0 +1,203 @@
+// Avians gallery (_includes/avians/gallery.html): every photo under the bird cards, newest first
+// (user, 2026-10-26). Thumbnails cropped to 3:2 in an even grid; hovering a tile lifts its
+// caption (the bird's name, date · place) over the photo's foot; clicking opens the viewer.
+// Similar photos are merged into stacks (see below); the viewer still shows them one by one. The continent bar hides other
+// continents' tiles (places-map.js sets hidden).
+
+// The sidebar (_gallery-side.scss) on the left, the photos on the right. As wide as the site's
+// top bar (user, 2026-10-27: "make the gallery similar width as the top bar"; it was the world
+// map's land width): the content column less its gutters, like the bird cards above.
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  grid-template-areas: "title title" "side main";
+  column-gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+
+  &[hidden] { display: none; }
+}
+
+.photo-gallery__main { grid-area: main; min-width: 0; }
+
+.photo-gallery__empty {
+  margin: 0;
+  padding: 2rem 0;
+  color: var(--ink-soft);
+}
+
+// Narrow screens: sidebar (folded) above the photos.
+@media (max-width: 900px) {
+  .photo-gallery {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "title" "side" "main";
+    row-gap: 1rem;
+  }
+}
+
+.photo-gallery__title {
+  grid-area: title;
+  margin: 0 0 1.25rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 500;
+}
+
+// ---- Grid ----
+.photo-gallery__grid {
+  display: grid;
+  // Three to a row, so each photo is larger (user, 2026-10-26; was auto-fill from 15rem);
+  // two on tablets, one on phones.
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photo-tile[hidden],
+.photo-tile.is-filtered-out { display: none; }        // continent bar / sidebar filters
+
+// ---- Stacks: similar photos merged (same bird, day and place; user, 2026-10-26) ----
+// Two card edges peek out above the top photo, and a badge counts the photos. The grid keeps
+// room for the edges (padding-top), so a stack lines up with the plain tiles' photos.
+.photo-gallery__grid { padding-top: 0.6rem; }
+
+.photo-tile--stack {
+  position: relative;
+  isolation: isolate;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 0.45rem;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--ink) 14%, var(--bg));
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  &::before { inset: -0.6rem 1rem auto; height: 2rem; opacity: 0.5; }
+  &::after { inset: -0.3rem 0.5rem auto; height: 2rem; opacity: 0.8; }
+
+  // Hovering fans the edges up a little, a hint there are more photos inside.
+  &:hover::before { transform: translateY(-0.2rem); }
+  &:hover::after { transform: translateY(-0.1rem); }
+}
+
+.photo-tile__count {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+
+  svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-tile--stack::before,
+  .photo-tile--stack::after { transition: none; }
+}
+
+// The whole tile is a button: it opens the full-screen viewer (photo-viewer.js).
+.photo-tile__open {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  border-radius: 0.45rem;
+  background: var(--surface);      // while loading
+  color: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.photo-tile__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+// A photo that fails to load hides itself (avians/photo.html); display: block would undo that.
+.photo-tile__img[hidden] { display: none; }
+
+@media (max-width: 900px) {
+  .photo-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .photo-gallery__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+// ---- Caption: hidden until hover / focus, over a soft shade at the foot ----
+.photo-tile__caption {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  gap: 0.1rem;
+  padding: 1.6rem 0.8rem 0.65rem;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.55), transparent);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.photo-tile__name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+
+.photo-tile__meta {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.photo-tile__open:hover,
+.photo-tile__open:focus-visible {
+  .photo-tile__img { transform: scale(1.03); }
+  .photo-tile__caption { opacity: 1; transform: none; }
+}
+
+// Touch screens have no hover: captions always show.
+@media (hover: none) {
+  .photo-tile__caption { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-tile__img,
+  .photo-tile__caption { transition: none; }
+}
+
+// ---- Reached from a bird card (user, 2026-10-30): an accent outline that holds, then fades ----
+// gallery-filter.js adds .is-flash after scrolling here and removes it when the fade ends.
+.photo-tile.is-flash .photo-tile__open { animation: photo-tile-flash 2.4s ease-out; }
+
+@keyframes photo-tile-flash {
+  0%, 45% { box-shadow: 0 0 0 3px var(--accent); }
+  100% { box-shadow: 0 0 0 3px transparent; }
+}

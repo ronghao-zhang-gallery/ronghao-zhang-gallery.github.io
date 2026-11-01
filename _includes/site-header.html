@@ -1,0 +1,58 @@
+{% comment %}
+  Top bar on every page: three separate floating segments (user, 2026-10-24; idea from
+  1in8b.life's floating header), with empty, see-through space between them:
+    1. the site bar: "Ronghao Zhang Photography | Home | Traces | Avians | Contact Me";
+    2. the language switch (EN | 简 | 繁);
+    3. the light/dark switch.
+  Narrow screens fold the page links into a menu button inside the site bar (site-menu.js).
+  "Contact Me" jumps to the footer, which has the email (no contact page yet).
+  The current page's link is marked with aria-current and holds the filled pill
+  (.site-nav__pill), which slides to the new page's link when you switch pages
+  (_page-transitions.scss, page-transitions.js). The pill and each label have their own
+  view-transition-name, so the browser can move them separately. The two switches are buttons with
+  aria-pressed (set by lang-switch.js / theme-toggle.js), which is how screen readers expect a
+  toggle to work. Each language button is labelled in its own language.
+{% endcomment %}
+{%- assign here = page.url %}
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="site-bar" data-site-bar>
+      <a class="site-bar__brand" href="{{ '/' | relative_url }}">{{ site.title }}<span class="site-bar__kind"> Photography</span></a>
+      <nav class="site-nav" id="site-nav" aria-label="Pages">
+        <a class="site-nav__link" href="{{ '/' | relative_url }}" style="view-transition-name: nav-home"{% if here == '/' %} aria-current="page"{% endif %}>
+          {%- if here == '/' %}<span class="site-nav__pill" aria-hidden="true"></span>{% endif -%}
+          {% include t.html en="Home" zh="首页" zh_hant="首頁" %}</a>
+        <a class="site-nav__link" href="{{ '/traces/' | relative_url }}" style="view-transition-name: nav-traces"{% if here == '/traces/' %} aria-current="page"{% endif %}>
+          {%- if here == '/traces/' %}<span class="site-nav__pill" aria-hidden="true"></span>{% endif -%}
+          {% include t.html en="Traces" zh="足迹" zh_hant="足跡" %}</a>
+        <a class="site-nav__link" href="{{ '/avians/' | relative_url }}" style="view-transition-name: nav-avians"{% if here == '/avians/' %} aria-current="page"{% endif %}>
+          {%- if here == '/avians/' %}<span class="site-nav__pill" aria-hidden="true"></span>{% endif -%}
+          {% include t.html en="Avians" zh="鸟类" zh_hant="鳥類" %}</a>
+        <a class="site-nav__link" href="#contact" style="view-transition-name: nav-contact">{% include t.html en="Contact Me" zh="联系我" zh_hant="聯絡我" %}</a>
+      </nav>
+      <button class="site-bar__menu" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+        <span class="visually-hidden">{% include t.html en="Menu" zh="菜单" zh_hant="選單" %}</span>
+      </button>
+    </div>
+
+    <div class="site-header__switches">
+      <div class="lang-switch" role="group" aria-label="Language · 语言 · 語言">
+        <button class="lang-switch__option" type="button" data-lang-set="en" lang="en" aria-label="English">EN</button>
+        <button class="lang-switch__option" type="button" data-lang-set="zh-Hans" lang="zh-Hans" aria-label="简体中文">简</button>
+        <button class="lang-switch__option" type="button" data-lang-set="zh-Hant" lang="zh-Hant" aria-label="繁體中文">繁</button>
+      </div>
+      <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
+        {%- comment -%} Both icons are drawn; CSS shows the one for the mode you'd switch to. {%- endcomment -%}
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/>
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/>
+        </svg>
+        <span class="visually-hidden">{% include t.html en="Dark mode" zh="深色模式" zh_hant="深色模式" %}</span>
+      </button>
+    </div>
+  </div>
+</header>

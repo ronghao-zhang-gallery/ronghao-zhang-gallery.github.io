@@ -1,0 +1,222 @@
+// Dot stage: a canvas that stays on screen while the text steps scroll past it.
+// dot-morph.js draws the coloured dots on the canvas; scroll-words.js lights the words.
+
+// overflow-x: clip keeps the title's slide out to the right from widening the page (clip, not
+// hidden, so the sticky canvas still sticks).
+.dot-stage { position: relative; overflow-x: clip; }
+
+// ---- Canvas: sticks under the top bar for the whole story ----
+.dot-stage__canvas {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h));
+  height: calc(100svh - var(--header-h));
+}
+
+// Hidden until the first picture has turned into dots, then fades in (dot-morph.js adds
+// is-ready), so nothing half-built shows while pictures load.
+.dot-stage__canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.dot-stage__canvas canvas.is-ready { opacity: 1; }
+
+.dot-stage__fallback {
+  display: none;
+  padding: 2rem var(--gutter);
+  color: var(--ink-soft);
+}
+
+.dot-stage.is-static .dot-stage__fallback { display: block; }
+
+// ---- Steps: one screen each, scrolling over the canvas ----
+// Pulled up by one canvas height so the first step starts on top of the canvas. It covers the
+// held lines below it, so it lets the pointer through to their page links (.dot-step__go).
+.dot-stage__steps {
+  position: relative;
+  margin-top: calc(-100svh + var(--header-h));
+  pointer-events: none;
+}
+
+// Wide screens: sides alternate (user, 2026-10-21). The dots fill one half of the screen (about
+// 5%–52% or 48%–95% of the width, placeOf() in dot-morph.js), so each step's text is placed in
+// the other half, measured on the screen rather than the content column: the dots grow with the
+// window, the content column stops at --content-w. The outer edge lines up with the top bar.
+.dot-step {
+  --edge: max(var(--gutter), calc((100vw - var(--content-w)) / 2 + var(--gutter)));
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  min-height: calc(100svh - var(--header-h));
+  padding-left: 56vw;           // odd steps: dots left, text right
+  padding-right: var(--edge);
+}
+
+.dot-step:nth-child(even),      // even steps: dots right, text left
+.dot-step.dot-step--text-left { // the same for a held line (below) on such a page
+  padding-left: var(--edge);
+  padding-right: 56vw;
+}
+
+// A held line on the right (the moment's): set flush right, so its lines end under the
+// light/dark switch, mirroring the left lines, which start under the site name (user,
+// 2026-10-23: the text sat right next to the picture).
+.dot-step.dot-step--text-right {
+  justify-items: end;
+  text-align: right;
+}
+
+// Its English line is longer than the others; at 19ch it broke as "…of a second for a /
+// celebratory moment,". A little wider gives two even lines.
+.dot-step--text-right .dot-step__text[data-l="en"] { max-width: 26ch; }
+
+// Above a full-width shape (the landscape): the line is centred across, and centred in the open
+// space above the shape, well clear of it (user, 2026-10-23). dot-morph.js places the shape low
+// on the screen and shares its top edge as --band-top; the first grid row ends there and the
+// line sits in its middle. dot-morph.js also reads the top padding and the least gap, to move
+// the shape down when the line wouldn't fit above it. More specific than the alternating rules
+// above, so it wins.
+.dot-step.dot-step--top {
+  --line-space: clamp(1rem, 4svh, 2.5rem);   // the least room over the line
+  grid-template-rows: max(0px, calc(var(--band-top, 60%) - var(--line-space)));
+  align-content: start;
+  align-items: center;
+  justify-items: center;
+  padding-top: var(--line-space);
+  padding-inline: var(--edge);
+  text-align: center;
+}
+
+.dot-step--top .dot-step__text { max-width: 26ch; }
+
+// The least gap between the line (with its page link) and the landscape; dot-morph.js reads it.
+.dot-step--top .dot-step__line { margin-bottom: clamp(1rem, 3svh, 1.75rem); }
+
+.dot-step__text {
+  min-width: 0;
+  max-width: 19ch;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 500;   // a little heavier than regular (user, 2026-10-23)
+  line-height: 1.45;  // airy lines (user, 2026-10-23; was 1.25)
+  text-wrap: balance;
+}
+
+// Held lines (the title, and lines with enter / leave in the story data): laid out like a step,
+// but over the sticky canvas, so they never scroll; line-moves.js slides them in and out.
+// Each fills the screen and they overlap, so only their page links take the pointer.
+.dot-step.dot-step--pinned {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  pointer-events: none;
+  will-change: transform, opacity;   // moved on their own layer: no repaint jitter
+}
+
+// ---- A line and its page link, kept together ----
+// One grid item, so the step centres (or sides) the pair as one; inside, both follow the
+// step's alignment (left, right or centred).
+.dot-step__line {
+  display: grid;
+  justify-items: inherit;
+  min-width: 0;
+}
+
+// The page link under each line (user, 2026-10-31): grey, the accent colour under the cursor.
+// "Explore Avians…" while the page exists, "Moments · coming soon" until then (story-go.html).
+.dot-step__go {
+  margin-top: clamp(0.6rem, 1.6svh, 1rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  font-weight: 500;
+  color: var(--ink-soft);
+  pointer-events: auto;
+  transition: color 0.25s ease;
+
+  &:hover,
+  &:focus-within { color: var(--accent); }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.dot-step__go:lang(zh),
+.dot-step__go :lang(zh) { font-weight: 400; }   // the Chinese fonts have one weight only
+
+
+// A line that flies in starts hidden, so it doesn't flash in place before line-moves.js runs.
+.dot-step--pinned[data-enter]:not([data-enter=""]) { visibility: hidden; }
+
+// The page title: the signed name (_signature.scss) with "PHOTOGRAPHY" under it. It uses the
+// screen gutter on the right instead of the content edge, so the name can be large.
+.dot-step.dot-step--title { padding-right: var(--gutter); }
+
+.dot-step--top .dot-step__text:lang(zh) { max-width: 16em; }   // one line when it fits
+
+// Chinese story lines (Simplified and Traditional; :lang(zh) matches both). Their font comes
+// from --font-cjk in the serif stack (_language.scss). The width limit is in em, not ch: 19ch
+// fits only about 9 Chinese characters, which broke lines into short scraps.
+.dot-step__text:lang(zh) {
+  max-width: 10.5em;
+  font-weight: 400;   // both Chinese fonts have one weight only
+  letter-spacing: 0.02em;
+  line-height: 1.7;   // Chinese needs more room between lines than Latin text
+}
+
+.dot-step__text--title {
+  display: grid;
+  gap: 0.6rem;
+  max-width: none;
+}
+
+// "PHOTOGRAPHY" under the signed name, in EB Garamond like the story's English lines (user,
+// 2026-10-23).
+.title-kind {
+  margin-left: 0.4em;
+  font-family: var(--font-serif);
+  font-size: clamp(0.9rem, 1.35vw, 1.2rem);   // Garamond runs small; matches the old size by eye
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  // Appears once the name is signed (--signed is set on the signature by make_signature.py).
+  animation: title-kind-in 0.9s ease 2.9s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-kind { animation: none; }
+}
+
+@keyframes title-kind-in {
+  from { opacity: 0; transform: translateY(0.4rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+// Phones: the shape sits in the upper part of the screen, so the text goes low, full width.
+@media (max-width: 760px) {
+  .dot-step,
+  .dot-step:nth-child(even),
+  .dot-step.dot-step--text-left,
+  .dot-step.dot-step--title {
+    align-items: end;
+    padding-inline: var(--gutter);
+    padding-bottom: 12svh;
+  }
+
+  .dot-step.dot-step--top { align-items: center; padding-bottom: 0; }
+  .dot-step.dot-step--text-right { justify-items: start; text-align: left; }   // full width
+  .dot-step__text { max-width: 24ch; }
+}
+
+// ---- Word-by-word reading ----
+.dot-step__text.is-split .scroll-word {
+  color: var(--ink-faint);
+  transition: color 0.25s ease;
+}
+
+.dot-step__text.is-split .scroll-word.is-lit { color: var(--ink); }

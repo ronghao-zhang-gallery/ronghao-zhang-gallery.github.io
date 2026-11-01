@@ -1,0 +1,46 @@
+// Page changes from the site bar (user, 2026-10-24: "use a smooth animation, do not abruptly
+// change"). Uses the browser's cross-document view transitions (Chrome / Edge / Safari 18.2+):
+//   - the filled pill (.site-nav__pill, view-transition-name nav-pill) slides from the old page's
+//     link to the new one's;
+//   - each label (nav-home, nav-traces, nav-avians, nav-contact, set inline in site-header.html) has its own
+//     name, so it is drawn above the sliding pill and its colour cross-fades;
+//   - the rest of the page cross-fades.
+// Browsers without it get a slide of the pill before the page changes (page-transitions.js).
+
+@view-transition { navigation: auto; }
+
+.site-nav__pill { view-transition-name: nav-pill; }
+
+// The pill: a gentle ease-out slide, above the page but below the labels (the layers would
+// otherwise stack in page order, and the pill could cover a label as it slides past).
+::view-transition-group(nav-pill) {
+  z-index: 1;
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-group(nav-home),
+::view-transition-group(nav-traces),
+::view-transition-group(nav-avians),
+::view-transition-group(nav-contact) { z-index: 2; }
+
+// Labels swap colour over the same time; the page itself fades a little quicker.
+::view-transition-group(nav-home),
+::view-transition-group(nav-traces),
+::view-transition-group(nav-avians),
+::view-transition-group(nav-contact),
+::view-transition-old(nav-home), ::view-transition-new(nav-home),
+::view-transition-old(nav-traces), ::view-transition-new(nav-traces),
+::view-transition-old(nav-avians), ::view-transition-new(nav-avians),
+::view-transition-old(nav-contact), ::view-transition-new(nav-contact) {
+  animation-duration: 0.45s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}

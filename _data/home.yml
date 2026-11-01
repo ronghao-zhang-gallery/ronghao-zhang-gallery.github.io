@@ -1,0 +1,74 @@
+# Homepage content: the dot story (the whole homepage). Every text has
+# three versions: English, Simplified Chinese (_zh) and Traditional Chinese (_zh_hant); the switch
+# in the top bar picks which is shown.
+#
+# Dot story: one line per dot shape, in order (portrait, warbler, moment, landscape; the shapes
+# are in assets/js/dot-shapes.js). The first line is the page title; the other three together
+# form one sentence, read as you scroll (user, 2026-10-23).
+#   text, text_zh, text_zh_hant   the line
+#   kind            (title only) the word under the signed name; the title has no Chinese version,
+#                   it stays in English on the Chinese page too (user, 2026-10-23)
+#   place           top = centred above a full-width shape (the landscape); otherwise beside it
+#   enter, leave    optional: the line is held level on screen and moves in / out as the dots
+#                   change (assets/js/line-moves.js). enter: left, top or bottom;
+#                   leave: right or down.
+#                   Without them, the line scrolls up with the page.
+#   go              optional: a short line under the text pointing to a page (user, 2026-10-31):
+#                   { page: URL, en, zh, zh_hant } with the page's name. While that page exists it
+#                   reads "Explore <name>…" and links to it; until then "<name> · coming soon".
+#                   The title has none (user, 2026-10-31: no "About me · coming soon").
+#                   soon: true keeps "coming soon" for a page that exists but is still being built.
+#                   Grey, the accent colour under the cursor (_includes/home/story-go.html).
+#   caption         optional: shown under the picture (user, 2026-10-23). A line of classical
+#                   poetry in quotation marks (the user's English translation on the English page,
+#                   “…”; the Chinese original on the 简 page, “…”, and on the 繁 page, 「…」),
+#                   then one line "name · place · date", each page in its own language only:
+#                     English  Cape May Warbler · Atlanta GA · 2026-05-05
+#                     简体     栗颊林莺 · 美国佐治亚州亚特兰大 · 二零二六年五月五日
+#                   Fields:
+#                     poem_en, poem (Simplified), poem_zh_hant   (no quotation marks; the page adds them)
+#                     name     optional, { en, zh, zh_hant }
+#                     place    { en, zh, zh_hant }
+#                     date     "YYYY-MM-DD" or "YYYY-MM" (quoted); the Chinese pages write it out
+#                              in Chinese numerals (_includes/date-zh.html)
+story:
+  - text: Ronghao Zhang Photography
+    kind: Photography   # shown under the signed name; the name itself is drawn by scripts/make_signature.py
+    leave: right        # slides out to the right as the warbler forms (user, 2026-10-23)
+  - text: Most of photography, to me, is a rustle of wings sweeping over the forest canopy,
+    text_zh: 摄影于我，是羽翼拂过林冠的一声轻响，
+    text_zh_hant: 攝影於我，是羽翼拂過林冠的一聲輕響，
+    enter: left         # flies in from the left, then sinks away down (user, 2026-10-23)
+    leave: down
+    go: { page: /avians/, en: Avians, zh: 鸟类, zh_hant: 鳥類 }
+    caption:
+      poem_en: Forests brim with vibrant hues, while birds chasing the sun fill the air with song.
+      poem: 山林多奇采，阳鸟吐清音。
+      poem_zh_hant: 山林多奇采，陽鳥吐清音。
+      name: { en: Cape May Warbler, zh: 栗颊林莺, zh_hant: 栗頰林鶯 }
+      place: { en: Atlanta GA, zh: 美国佐治亚州亚特兰大, zh_hant: 美國喬治亞州亞特蘭大 }
+      date: "2026-05-05"   # user's example line, 2026-10-23 (an earlier message said April 2026)
+  - text: one hundredth of a second for a celebratory moment,
+    text_zh: 是欢腾瞬间里的百分之一秒，
+    text_zh_hant: 是歡騰瞬間裡的百分之一秒，
+    enter: bottom       # rises in from below, then sinks away down (user, 2026-10-23)
+    leave: down
+    go: { page: /moments/, en: Moments, zh: 瞬间, zh_hant: 瞬間 }               # not built yet
+    caption:
+      poem_en: Even the lush green grass of spring seems envious of their vibrant gowns.
+      poem: 庾郎年最少，青草妒春袍。
+      poem_zh_hant: 庾郎年最少，青草妒春袍。
+      place: { en: Atlanta GA, zh: 美国佐治亚州亚特兰大, zh_hant: 美國喬治亞州亞特蘭大 }
+      date: "2026-05"      # day not given yet
+  - text: or a long journey towards the parts unknown.
+    text_zh: 亦是奔赴未知之境的迢迢长途。
+    text_zh_hant: 亦是奔赴未知之境的迢迢長途。
+    place: top
+    enter: top          # comes down from the top, centred over the landscape (user, 2026-10-23)
+    go: { page: /traces/, en: Traces, zh: 足迹, zh_hant: 足跡, soon: true }   # still building (user, 2026-10-31)
+    caption:
+      poem_en: Light shifts between dawn and dusk, yet hills and rivers retain their limpid glow.
+      poem: 昏旦变气候，山水含清晖。
+      poem_zh_hant: 昏旦變氣候，山水含清暉。
+      place: { en: Dietrich River AK, zh: 美国阿拉斯加州迪特里希河, zh_hant: 美國阿拉斯加州迪特里希河 }
+      date: "2025-09"      # day not given yet

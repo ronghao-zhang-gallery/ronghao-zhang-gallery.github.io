@@ -1,0 +1,35 @@
+# Site settings for Jekyll. Changes here need a restart of `jekyll serve`.
+
+# ---- Site identity ----
+title: Ronghao Zhang
+email: ronghao.zhang.home@gmail.com
+location: Atlanta, GA
+location_zh: 美国佐治亚州亚特兰大        # Simplified Chinese
+location_zh_hant: 美國喬治亞州亞特蘭大   # Traditional Chinese
+description: Birds and landscapes photographed by Ronghao Zhang, each with its field record.
+baseurl: ""
+url: "https://ronghao-zhang-gallery.github.io"
+
+# ---- Photo hosting ----
+# Image repos, one per subject and year (bird-2026, …), each with large/ and thumb/, served by
+# GitHub Pages. Photo data stores only file names; the site builds each URL from these.
+photo_hosts:
+  bird-2026: https://ronghao-zhang-gallery.github.io/bird-2026
+  bird-2025: https://ronghao-zhang-gallery.github.io/bird-2025   # 2025 photos (user, 2026-10-31)
+# Photos not imported into an image repo yet: thumbnails scripts/add_sighting.py makes in
+# local-photos/<year>/thumb/ (gitignored), shown in a local preview only.
+photo_local: /local-photos
+
+# ---- Build ----
+exclude:
+  - archive/        # previous version of the site, kept for reference only
+  - inbox/          # new photo exports waiting for scripts/import_photos.py
+  - scripts/
+  - CLAUDE.md       # project notes, not part of the site
+  - AGENTS.md
+  - PRODUCT.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .jekyll-cache/
+  - .sass-cache/

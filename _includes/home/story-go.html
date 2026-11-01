@@ -1,0 +1,19 @@
+{% comment %}
+  The short line under a homepage story line that points to a page (user, 2026-10-31): a link
+  "Explore Avians…" while the page exists (no arrow: user, 2026-10-31), "Moments · coming soon"
+  until it is built, or while `soon: true` (a page still being built). Grey, the accent colour under the cursor (.dot-step__go in _dot-stage.scss).
+  Param: go ({ page, en, zh, zh_hant, soon } from `story` in _data/home.yml).
+{% endcomment %}
+{%- assign go = include.go -%}
+{%- assign target = site.pages | where: "url", go.page | first -%}
+{%- if target and go.soon != true -%}
+{%- capture en %}Explore {{ go.en }}…{% endcapture -%}
+{%- capture zh %}探索{{ go.zh }}……{% endcapture -%}
+{%- capture zh_hant %}探索{{ go.zh_hant }}……{% endcapture -%}
+<p class="dot-step__go"><a href="{{ go.page | relative_url }}">{% include t.html en=en zh=zh zh_hant=zh_hant %}</a></p>
+{%- else -%}
+{%- capture en %}{{ go.en }} · coming soon{% endcapture -%}
+{%- capture zh %}{{ go.zh }} · 即将上线{% endcapture -%}
+{%- capture zh_hant %}{{ go.zh_hant }} · 即將上線{% endcapture -%}
+<p class="dot-step__go dot-step__go--soon">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+{%- endif -%}
