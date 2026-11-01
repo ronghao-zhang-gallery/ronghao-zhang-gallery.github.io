@@ -29,12 +29,12 @@ body:not(.home-page) main {
 }
 
 .gallery-title {
-  font-family: var(--script);
-  font-size: 2.4rem;
-  font-weight: 400;
-  color: rgba(232, 232, 232, 0.90);
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: rgba(232, 232, 232, 0.92);
   margin-bottom: 0.4rem;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .gallery-species-count {
@@ -42,6 +42,7 @@ body:not(.home-page) main {
   font-size: 0.82rem;
   font-weight: 300;
   letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
   color: var(--accent);
   margin-bottom: 0.4rem;
   opacity: 0.85;
@@ -55,25 +56,29 @@ body:not(.home-page) main {
   line-height: 1.65;
 }
 
-// ─── Photo grid — dynamic sizes ───────────────────────────────────────────────
-// Every 1st-of-5 card is featured (2×2), every 3rd-of-5 is wide (2×1).
-// This creates an editorial, non-uniform layout.
+// ─── Photo grid — justified rows ──────────────────────────────────────────────
+// Each card carries its aspect ratio as --r (width / height). Cards start at
+// --row-h tall and grow in proportion to --r to fill the row, so every photo in
+// a row shares one height and nothing is cropped. --r comes from `ratio` in
+// photos.yml (default 3:2) and is corrected by gallery.js once the image loads.
 
 .photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 210px;
-  grid-auto-flow: dense;
-  gap: 0.75rem;
+  --row-h: 260px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.6rem;
+
+  // Soaks up the leftover space in the last row so it isn't stretched
+  &::after {
+    content: '';
+    flex-grow: 999999;
+  }
 }
 
-// Featured — 2 columns × 2 rows
-.photo-card:nth-child(5n+1) {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-// Wide — 2 columns × 1 row
-.photo-card:nth-child(5n+3) {
-  grid-column: span 2;
+.photo-grid .photo-card {
+  flex-grow: calc(var(--r, 1.5) * 100);
+  flex-basis: calc(var(--r, 1.5) * var(--row-h));
+  aspect-ratio: var(--r, 1.5);
+  min-width: 0;
 }

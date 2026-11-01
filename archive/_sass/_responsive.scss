@@ -2,9 +2,9 @@
 // Ordered largest → smallest. All media overrides live here so layout rules
 // stay clean in their respective partials.
 
-// ── 1200px — tighten photo grid ──────────────────────────────────────────────
+// ── 1200px — shorter justified rows ──────────────────────────────────────────
 @media (max-width: 1200px) {
-  .photo-grid { grid-template-columns: repeat(3, 1fr); }
+  .photo-grid { --row-h: 220px; }
 }
 
 // ── 900px — stack lightbox vertically ────────────────────────────────────────
@@ -105,17 +105,7 @@
 
   .gallery-main { padding: 1.25rem; }
 
-  .photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 160px;
-  }
-
-  // Reset dynamic sizing — uniform 2-col on mobile
-  .photo-card:nth-child(5n+1),
-  .photo-card:nth-child(5n+3) {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
+  .photo-grid { --row-h: 150px; }
 
   // Hero caption — shrink text so it doesn't overlap the < > arrows
   .hero-content   { padding: 0 4.5rem; }
@@ -129,6 +119,6 @@
 
 // ── 480px — tighten grid gap ─────────────────────────────────────────────────
 @media (max-width: 480px) {
-  .photo-grid { gap: 0.5rem; }
+  .photo-grid { gap: 0.4rem; --row-h: 120px; }
   .gallery-main { padding: 1rem; }
 }

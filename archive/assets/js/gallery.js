@@ -13,6 +13,11 @@
         img.classList.add('img-loaded');
         var inner = img.closest('.photo-card-inner');
         if (inner) inner.classList.add('img-ready');
+        // Use the real aspect ratio for the justified grid (covers photos with no `ratio` in photos.yml)
+        var card = img.closest('.photo-card');
+        if (card && img.naturalWidth && img.naturalHeight) {
+          card.style.setProperty('--r', (img.naturalWidth / img.naturalHeight).toFixed(4));
+        }
       }, { once: true });
     }
 

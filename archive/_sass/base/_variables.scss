@@ -22,6 +22,7 @@
   --ease:        0.28s ease;
 
   // Typography
-  --sans:        'Comfortaa', system-ui, sans-serif;   // rounded, thin
-  --script:      'Sacramento', cursive;                // fountain-pen signature
+  --sans:        'Inter', system-ui, -apple-system, sans-serif;               // UI, labels, EXIF
+  --serif:       'Cormorant Garamond', 'EB Garamond', Georgia, serif;         // headings, titles
+  --script:      'Sacramento', cursive;   // signature — reserved for the name only (logo + hero)
 }

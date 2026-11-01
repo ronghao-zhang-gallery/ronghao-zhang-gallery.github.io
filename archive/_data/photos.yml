@@ -5,6 +5,8 @@
 # - image-low-res:   compressed URL used for gallery grid thumbnails (and home page previews)
 # - image-raw:       full-resolution URL used for the lightbox detail view (and featured home page hero slides)
 # - featured: true   (optional) show this photo in the home page hero slideshow, displayed at raw quality
+# - ratio:           (optional) width / height, e.g. 1.5 — lets the gallery grid lay out rows before images load.
+#                    Fill in automatically with: python3 scripts/add_photo_ratios.py
 #
 # To add a photo: paste a new block below with the correct category/subproject_slug.
 # To feature a photo on the home page: add "featured: true" to its entry.

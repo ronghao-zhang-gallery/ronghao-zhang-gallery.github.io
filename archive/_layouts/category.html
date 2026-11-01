@@ -93,6 +93,7 @@ body_class: category-page
            data-lens="{{ photo.lens }}"
            data-date="{{ photo.date }}"
            data-full="{{ photo['image-raw'] }}"
+           style="--r: {{ photo.ratio | default: 1.5 }}"
            role="button"
            tabindex="0"
            aria-label="View {{ photo.title }}">
