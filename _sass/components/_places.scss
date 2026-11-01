@@ -663,7 +663,7 @@
   transition: opacity 0.25s ease, border-color 0.25s ease;
 }
 
-// The card in focus (hovered, or at the reading line on phones) gets a firmer edge.
+// The card in focus (hovered, or seen whole in the list on phones) gets a firmer edge.
 .visit--bird.is-active { border-color: color-mix(in srgb, var(--ink) 40%, transparent); }
 
 // Tight lines in every language (the Chinese pages' 1.7 would make the cards tall).
@@ -849,8 +849,7 @@ a.visit__photos .visit__photo--sticker { transition: transform 0.25s ease; }
 
 // Avians: the cards get a set height and scroll inside it once the birds outgrow it (user,
 // 2026-10-26: "dedicate a certain length, and make a scroll bar"): under the world map about four
-// cards, less on a short window; beside a zoomed map, the map's own height. Phones keep plain page scrolling (a box scrolling inside the page is awkward to
-// thumb, and the reading-line pick follows the page's scroll).
+// cards, less on a short window; beside a zoomed map, the map's own height. Phones: see below.
 @media (min-width: 761px) {
   .places--plain .visit-list {
     max-height: min(38rem, 70vh);
@@ -929,6 +928,32 @@ a.visit__photos .visit__photo--sticker { transition: transform 0.25s ease; }
       flex: 0 0 25.5rem;
       scroll-snap-align: start;
     }
+  }
+}
+
+// Phones (user, 2026-11-01: every card was listed, the gallery took long to reach and the range
+// was hard to see): the list shows at most one and a half cards and scrolls inside, so the map
+// stays in view above it; the card seen whole shows its range (places-map.js). Every card is as
+// tall as the tallest in view (--phone-card-h) and the list 1.5 of them (--phone-list-h), both
+// set by places-map.js. Each card snaps to the top, so one is always whole once the list rests.
+@media (max-width: 760px) {
+  .places--plain .visit-list {
+    max-height: var(--phone-list-h, 22rem);
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+
+    // More cards below: the bottom edge fades out (phones hide scroll bars until you scroll).
+    &.has-more {
+      mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+    }
+  }
+
+  .places--plain .visit--bird {
+    min-height: var(--phone-card-h, 0);
+    scroll-snap-align: start;
   }
 }
 

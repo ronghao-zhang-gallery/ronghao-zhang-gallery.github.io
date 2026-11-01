@@ -211,6 +211,32 @@
   .dot-step.dot-step--top { align-items: center; padding-bottom: 0; }
   .dot-step.dot-step--text-right { justify-items: start; text-align: left; }   // full width
   .dot-step__text { max-width: 24ch; }
+
+  // A line under its picture: just below it, or below its caption (user, 2026-11-01: the title
+  // and the moment's line sat far below their pictures). dot-morph.js shares that foot as
+  // --pic-foot on the line's box. The gap is the warbler's, between its line and its picture
+  // (captionGap() in dot-morph.js); the title, with no caption, sits a little closer.
+  // :where keeps it as specific as the title's and the warbler's own rules, which follow.
+  .dot-step.dot-step--pinned:where(:not(.dot-step--top, .dot-step--phone-top)) {
+    align-items: start;
+    padding-top: calc(var(--pic-foot, 55svh) + clamp(24px, 4svh, 44px));
+    padding-bottom: 0;
+  }
+
+  .dot-step.dot-step--title { padding-top: calc(var(--pic-foot, 55svh) + clamp(0.75rem, 3svh, 1.5rem)); }
+
+  // Over the landscape: the line rests just above it, the same gap away, not centred in the
+  // space above (user, 2026-11-01).
+  .dot-step.dot-step--top { align-items: end; }
+  .dot-step--top .dot-step__line { margin-bottom: clamp(24px, 4svh, 44px); }
+
+  // A line whose picture sits under it (phonePlace: 'low' in dot-shapes.js, the warbler; the
+  // class is added by dot-morph.js): at the top, the picture placed under it (user, 2026-11-01).
+  .dot-step.dot-step--phone-top {
+    align-items: start;
+    padding-top: clamp(1.25rem, 5svh, 2.5rem);
+    padding-bottom: 0;
+  }
 }
 
 // ---- Word-by-word reading ----

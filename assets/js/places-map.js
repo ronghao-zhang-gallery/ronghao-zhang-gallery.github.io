@@ -156,7 +156,8 @@
       pick(picked === m ? null : m);
     });
   });
-  document.addEventListener('click', function () { pick(null); });
+  // Avians on phones: the card seen whole keeps its range (phoneCards() picks it again).
+  document.addEventListener('click', function () { pick(null); requestPhone(); });
 
   // ---- Continent bar ----
   var GLIDE = 700;   // ms: the zoom, the same as the layout change in _places.scss
@@ -316,12 +317,68 @@
     more();
   }
 
-  // ---- Phones: the row at the reading line is picked while the list scrolls past ----
+  // ---- Avians on phones: at most 1.5 cards in view, the whole one shows its range ----
+  // (user, 2026-11-01: "we can see at most 1.5 bird cards, whenever 1 bird card can be seen
+  // completely, the map should [show] that bird's distribution".) Cards differ in height (a
+  // morphology line that wraps, or none), so every card is made as tall as the tallest in view
+  // (--phone-card-h) and the list 1.5 of them (--phone-list-h, _places.scss): exactly one and a
+  // half show. After every scroll, search, sort or continent change, the first card wholly
+  // inside the list is picked. While none is whole (mid-scroll), the last one stays, so the
+  // range doesn't flicker.
   var phone = window.matchMedia('(max-width: 760px)');
+  var plain = section.classList.contains('places--plain');
+  function cardsInView() {
+    return rows.filter(function (r) { return !r.hidden && !r.classList.contains('is-search-off'); });
+  }
+  // Sizes: measured with the set card height taken off, so cards can shrink again (a language
+  // with shorter lines, a narrower window). Run on resize, language, continent and font changes.
+  function sizePhoneCards() {
+    section.style.removeProperty('--phone-card-h');
+    section.style.removeProperty('--phone-list-h');
+    if (!phone.matches) return;
+    var tallest = Math.max.apply(null, cardsInView().map(function (r) { return r.offsetHeight; }).concat(0));
+    if (!tallest) return;
+    var gap = parseFloat(getComputedStyle(list).rowGap) || 0;
+    section.style.setProperty('--phone-card-h', tallest + 'px');
+    section.style.setProperty('--phone-list-h', Math.ceil(tallest * 1.5 + gap) + 'px');
+  }
+  var resized = true;
+  function phoneCards() {
+    phoneQueued = false;
+    if (!plain || !list) return;
+    if (resized) { resized = false; sizePhoneCards(); }
+    if (!phone.matches) return;
+    var cards = cardsInView();
+    var box = list.getBoundingClientRect();
+    var whole = cards.find(function (r) {
+      var b = r.getBoundingClientRect();
+      return b.top >= box.top - 1 && b.bottom <= box.bottom + 1;
+    });
+    if (whole && whole !== picked) pick(whole);
+  }
+  var phoneQueued = false;
+  function requestPhone() {
+    if (phoneQueued || !plain) return;
+    phoneQueued = true;
+    window.requestAnimationFrame(phoneCards);
+  }
+  function resizePhone() { resized = true; requestPhone(); }
+  if (plain && list) {
+    list.addEventListener('scroll', requestPhone, { passive: true });
+    document.addEventListener('cardschange', resizePhone);             // search / sort (bird-cards.js)
+    window.addEventListener('resize', resizePhone);
+    window.addEventListener('langchange', resizePhone);
+    document.addEventListener('continentchange', function () { list.scrollTop = 0; resizePhone(); });
+    if (document.fonts) document.fonts.ready.then(resizePhone);        // card heights settle
+    requestPhone();
+  }
+
+  // ---- Phones, other lists (Traces' rows, when shown): the row at the reading line is picked
+  // while the page scrolls past ----
   var queued = false;
   function readingLine() {
     queued = false;
-    if (!phone.matches || !rows.length) return;
+    if (plain || !phone.matches || !rows.length) return;
     var line = window.innerHeight * 0.4, best = null, bestDist = Infinity;
     rows.forEach(function (r) {
       if (r.hidden || r.classList.contains('is-search-off')) return;   // continent / card search

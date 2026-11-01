@@ -6,9 +6,9 @@ Personal photography website built with Jekyll and deployed to GitHub Pages
 ## Status
 
 Rebuilding from scratch (started 2026-10-20) with a **new design** and a **new
-content structure**. The previous site lives in `archive/` for reference only:
-it is excluded from the build (`_config.yml`), and new code must not depend on it
-or modify it.
+content structure**. The previous site was kept in `archive/` for reference until the user
+removed it (2026-11-01, commit 776f75b "remove the archived old repository"); it is still in
+git history (e.g. `git show b025e21:archive/…`). New code must not depend on it.
 
 ## Commands
 
@@ -535,6 +535,25 @@ use a marked placeholder instead.
     (`pointer-events: none`), only the links take it. dot-morph.js measures the pair for the
     landscape's room above it and the dot fade behind its text. Checked at 1440 (EN light, 繁
     dark) and 390 px (简).
+  - **Phone layout of the story, 2026-11-01** (user; wide screens unchanged, checked
+    pixel-identical at 1440):
+    - **Smaller dots**: 0.75× (`PHONE_DOT`), floor 1 px (`PHONE_DOT_MIN`; phone dots already
+      sat near the 1.4 px minimum). Same dot count, so pictures read lighter and finer.
+    - **Portrait stays where it was; the title sits just under it** (it was ~230 px lower).
+    - **Every line close to its picture** (user, same day: "for the moments and the mountain,
+      also make the text close to the dot image, at distance comparable to the wabler"): the
+      moment's line just under its caption, the landscape's line just above the landscape (no
+      longer centred in the space above), both the warbler's gap (24–44 px, 4% of the screen
+      height, `captionGap()`); the title a little closer (no caption). dot-morph.js
+      `sharePhoneFeet()` puts each picture's foot (or its caption's) on its line's box as
+      `--pic-foot`; `_dot-stage.scss` sets the line under it.
+    - **Warbler under its line, like the landscape**: `phonePlace: 'low'` in dot-shapes.js puts
+      the picture under its text (dot-morph.js adds `.dot-step--phone-top` to the line, which
+      goes to the top; the picture's top a caption gap below the line and its link, measured as
+      `lineFoot`), and the change from the portrait **falls** into it, the change on to the
+      moment **rises** out of it (`isLow()`: bands, and low shapes on phones). On phones the
+      warbler line leaves **upward** under the top bar (line-moves.js), not down through the
+      picture. Checked at 390 × 844, EN light and 繁 dark, at rest and mid-change.
   - **Open:** on wide screens, at the very bottom the footer pushes the pinned story up by its
     height, so the landscape's line slides under the top bar (phones are fine).
   - **The dot story is now the homepage opening** (user, 2026-10-22), replacing the disliked
@@ -911,6 +930,18 @@ use a marked placeholder instead.
     same `data-gallery-jump` link as the sticker: scrolls the tile to the middle, outlines it,
     focuses it). Soft grey, the accent on hover/focus; screen readers: "Show its photos in the
     gallery". Photo-less birds get no camera. `.visit__head` / `.visit__camera` in `_places.scss`.
+  - **Phones: one and a half cards, the whole one shows its range** (user, 2026-11-01: on a
+    phone every card was listed down the page, the gallery took long to reach and the range was
+    hard to see; "at most 1.5 bird cards, whenever 1 bird card can be seen completely, the map
+    should [show] that bird's distribution", phones only). Under 760 px the card list scrolls
+    inside its own box: every card is made as tall as the tallest in view (`--phone-card-h`) and
+    the box 1.5 of them (`--phone-list-h`), so exactly one and a half show; cards snap to the
+    top; the bottom edge fades while more are below. The first card wholly inside the box is
+    picked (range on the map, firm edge, the rest dimmed; while none is whole mid-scroll, the
+    last stays). Re-measured on resize, language, continent, fonts loading and card search /
+    sort (bird-cards.js fires `cardschange`). places-map.js `phoneCards()`; this replaced the
+    phones' "card at the reading line" pick on Avians (Traces' rows keep it). Wider screens
+    unchanged. Checked at 390 × 844, world and North America.
   - **Card search and sort** (user, 2026-10-31: "a sort button (by time, by name) and a search
     textbox"): a bar above the cards: a search box (bird names in all three languages,
     scientific name, place names; case and accents ignored, every word must match) and a
@@ -1124,8 +1155,8 @@ use a marked placeholder instead.
   - `2026-05-03_Birding/RAW_RAW/`: 367 CR3 raws (19 GB). Originals; not a git repo.
 - **Contact form** posted to Formspree (`https://formspree.io/f/xpqokrlr`).
   Contact email: ronghao.zhang.home@gmail.com. Based in Atlanta, GA.
-- `archive/scripts/add_photo_ratios.py` reads each image's width/height from the
-  first bytes of its JPEG. It can be reused to avoid layout shift.
+- `archive/scripts/add_photo_ratios.py` (now only in git history, see Status) reads each
+  image's width/height from the first bytes of its JPEG. It can be reused to avoid layout shift.
 
 ## Conventions
 

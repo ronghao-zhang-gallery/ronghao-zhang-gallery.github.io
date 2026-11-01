@@ -5,7 +5,8 @@
  * A shape is { image: url, imageDark: url, outline: [[x, y], ...], place: 'band' } (all but image
  * optional): imageDark is used in dark mode; outline (picture pixels) keeps only the subject
  * inside it; place: 'band' spans the content width at the bottom of the screen, and its story
- * line then needs `place: top`. dot-morph.js also accepts a function that paints on a hidden
+ * line then needs `place: top`; phonePlace: 'low' (phones only) puts the picture under its
+ * story line instead of above it, and the dots fall into it and rise out of it like a band's. dot-morph.js also accepts a function that paints on a hidden
  * 1000 × 700 canvas. It places more dots where a pixel stands out from the picture's background
  * and gives each dot the colour underneath it.
  *
@@ -20,8 +21,10 @@
   // ---- 1. The photographer at work with a long lens on a tripod (left) ----
   var portrait = { image: DOTS + 'portrait_bright.png', imageDark: DOTS + 'portrait_dark.png' };
 
-  // ---- 2. The warbler, whole: bird, branch and leaves (right) ----
-  var warbler = { image: DOTS + 'wabler_bright.png', imageDark: DOTS + 'wabler_dark.png' };
+  // ---- 2. The warbler, whole: bird, branch and leaves (right; on phones under its line) ----
+  // Phones (user, 2026-11-01): below its text, so the change from the portrait falls into it and
+  // the change on to the moment rises out of it, like the change into the landscape.
+  var warbler = { image: DOTS + 'wabler_bright.png', imageDark: DOTS + 'wabler_dark.png', phonePlace: 'low' };
 
   // ---- 4. The landscape, at the bottom of the screen ----
   var landscape = { image: DOTS + 'landscape_bright.png', imageDark: DOTS + 'landscape_dark.png', place: 'band' };

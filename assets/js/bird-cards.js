@@ -10,6 +10,8 @@
  *     first); A–Z sorts by the name in the page's language (Chinese by its collation), keeping
  *     birds with photos first. It re-sorts when the language changes.
  *   - "No birds match." shows when the search leaves no card in view.
+ * Both fire `cardschange` on document, so places-map.js can resize the phone list and pick the
+ * card seen whole again.
  */
 (function () {
   'use strict';
@@ -50,6 +52,7 @@
     list.scrollTop = 0;
     list.scrollLeft = 0;
     list.dispatchEvent(new Event('scroll'));     // edge fades follow the new length
+    document.dispatchEvent(new CustomEvent('cardschange'));
   }
 
   // ---- Sort ----
@@ -69,6 +72,7 @@
     list.scrollTop = 0;
     list.scrollLeft = 0;
     list.dispatchEvent(new Event('scroll'));
+    document.dispatchEvent(new CustomEvent('cardschange'));
   }
 
   // ---- Placeholder in the page's language ----

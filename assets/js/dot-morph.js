@@ -23,6 +23,10 @@
  *      the dots behind that text fade so it stays readable while they fall past it.
  *      Changes into a band fall downward and build it from the ground up; changes out of it
  *      rise from the top down (user, 2026-10-22).
+ *      Phones: a shape with phonePlace: 'low' (the warbler) sits under its text line, which goes
+ *      to the top, and changes into and out of it fall and rise the same way (user, 2026-11-01).
+ *      On phones each line sits close to its picture (--pic-foot under a picture and its
+ *      caption, sharePhoneFeet()), and dots are smaller.
  *   5. On page load the dots fly in from a wide scatter while the name is signed, starting in
  *      the page's own colour and settling into the picture's colours (user, 2026-10-22).
  *   6. Every shape has a light-mode and a dark-mode set of dots (the same set when there is no
@@ -79,6 +83,9 @@
   // Then 1.65 with 1.5× the dots (2026-10-22), keeping the dot size.
   var COVERAGE = 1.65;
   var DOT_MIN = 1.4, DOT_MAX = 7;          // CSS pixels
+  // Phones: dots 0.75× the size (user, 2026-11-01: "make the dots smaller only for phone"), with
+  // a lower floor, since phone dots already sat near DOT_MIN.
+  var PHONE_DOT = 0.75, PHONE_DOT_MIN = 1;
   var DRAW_W = 1000, DRAW_H = 700;         // size of the hidden painting canvas
   var BOX_W = DRAW_W / DRAW_H, BOX_H = 1;  // every shape fills x ±BOX_W, y ±BOX_H
 
@@ -621,6 +628,7 @@
 
   function dotSize(areaPx, count) {
     var dot = Math.sqrt((COVERAGE * areaPx) / count);
+    if (!wide) return Math.max(PHONE_DOT_MIN, Math.min(DOT_MAX, dot) * PHONE_DOT) * view.dpr;
     return Math.max(DOT_MIN, Math.min(DOT_MAX, dot)) * view.dpr;
   }
 
@@ -644,10 +652,11 @@
   // percentile of its dots. The light and dark pictures are framed a little differently, so it
   // blends both by the theme (smooth while the theme glides). Worked out once per dot set.
   function restExtent(index) {
-    if (!shapes[index]) return { x0: -BOX_W, x1: BOX_W, y0: -BOX_H };
+    if (!shapes[index]) return { x0: -BOX_W, x1: BOX_W, y0: -BOX_H, y1: BOX_H };
     var l = setExtent(index, shapes[index].light), d = setExtent(index, shapes[index].dark);
     return {
-      x0: l.x0 + (d.x0 - l.x0) * theme, x1: l.x1 + (d.x1 - l.x1) * theme, y0: l.y0 + (d.y0 - l.y0) * theme
+      x0: l.x0 + (d.x0 - l.x0) * theme, x1: l.x1 + (d.x1 - l.x1) * theme,
+      y0: l.y0 + (d.y0 - l.y0) * theme, y1: l.y1 + (d.y1 - l.y1) * theme
     };
   }
 
@@ -669,7 +678,8 @@
         // The bottom edge, for the caption. The landscape's forest runs dense to its foot (in
         // light mode especially), so it is measured lower down: 0.1% instead of 0.5% (user,
         // 2026-10-23: its caption touched the trees in light mode).
-        y0: ys[Math.floor((ys.length - 1) * (isBand(index) ? 0.001 : 0.005))]
+        y0: ys[Math.floor((ys.length - 1) * (isBand(index) ? 0.001 : 0.005))],
+        y1: ys[Math.floor((ys.length - 1) * 0.995)]   // the top edge (a low shape on phones)
       };
     }
     return set.rest;
@@ -680,12 +690,27 @@
     return !!entry && entry.place === 'band';
   }
 
+  // Shapes the dots fall into and rise out of: a band, or on phones a phonePlace: 'low' shape
+  // (it sits under its text line; placeOf()).
+  function isPhoneLow(index) {
+    var entry = window.DotShapes[index];
+    return !wide && !!entry && entry.phonePlace === 'low';
+  }
+  function isLow(index) { return isBand(index) || isPhoneLow(index); }
+  // Its line goes to the top on phones (.dot-step--phone-top in _dot-stage.scss; line-moves.js
+  // lets it leave upward). One source for both: the shape list.
+  window.DotShapes.forEach(function (entry, index) {
+    var box = entry && entry.phonePlace === 'low' && stage.querySelector('[data-pin="' + index + '"]');
+    if (box) box.classList.add('dot-step--phone-top');
+  });
+
   // Least room a band's text line needs above the band, in CSS pixels: the space over the line
   // (its box's top padding), the line and the least gap under it (its margin), set in
   // _dot-stage.scss.
   // Not its offsetTop: the line rests on the band, so that would only repeat the band's top.
   var bandRoom = 0;
   var bandCaption = 0;   // height of the band's caption plus its gap, in CSS pixels
+  var lineFoot = [];     // phones: bottom of a low shape's text line (and link), from the canvas top
   // Width of each side picture's text line, in CSS pixels: from the start of its longest line to
   // its end (the line's box is wider than its words). Used to size the picture beside it.
   var textWidth = [];
@@ -695,6 +720,7 @@
     bandRoom = 0;
     bandCaption = 0;
     textWidth = [];
+    lineFoot = [];
     captions.forEach(function (caption) {
       if (isBand(Number(caption.dataset.caption))) bandCaption = caption.offsetHeight + captionGap();
     });
@@ -703,6 +729,11 @@
       var text = box && Array.prototype.find.call(box.querySelectorAll('[data-scroll-words]'),
         function (el) { return el.offsetParent !== null; });
       if (!text) return;
+      if (isPhoneLow(index)) {
+        var line = text.closest('.dot-step__line') || text;   // its box is the canvas-sized layer
+        lineFoot[index] = line.offsetTop + line.offsetHeight;
+        return;
+      }
       if (isBand(index)) {
         // The line with its page link under it (.dot-step__line), and the gap below the pair.
         var pair = text.closest('.dot-step__line') || text;
@@ -786,6 +817,13 @@
         scale: [sx, scale],
         size: dotSize(scale * view.h * BOX_W * scale * view.h * BOX_H, BASE_COUNT)
       };
+    }
+    if (isPhoneLow(index)) {
+      // Phones, under its line (user, 2026-11-01): the picture's top edge a caption gap below the
+      // line's foot; its caption hangs under it as usual.
+      var top = ((lineFoot[index] || 0.3 * view.h) + captionGap()) / view.h;
+      var y1 = shapes[index] ? restExtent(index).y1 : BOX_H;
+      return { offset: [0, 1 - 2 * top - y1 * sideScale[1]], scale: sideScale, size: sideDot };
     }
     return {
       // The portrait (and every picture on phones). It sits a little in from the screen edge
@@ -895,8 +933,11 @@
     gl.uniform1f(u.uSizeFrom, from.size);
     gl.uniform1f(u.uSizeTo, to.size);
 
-    // Into or out of a band: the dots fall or rise, no sideways arch.
-    var vert = isBand(pair + 1) ? 1 : isBand(pair) ? -1 : 0;
+    // Into or out of a band (or a low shape on phones): the dots fall or rise, no sideways arch.
+    var vert = isLow(pair + 1) ? 1 : isLow(pair) ? -1 : 0;
+    // Phones: re-share where each picture ends once its place may have moved (theme glide too).
+    if (theme > 0 && theme < 1) feetDirty = true;
+    if (feetDirty && !wide) { feetDirty = false; sharePhoneFeet(); }
     gl.uniform1f(u.uVert, vert);
     // Arch height grows with the distance crossed: none on phones, where shapes don't move sideways.
     var travel = vert ? 0 : to.offset[0] - from.offset[0];
@@ -921,6 +962,29 @@
     // side looked smaller than its right (user, 2026-10-23). The twist eases out as it forms.
     gl.uniform1f(u.uTurn, TURN * Math.sin(position * 1.6) * (1 - weight));
     gl.drawArrays(gl.POINTS, 0, DOT_COUNT);
+  }
+
+  // Phones: where each picture that sits above its line ends (its foot, or its caption's foot
+  // when it has one), from the canvas top, shared on its line's box as --pic-foot so the CSS
+  // sets the line just under it (user, 2026-11-01: the title and the moment's line sat far below
+  // their pictures). Low shapes (the warbler, the landscape) sit under their lines instead.
+  // Worked out again whenever a picture may have moved: resize, language, a picture loaded, the
+  // theme glide (feetDirty). Wide screens: not used.
+  var feetDirty = true;
+  function sharePhoneFeet() {
+    for (var i = 0; i < shapeCount; i++) {
+      var box = stage.querySelector('[data-pin="' + i + '"]');
+      if (!box || isLow(i) || !shapes[i]) continue;
+      var place = placeOf(i);
+      var foot = ((1 - (place.offset[1] + restExtent(i).y0 * place.scale[1])) / 2) * view.h;
+      var caption = captions.find(function (c) { return Number(c.dataset.caption) === i; });
+      if (caption) {
+        placeCaption(caption, i, place);   // sets its wrap width, so its height is the real one
+        foot += captionGap() + caption.offsetHeight;
+      }
+      var px = Math.round(foot) + 'px';
+      if (box.style.getPropertyValue('--pic-foot') !== px) box.style.setProperty('--pic-foot', px);
+    }
   }
 
   var queued = false;
@@ -960,6 +1024,7 @@
     }
     // Reload the buffers only if this shape is on screen now (about 15 MB of dot data each time).
     if (job.i === currentPair || job.i === currentPair + 1) currentPair = -1;
+    feetDirty = true;
     requestRender();
   }
 
@@ -991,9 +1056,9 @@
 
   // ---- Events ----
   window.addEventListener('scroll', requestRender, { passive: true });
-  window.addEventListener('resize', function () { resize(); measureText(); requestRender(); });
+  window.addEventListener('resize', function () { resize(); measureText(); feetDirty = true; requestRender(); });
   // The line over the landscape changed (language) or got its real font: measure it again.
-  function remeasure() { measureText(); requestRender(); }
+  function remeasure() { measureText(); feetDirty = true; requestRender(); }
   window.addEventListener('langchange', remeasure);
   if (document.fonts) document.fonts.ready.then(remeasure);
   // Light/dark switch: theme-toggle.js changes data-theme on <html>.

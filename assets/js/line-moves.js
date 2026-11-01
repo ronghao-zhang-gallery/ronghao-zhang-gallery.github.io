@@ -9,6 +9,8 @@
  *   - the last line comes down from the top at the same time.
  * Which line moves how is set in _data/home.yml (enter / leave) and written into the markup by
  * dot-story.html as data-pin (the page the line belongs to), data-enter and data-leave.
+ * On phones a line at the top (.dot-step--phone-top, the warbler's: its picture sits under it)
+ * leaves upward instead of down, out under the top bar (user, 2026-11-01).
  *
  * Every move follows the scroll position, so scrolling back plays it backwards and stopping
  * halfway leaves the line halfway. The lines sit in the sticky layer with the dots, so the
@@ -80,8 +82,14 @@
       } else if (page > pin) {
         // Leaving: gone once the change into the next page is done.
         var n = move(page - pin, false);
-        if (box.dataset.leave === 'right') x = n * (window.innerWidth - text.offsetLeft + 40);
-        if (box.dataset.leave === 'down') {
+        var leave = box.dataset.leave;
+        if (leave === 'down' && phone.matches && box.classList.contains('dot-step--phone-top')) leave = 'up';
+        if (leave === 'right') x = n * (window.innerWidth - text.offsetLeft + 40);
+        if (leave === 'up') {
+          y = -n * (text.offsetTop + text.offsetHeight + 40);   // out under the top bar
+          opacity = 1 - n;
+        }
+        if (leave === 'down') {
           y = n * (box.offsetHeight - text.offsetTop);   // its top reaches the bottom edge
           opacity = 1 - n;
         }
