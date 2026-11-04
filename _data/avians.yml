@@ -2,11 +2,13 @@
 # and list as the Traces page, but every dot is a place where a bird was observed. The page
 # reuses the Traces template (_includes/places/places-map.html, page="avians").
 #
-# places: one dot each.
+# places: one dot each (unless a dot below groups it with others).
 #   id         short name, used by visits below
 #   name       { en, zh, zh_hant }, in the same style as the captions
 #   continent  an id from _data/continents.yml
 #   lat, lon   ROUNDED to about 0.1° (~10 km): never the exact spot (so nests aren't given away)
+#   region     optional: the `area` place it lies in (e.g. alaska), see below
+#   area       true for a whole state standing in for a sensitive bird's spot: no dot, no lat/lon
 # visits: one row per sighting in the dated list, newest first on the page. Added by
 #   scripts/add_sighting.py from the photo's EXIF (only the place and species by hand):
 #   place      a place id
@@ -24,6 +26,10 @@
 #   taken      date and time to the hundredth of a second ("YYYY-MM-DDTHH:MM:SS.ss"): the page
 #              sorts by it (bursts put several photos in one second)
 #   camera, lens, focal (mm), aperture (f-number), exposure (seconds, "1/500"), iso
+#   count      optional: how many were counted (from an eBird checklist), kept in the trip log
+#
+# The trip log, _data/trips.yml (every outing and the birds seen on it), is made from this
+# file: after changing it by hand, run scripts/make_trips.py (add_sighting.py runs it).
 #
 # (The Cape May Warbler sighting from the homepage caption was removed, user 2026-10-25.)
 
@@ -40,6 +46,11 @@ places:
     name: { en: "Legacy Park, Decatur GA", zh: 美国佐治亚州迪凯特传承公园, zh_hant: 美國喬治亞州迪凱特傳承公園 }
     lat: 33.8
     lon: -84.3
+  - id: constitution-lakes        # 2026-06-14 (user, 2026-11-04); DeKalb County, in Atlanta
+    continent: north-america
+    name: { en: "Constitution Lakes, Atlanta GA", zh: 美国佐治亚州亚特兰大宪法湖公园, zh_hant: 美國喬治亞州亞特蘭大憲法湖公園 }
+    lat: 33.7
+    lon: -84.3
   - id: savannah-nwr              # Laurel Hill Wildlife Drive, Jasper County SC (user, 2026-10-31)
     continent: north-america
     name: { en: Savannah NWR SC, zh: 美国南卡罗来纳州萨凡纳国家野生动物保护区, zh_hant: 美國南卡羅來納州薩凡納國家野生動物保護區 }
@@ -50,6 +61,70 @@ places:
     name: { en: Fort Pulaski NM GA, zh: 美国佐治亚州普拉斯基堡国家纪念地, zh_hant: 美國喬治亞州普拉斯基堡國家紀念地 }
     lat: 32.0
     lon: -80.9
+  - id: north-of-coldfoot         # Dalton Highway north of Coldfoot AK, 2025-09-20 (user, 2026-11-01:
+                                  # "North to Coldfoot, AK, but forget where the exact location is")
+    continent: north-america
+    name: { en: North of Coldfoot AK, zh: 美国阿拉斯加州科尔德富特以北, zh_hant: 美國阿拉斯加州科爾德富特以北 }
+    region: alaska                # its birds shown only as "Alaska" (see the alaska place) show here too
+    lat: 67.5                     # a rough spot between Coldfoot (67.25) and the Dietrich River
+    lon: -150.1
+  - id: atigun-valley             # the Atigun River valley below Atigun Pass, Dalton Highway, 2025-09-20
+                                  # (user, 2026-11-01: "Atigun Pass River Valley")
+    continent: north-america
+    name: { en: Atigun River Valley AK, zh: 美国阿拉斯加州阿蒂根河谷, zh_hant: 美國阿拉斯加州阿蒂根河谷 }
+    region: alaska
+    lat: 68.3                     # rounded: the valley north of the pass (68.1, -149.5 on Traces)
+    lon: -149.4
+  - id: denali                    # Denali National Park, 2025-09-22 (user, 2026-11-04)
+    continent: north-america
+    name: { en: Denali National Park AK, zh: 美国阿拉斯加州德纳利国家公园, zh_hant: 美國阿拉斯加州德納利國家公園 }
+    region: alaska
+    lat: 63.7                     # the park entrance, as on Traces (no spot given)
+    lon: -148.9
+  - id: cooper-landing            # Cooper Landing, Kenai Peninsula, 2025-09-25 (user, 2026-11-04)
+    continent: north-america
+    name: { en: Cooper Landing AK, zh: 美国阿拉斯加州库珀兰丁, zh_hant: 美國阿拉斯加州庫珀蘭丁 }
+    region: alaska
+    lat: 60.5                     # the town, rounded (no spot given)
+    lon: -149.8
+  - id: kenai-fjords              # Kenai Fjords National Park, 2025-09-25 (user, 2026-11-04)
+    continent: north-america
+    name: { en: Kenai Fjords National Park AK, zh: 美国阿拉斯加州基奈峡湾国家公园, zh_hant: 美國阿拉斯加州基奈峽灣國家公園 }
+    region: alaska
+    lat: 59.9                     # Resurrection Bay off Seward, rounded (no spot given)
+    lon: -149.5
+  # Sensitive birds (user, 2026-11-03): eBird marks some species as sensitive and shows their
+  # records only coarsely; the exact spot is kept private. Such a sighting is recorded as the
+  # whole state. An `area` place has no dot and no coordinates: its birds' cards count every
+  # place with `region: <its id>` as theirs, so clicking any Alaska dot shows them. It is not
+  # counted in the page's "N places".
+  - id: alaska
+    continent: north-america
+    area: true
+    name: { en: AK, zh: 美国阿拉斯加州, zh_hant: 美國阿拉斯加州 }   # user, 2026-11-04: "AK", not "Alaska"
+
+# dots: one dot on the map for several nearby places (user, 2026-11-01: "merge the 2 dots for
+#   savannah, and merge the 2 dots for atlanta"). The places stay separate (cards, gallery and
+#   search keep each park's name); only the map draws them as one dot.
+#   id         the dot's name (used by the page in place of the places' ids)
+#   places     the place ids it stands for
+#   continent, lat, lon   as for a place: about the middle of its places, rounded
+dots:
+  - id: atlanta-area              # Murphey Candler Park (33.9), Legacy Park, Decatur (33.8),
+    places: [murphey-candler, legacy-park, constitution-lakes]   # Constitution Lakes (33.7)
+    continent: north-america
+    lat: 33.8
+    lon: -84.3
+  - id: savannah-area             # Savannah NWR SC (32.2, -81.1) and Fort Pulaski NM GA (32.0, -80.9)
+    places: [savannah-nwr, fort-pulaski]
+    continent: north-america
+    lat: 32.1
+    lon: -81.0
+  - id: kenai-area                # Kenai Fjords NP off Seward (59.9, -149.5) and Cooper Landing
+    places: [kenai-fjords, cooper-landing]   # (60.5, -149.8); user, 2026-11-04
+    continent: north-america
+    lat: 60.2
+    lon: -149.65
 
 visits:
   - place: legacy-park
@@ -206,6 +281,10 @@ visits:
     species: grey-catbird
     date: "2026-10-17"
     taken: "2026-10-17"
+  - place: murphey-candler       # seen, no photo (user, 2026-11-04)
+    species: american-goldfinch
+    date: "2026-10-17"
+    taken: "2026-10-17"
   # (Common Gallinule and Boat-tailed Grackle: their photo-less rows were replaced by the photo
   #  rows at the end, user 2026-10-31: 2 grackle photos, 1 gallinule.)
   - place: savannah-nwr           # seen, no photo (user, 2026-10-31)
@@ -353,6 +432,10 @@ visits:
     species: northern-cardinal
     date: "2026-04-19"
     taken: "2026-04-19"
+  - place: fort-pulaski          # added later (user, 2026-11-04)
+    species: osprey
+    date: "2026-04-19"
+    taken: "2026-04-19"
   - place: murphey-candler
     species: eastern-bluebird
     photo: 20251227-001_eastern-bluebird_2025_murphey-candler-park.webp
@@ -394,3 +477,446 @@ visits:
     species: red-bellied-woodpecker
     date: "2025-12-27"
     taken: "2025-12-27"
+  - place: north-of-coldfoot
+    species: spruce-grouse
+    photo: 20250920-001_spruce-grouse_2025_north-of-coldfoot.webp
+    export: 2025-09-20_15-31-12_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
+    date: "2025-09-20"
+    taken: "2025-09-20T15:31:12.98"
+    camera: Canon EOS RP
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/1000"
+    iso: 6400
+  - place: north-of-coldfoot
+    species: spruce-grouse
+    photo: 20250920-002_spruce-grouse_2025_north-of-coldfoot.webp
+    export: 2025-09-20_15-31-20_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div1000SEC_ISO6400.jpg
+    date: "2025-09-20"
+    taken: "2025-09-20T15:31:20.97"
+    camera: Canon EOS RP
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/1000"
+    iso: 6400
+  - place: north-of-coldfoot
+    species: spruce-grouse
+    photo: 20250920-003_spruce-grouse_2025_north-of-coldfoot.webp
+    export: 2025-09-20_15-31-38_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div2000SEC_ISO6400.jpg
+    date: "2025-09-20"
+    taken: "2025-09-20T15:31:38.30"
+    camera: Canon EOS RP
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/2000"
+    iso: 6400
+  - place: atigun-valley            # seen, no photo (user, 2026-11-01: same day as the Spruce Grouse)
+    species: willow-ptarmigan
+    date: "2025-09-20"
+    taken: "2025-09-20"
+  # (Canada Jay: its photo-less row was replaced by the photo row at the end, user 2026-11-03.)
+  - place: north-of-coldfoot
+    species: canada-jay
+    photo: 20250920-004_canada-jay_2025_north-of-coldfoot.webp
+    export: 2025-09-20_14-20-22_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div200SEC_ISO500.jpg
+    date: "2025-09-20"
+    taken: "2025-09-20T14:20:22.35"
+    camera: Canon EOS RP
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/200"
+    iso: 500
+
+  # Northern Hawk Owl (user, 2026-11-03), no photo. eBird lists it as a sensitive species, so it
+  # is recorded only as Alaska (the `alaska` area place), not where on the Dalton Highway trip.
+  - place: alaska
+    species: northern-hawk-owl
+    date: "2025-09-19"
+    taken: "2025-09-19"
+
+  # Denali National Park checklist, 2025-09-22 (user, 2026-11-04), no photo.
+  - place: denali
+    species: common-raven
+    date: "2025-09-22"
+    taken: "2025-09-22"
+
+  # Murphey Candler Park checklist, 2026-05-03 (user, 2026-11-04): 53 species, no photos;
+  # `count` is how many were counted (from the user's eBird checklist), in its order.
+  - place: murphey-candler
+    species: canada-goose
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 15
+  - place: murphey-candler
+    species: mallard
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 8
+  - place: murphey-candler
+    species: chimney-swift
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 6
+  - place: murphey-candler
+    species: spotted-sandpiper
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: solitary-sandpiper
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 4
+  - place: murphey-candler
+    species: great-blue-heron
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: red-shouldered-hawk
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 3
+  - place: murphey-candler
+    species: red-tailed-hawk
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: red-bellied-woodpecker
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 5
+  - place: murphey-candler
+    species: downy-woodpecker
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 4
+  # (eastern-wood-pewee: replaced by its photo rows at the end; count 1 moved there, user 2026-11-04)
+  - place: murphey-candler
+    species: eastern-phoebe
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 6
+  - place: murphey-candler
+    species: white-eyed-vireo
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 3
+  - place: murphey-candler
+    species: yellow-throated-vireo
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: red-eyed-vireo
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: blue-jay
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: american-crow
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 5
+  - place: murphey-candler
+    species: fish-crow
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 5
+  - place: murphey-candler
+    species: carolina-chickadee
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: tufted-titmouse
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 6
+  - place: murphey-candler
+    species: northern-rough-winged-swallow
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 25
+  - place: murphey-candler
+    species: barn-swallow
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 10
+  - place: murphey-candler
+    species: ruby-crowned-kinglet
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: white-breasted-nuthatch
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: brown-headed-nuthatch
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 4
+  - place: murphey-candler
+    species: blue-gray-gnatcatcher
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 6
+  - place: murphey-candler
+    species: carolina-wren
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 4
+  - place: murphey-candler
+    species: grey-catbird
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: brown-thrasher
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: eastern-bluebird
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 12
+  - place: murphey-candler
+    species: american-robin
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: cedar-waxwing
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 60
+  - place: murphey-candler
+    species: chipping-sparrow
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: song-sparrow
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: eastern-towhee
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 4
+  - place: murphey-candler
+    species: baltimore-oriole
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: black-and-white-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: tennessee-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: common-yellowthroat
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: hooded-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 3
+  # (american-redstart: replaced by its photo rows at the end; count 6 moved there, user 2026-11-04)
+  # (cape-may-warbler: replaced by its photo rows at the end; count 10 moved there, user 2026-11-04)
+  - place: murphey-candler
+    species: northern-parula
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: magnolia-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: chestnut-sided-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: palm-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 5
+  - place: murphey-candler
+    species: pine-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: yellow-rumped-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 8
+  - place: murphey-candler
+    species: canada-warbler
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: summer-tanager
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 1
+  - place: murphey-candler
+    species: scarlet-tanager
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: northern-cardinal
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 14
+  - place: murphey-candler
+    species: indigo-bunting
+    date: "2026-05-03"
+    taken: "2026-05-03"
+    count: 2
+  - place: murphey-candler
+    species: american-redstart
+    photo: 20260503-001_american-redstart_2026_murphey-candler-park.webp
+    export: IM8A6907.jpg
+    date: "2026-05-03"
+    taken: "2026-05-03T07:52:33.51"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/250"
+    iso: 4000
+    count: 6                      # from the 2026-05-03 eBird checklist
+  - place: murphey-candler
+    species: eastern-wood-pewee
+    photo: 20260503-002_eastern-wood-pewee_2026_murphey-candler-park.webp
+    export: IM8A6934.jpg
+    date: "2026-05-03"
+    taken: "2026-05-03T08:11:43.89"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/1000"
+    iso: 4000
+    count: 1                      # from the 2026-05-03 eBird checklist
+  - place: murphey-candler
+    species: cape-may-warbler
+    photo: 20260503-003_cape-may-warbler_2026_murphey-candler-park.webp
+    export: IM8A7065.jpg
+    date: "2026-05-03"
+    taken: "2026-05-03T08:39:08.32"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/2000"
+    iso: 5000
+    count: 10                      # from the 2026-05-03 eBird checklist
+  - place: murphey-candler
+    species: cape-may-warbler
+    photo: 20260503-004_cape-may-warbler_2026_murphey-candler-park.webp
+    export: IM8A7071.jpg
+    date: "2026-05-03"
+    taken: "2026-05-03T08:39:10.47"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/2000"
+    iso: 5000
+  - place: murphey-candler
+    species: cape-may-warbler
+    photo: 20260503-005_cape-may-warbler_2026_murphey-candler-park.webp
+    export: IM8A7076.jpg
+    date: "2026-05-03"
+    taken: "2026-05-03T08:39:11.33"
+    camera: Canon EOS R5
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/2000"
+    iso: 5000
+  - place: cooper-landing
+    species: stellers-jay
+    photo: 20250925-002_stellers-jay_2025_cooper-landing.webp
+    export: 2025-09-25_20-45-09_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO3200.jpg
+    date: "2025-09-25"
+    taken: "2025-09-25T20:45:09.76"
+    camera: Canon EOS RP
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/500"
+    iso: 3200
+  - place: kenai-fjords
+    species: bald-eagle
+    photo: 20250925-001_bald-eagle_2025_kenai-fjords.webp
+    export: 2025-09-25_15-09-33_Canon-EOS-RP_RF100-400mm-F5.6-8-IS-USM_400MM_F8.0_1div500SEC_ISO1600.jpg
+    date: "2025-09-25"
+    taken: "2025-09-25T15:09:33.14"
+    camera: Canon EOS RP
+    lens: RF100-400mm F5.6-8 IS USM
+    focal: 400
+    aperture: 8
+    exposure: "1/500"
+    iso: 1600
+  - place: kenai-fjords          # seen, no photo (user, 2026-11-04)
+    species: american-crow
+    date: "2025-09-25"
+    taken: "2025-09-25"
+  - place: kenai-fjords          # seen, no photo (user, 2026-11-04)
+    species: leachs-storm-petrel
+    date: "2025-09-25"
+    taken: "2025-09-25"
+  # Constitution Lakes, 2026-06-14 08:00, eBird checklist, no photos (user, 2026-11-04), in its order
+  - place: constitution-lakes
+    species: yellow-crowned-night-heron
+    date: "2026-06-14"
+    taken: "2026-06-14"
+    count: 2
+  - place: constitution-lakes
+    species: great-blue-heron
+    date: "2026-06-14"
+    taken: "2026-06-14"
+    count: 9
+  - place: constitution-lakes
+    species: belted-kingfisher
+    date: "2026-06-14"
+    taken: "2026-06-14"
+    count: 1
+  - place: constitution-lakes
+    species: northern-cardinal
+    date: "2026-06-14"
+    taken: "2026-06-14"
+    count: 1
+  - place: constitution-lakes
+    species: indigo-bunting
+    date: "2026-06-14"
+    taken: "2026-06-14"
+    count: 1

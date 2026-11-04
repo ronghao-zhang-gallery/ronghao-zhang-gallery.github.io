@@ -171,3 +171,264 @@ red-tailed-hawk:
   wing_mm: 403
   tail_mm: 212
   iucn: LC
+spruce-grouse:
+  weight_g: 474
+  wing_mm: 180
+  tail_mm: 111
+  iucn: LC
+willow-ptarmigan:
+  weight_g: 567
+  wing_mm: 196
+  tail_mm: 109
+  iucn: LC
+canada-jay:
+  weight_g: 72
+  wing_mm: 150
+  tail_mm: 136
+  iucn: LC
+common-raven:
+  weight_g: 928
+  wing_mm: 420
+  tail_mm: 229
+  iucn: LC
+canada-goose:
+  weight_g: 2812
+  wing_mm: 423
+  tail_mm: 122
+  iucn: LC
+mallard:
+  weight_g: 843
+  wing_mm: 263
+  tail_mm: 87
+  iucn: LC
+chimney-swift:
+  weight_g: 24
+  wing_mm: 124
+  tail_mm: 44
+  iucn: VU
+red-shouldered-hawk:
+  weight_g: 604
+  wing_mm: 319
+  tail_mm: 173
+  iucn: LC
+eastern-wood-pewee:
+  weight_g: 14
+  wing_mm: 81
+  tail_mm: 63
+  iucn: LC
+white-eyed-vireo:
+  weight_g: 11
+  wing_mm: 62
+  tail_mm: 49
+  iucn: LC
+yellow-throated-vireo:
+  weight_g: 18
+  wing_mm: 76
+  tail_mm: 48
+  iucn: LC
+red-eyed-vireo:
+  weight_g: 16
+  wing_mm: 78
+  tail_mm: 53
+  iucn: LC
+blue-jay:
+  weight_g: 88
+  wing_mm: 130
+  tail_mm: 121
+  iucn: LC
+  sticker_by: "Blake Ross"
+  sticker_license: "CC BY"
+  sticker_url: "https://www.inaturalist.org/observations/144792422"
+american-crow:
+  weight_g: 449
+  wing_mm: 294
+  tail_mm: 167
+  iucn: LC
+fish-crow:
+  weight_g: 285
+  wing_mm: 277
+  tail_mm: 157
+  iucn: LC
+carolina-chickadee:
+  weight_g: 10
+  wing_mm: 59
+  tail_mm: 50
+  iucn: LC
+tufted-titmouse:
+  weight_g: 22
+  wing_mm: 78
+  tail_mm: 69
+  iucn: LC
+northern-rough-winged-swallow:
+  weight_g: 16
+  wing_mm: 107
+  tail_mm: 48
+  iucn: LC
+barn-swallow:
+  weight_g: 18
+  wing_mm: 116
+  tail_mm: 70
+  iucn: LC
+ruby-crowned-kinglet:
+  weight_g: 6.2
+  wing_mm: 58
+  tail_mm: 42
+  iucn: LC
+white-breasted-nuthatch:
+  weight_g: 21
+  wing_mm: 89
+  tail_mm: 49
+  iucn: LC
+brown-headed-nuthatch:
+  weight_g: 10
+  wing_mm: 65
+  tail_mm: 35
+  iucn: LC
+blue-gray-gnatcatcher:
+  weight_g: 5.8
+  wing_mm: 51
+  tail_mm: 49
+  iucn: LC
+brown-thrasher:
+  weight_g: 69
+  wing_mm: 102
+  tail_mm: 122
+  iucn: LC
+american-robin:
+  weight_g: 78
+  wing_mm: 127
+  tail_mm: 96
+  iucn: LC
+cedar-waxwing:
+  weight_g: 32
+  wing_mm: 95
+  tail_mm: 60
+  iucn: LC
+song-sparrow:
+  weight_g: 22
+  wing_mm: 66
+  tail_mm: 67
+  iucn: LC
+eastern-towhee:
+  weight_g: 40
+  wing_mm: 82
+  tail_mm: 92
+  iucn: LC
+baltimore-oriole:
+  weight_g: 33
+  wing_mm: 92
+  tail_mm: 73
+  iucn: LC
+black-and-white-warbler:
+  weight_g: 11
+  wing_mm: 69
+  tail_mm: 47
+  iucn: LC
+tennessee-warbler:
+  weight_g: 8.9
+  wing_mm: 62
+  tail_mm: 42
+  iucn: LC
+common-yellowthroat:
+  weight_g: 9.5
+  wing_mm: 55
+  tail_mm: 49
+  iucn: LC
+hooded-warbler:
+  weight_g: 10
+  wing_mm: 65
+  tail_mm: 55
+  iucn: LC
+american-redstart:
+  weight_g: 8.2
+  wing_mm: 62
+  tail_mm: 53
+  iucn: LC
+cape-may-warbler:
+  weight_g: 10
+  wing_mm: 66
+  tail_mm: 45
+  iucn: LC
+northern-parula:
+  weight_g: 7.8
+  wing_mm: 58
+  tail_mm: 44
+  iucn: LC
+magnolia-warbler:
+  weight_g: 8.1
+  wing_mm: 58
+  tail_mm: 46
+  iucn: LC
+chestnut-sided-warbler:
+  weight_g: 9.3
+  wing_mm: 62
+  tail_mm: 46
+  iucn: LC
+palm-warbler:
+  weight_g: 10
+  wing_mm: 64
+  tail_mm: 51
+  iucn: LC
+pine-warbler:
+  weight_g: 12
+  wing_mm: 72
+  tail_mm: 54
+  iucn: LC
+yellow-rumped-warbler:
+  weight_g: 12
+  wing_mm: 74
+  tail_mm: 56
+  iucn: LC
+canada-warbler:
+  weight_g: 10
+  wing_mm: 62
+  tail_mm: 53
+  iucn: LC
+summer-tanager:
+  weight_g: 29
+  wing_mm: 92
+  tail_mm: 71
+  iucn: LC
+scarlet-tanager:
+  weight_g: 28
+  wing_mm: 93
+  tail_mm: 64
+  iucn: LC
+indigo-bunting:
+  weight_g: 15
+  wing_mm: 65
+  tail_mm: 49
+  iucn: LC
+northern-hawk-owl:
+  weight_g: 320
+  wing_mm: 231
+  tail_mm: 186
+  iucn: LC
+stellers-jay:
+  weight_g: 128
+  wing_mm: 146
+  tail_mm: 133
+  iucn: LC
+bald-eagle:
+  weight_g: 4701
+  wing_mm: 602
+  tail_mm: 294
+  iucn: LC
+  sticker_by: "Paul Danese"
+  sticker_license: "CC BY-SA 4.0"
+  sticker_url: "https://commons.wikimedia.org/?curid=154252850"
+leachs-storm-petrel:
+  weight_g: 37
+  wing_mm: 150
+  tail_mm: 75
+  iucn: VU
+yellow-crowned-night-heron:
+  weight_g: 682
+  wing_mm: 284
+  tail_mm: 114
+  iucn: LC
+belted-kingfisher:
+  weight_g: 148
+  wing_mm: 159
+  tail_mm: 94
+  iucn: LC

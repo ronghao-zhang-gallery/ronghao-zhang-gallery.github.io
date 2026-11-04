@@ -1,7 +1,8 @@
 // Avians bird-card tools (user, 2026-10-31): a search box and a Recent / A–Z switch above the
 // cards (markup in _includes/places/places-map.html, behaviour in assets/js/bird-cards.js).
 // The search box matches the gallery sidebar's; the switch is the language switch's pill
-// options on a plain outline. One row, a set height, so the zoomed list can subtract it.
+// options on a plain outline. "Return to all" shows beside the search box while a map dot's
+// birds are shown (user, 2026-11-03). One row, a set height, so the zoomed list can subtract it.
 
 // ---- The bar ----
 .places--plain {
@@ -53,6 +54,27 @@
   }
 }
 
+// ---- Return to all: an outlined pill, the accent's colour, so it reads as "a filter is on" ----
+.card-tools__all {
+  flex: none;
+  height: 2.25rem;
+  padding: 0 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--accent);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  &:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  &[hidden] { display: none; }
+}
+
 // ---- Sort: two pill options, the chosen one filled ----
 .card-tools__sort {
   display: flex;
@@ -84,5 +106,6 @@
   }
 }
 
-// ---- Cards the search leaves out ----
-.visit--bird.is-search-off { display: none; }
+// ---- Cards the search or the chosen dot leaves out ----
+.visit--bird.is-search-off,
+.visit--bird.is-place-off { display: none; }

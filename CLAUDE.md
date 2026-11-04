@@ -767,7 +767,7 @@ use a marked placeholder instead.
     the photo's size. **Photo-less cards come after every card with a photo** (user,
     2026-10-31; `card_order` in places-map.html), each group newest sighting first. The gallery, its sidebar and the "N photos" count use only rows with a
     photo (`photo_visits` in places-map.html); the species count includes every bird. Photo-less
-    birds so far: **American Goldfinch**, Atlanta GA, 2026-10-25 (user, 2026-10-31; Chinese
+    birds so far: **American Goldfinch**, Atlanta GA, 2026-10-25 (user, 2026-10-31; also seen at Murphey Candler Park on 2026-10-17, added 2026-11-04; Chinese
     北美金翅雀, Claude's choice; eBird `amegfi`, all four seasons, range added); **Grey Catbird**,
     Atlanta GA, 2026-10-17 (user, 2026-10-31; the user's spelling, eBird says "Gray"; Chinese
     灰嘲鸫 / 灰嘲鶇, Claude's choice; eBird `grycat`, all four seasons, range added; run the
@@ -878,11 +878,65 @@ use a marked placeholder instead.
     `murphey-candler-park`. New species `red-tailed-hawk` (红尾鵟 / 紅尾鵟, *Buteo jamaicensis*,
     `rethaw`; sticker and facts fetched). **Red-tailed is final** (user, 2026-10-31): the user
     changed it to Red-shouldered Hawk, then back ("change back to red tailed hawk"); both
-    renames happened before bird-2025 was ever committed. **Its range map still needs a run
-    with the user's key** (`make_ranges.py rethaw`). **Hawk cover = 002** (user, 2026-10-31: "use the other
-    hawk image as the cover": the one on the ground with the squirrel, not the newest 003). The species.yml key line must
-    end in ":" with no comment after it: fetch_stickers.py reads it as plain text. The gallery's Year filter shows 2026 and 2025 on its own.
-    Count "4 places · 35 species · 19 photos".
+    renames happened before bird-2025 was ever committed. **Range map added 2026-11-01**
+    (user's key; all four seasons, North America only). **Hawk cover = 002** (user, 2026-10-31: "use the other
+    hawk image as the cover": the one on the ground with the squirrel, not the newest 003).
+  - **Spruce Grouse, Alaska 2025** (user, 2026-11-01: "3 sprouse grouse photo", added to bird-2025):
+    a male, 2025-09-20 15:31, Canon EOS RP + RF100-400mm, ISO 6400; exports named by the camera
+    app (`2025-09-20_15-31-12_Canon-EOS-RP_…jpg`), kept as `export`. No GPS; the user said
+    "North to Coldfoot, AK, but forget where the exact location is", so a new place
+    `north-of-coldfoot` ("North of Coldfoot AK", 67.5, −150.1: a rough spot on the Dalton
+    Highway, rounded like the rest). Files `20250920-001..003_spruce-grouse_2025_north-of-coldfoot`.
+    001's large copy is 1.7 MB (noise at ISO 6400; q65 only saved 0.1 MB, so q70 kept).
+    New species `spruce-grouse` (枞树镰翅鸡 / 樅樹鐮翅雞, *Canachites canadensis*, `sprgro`;
+    sticker fetched; **`iucn: LC` by hand**, the library has none). Range map added (user's key,
+    2026-11-01; year-round only). **Seen the same day, no photos** (user, 2026-11-01): **Willow
+    Ptarmigan** (柳雷鸟 / 柳雷鳥, *Lagopus lagopus*, `wilpta`; range year-round, breeding and
+    nonbreeding, reaching North America, Europe and Asia) and **Canada Jay** (灰噪鸦 / 灰噪鴉,
+    *Perisoreus canadensis*, `gryjay`, the code from its Gray Jay days; year-round): photo-less
+    rows: the jay at `north-of-coldfoot`, the ptarmigan at a new place `atigun-valley` ("Atigun
+    River Valley AK", 阿蒂根河谷, 68.3, −149.4: the valley north of Atigun Pass; user, 2026-11-01,
+    "Atigun Pass River Valley"); Chinese from the sticker library (IOC); stickers, facts (both
+    LC) and ranges fetched. Count "5 places · 38 species · 22 photos" (after the bluebird and hawk
+    it was "4 places · 35 species · 19 photos"). The species.yml key line must end in ":" with no
+    comment after it: fetch_stickers.py reads it as plain text. The gallery's Year filter shows
+    2026 and 2025 on its own.
+  - **Canada Jay photo** (user, 2026-11-03: "I add a photo for canada jay, convert it"): export
+    `2025-09-20_14-20-22_Canon-EOS-RP_…_ISO500.jpg`, taken before the grouse that day but given
+    the next free number: `20250920-004_canada-jay_2025_north-of-coldfoot` (names never
+    renumber; the page sorts by EXIF time). Its photo-less row was replaced by the photo row.
+  - **2026-05-03 photos** (user, 2026-11-04: "5 new pictures to bird-2026, they belong to
+    2026-05-03 birding trip", the Murphey Candler checklist): IM8A6907 American Redstart (male),
+    IM8A6934 Eastern Wood-Pewee (orange lower mandible, no eye ring; Claude's ID), IM8A7065 /
+    7071 / 7076 Cape May Warbler → `20260503-001..005_<bird>_2026_murphey-candler-park`. Two
+    exports were under 3840 px (2343, 3790), so their large copies are full size, not
+    enlarged. 003 was 2.1 MB at q70 (feather texture), over bird-2026's pre-commit limit
+    (2 MB, `.git/hooks/pre-commit`; user, 2026-11-04: "causes git issue"), so it was re-encoded at
+    **q62 (1.87 MB)** before it was ever committed. Keep every file under 2 MB: drop the
+    quality for that one file until it fits.
+  - **Kenai Peninsula, 2025-09-25** (user, 2026-11-04: "add steller's Jay photo", then "at Kenai
+    Fjord National Park, add the white head bald eagle image"): two new places, `kenai-fjords`
+    ("Kenai Fjords National Park AK", 59.9, −149.5, Resurrection Bay off Seward) and
+    `cooper-landing` ("Cooper Landing AK", 60.5, −149.8), both `region: alaska`. Bald Eagle
+    (two adults on the cliffs, 15:09) → `20250925-001_bald-eagle_2025_kenai-fjords`; Steller's
+    Jay (two at a feeder, 20:45, portrait) → `20250925-002_stellers-jay_2025_cooper-landing`
+    (made first as 001, renumbered before any commit so the day reads in time order). New
+    species `bald-eagle` (白头海雕 / 白頭海鵰, `baleag`; sticker a photo cut-out by Paul Danese,
+    CC BY-SA 4.0, credited by the page from bird_facts.yml) and `stellers-jay` (暗冠蓝鸦 /
+    暗冠藍鴉, `stejay`). Ranges made (user's key, that run only) and checked with
+    range_sheet.py: both match the expert maps, so no `range_approx`. Count "9 places · 83
+    species · 30 photos". **American Crow at Kenai Fjords the same day, no photo** (user,
+    2026-11-04): a photo-less row; the species was already on the site from Murphey Candler,
+    so its card still says last seen there (2026-05-03), and hovering it also lights the Kenai
+    dot. (Crows on the Kenai coast were Northwestern Crow until eBird lumped it in 2021.)
+    **Leach's Storm Petrel there too, no photo** (user, 2026-11-04): new species
+    `leachs-storm-petrel` (白腰叉尾海燕, the same in Traditional; *Hydrobates leucorhous*,
+    `lcspet`; **VU** from the library, which matches the Red List since 2016); sticker, facts
+    and range fetched. A seabird: ranges are drawn on land only, so its map shows just its
+    nesting coasts; a `range_note` says so. Count "10 places · 86 species · 30 photos". The three
+    checklist rows were replaced by the photo rows, **each eBird `count` moved onto the bird's
+    first photo row** (make_trips.py sums counts per bird), so the trip still has 53 species;
+    timed birds now lead that trip's list, as make_trips.py orders them.
     **Red-bellied Woodpecker seen there the same day, no photo** (user, 2026-10-31): a
     photo-less row (2025-12-27, `murphey-candler`); the species was already on the site from
     Fort Pulaski, so its card still says last seen 2026-04-19 there and hovering it lights both
@@ -894,7 +948,8 @@ use a marked placeholder instead.
     Hudsonian Whimbrel, Ruddy Turnstone, Laughing Gull, Western Cattle-Egret (the user's
     spelling), Brown Pelican (listed twice by the user, one row), Red-bellied Woodpecker, and
     Northern Cardinal (already on the site: its second place, so hovering its card lights both
-    dots and pulses Atlanta, where it was seen last; checked). Chinese: the sticker library's
+    dots and pulses Atlanta, where it was seen last; checked). **Osprey** added to it later (user, 2026-11-04), so its card now says
+    last seen at Fort Pulaski. Chinese: the sticker library's
     IOC Simplified, Traditional by character conversion, as for Savannah NWR. Count "3 places ·
     34 species · 16 photos".
     - **Codes after splits**: Hudsonian Whimbrel is eBird `whimbr` and Western Cattle-Egret
@@ -925,6 +980,128 @@ use a marked placeholder instead.
     **bird-2026 file names keep `atlanta-ga`** (published names never change; ask before
     renaming). The longer names put date · place on two lines on those cards. Count "4 places
     · 34 species · 16 photos".
+  - **One dot for nearby places** (user, 2026-11-01: "merge the 2 dots for savannah, and merge
+    the 2 dots for atlanta"): `dots:` in avians.yml groups places onto one map dot (`places`,
+    `continent`, `lat`/`lon` about their middle): `atlanta-area` (Murphey Candler + Legacy Park,
+    33.85, −84.3) and `savannah-area` (Savannah NWR + Fort Pulaski, 32.1, −81.0); later
+    `kenai-area` (Kenai Fjords NP off Seward + Cooper Landing, 60.2, −149.65; user, 2026-11-04,
+    "merge the seward dot and Kenai Fjord dot"). The places stay
+    separate everywhere else (card date · place, gallery Place filter, search), and the count
+    line still counts places (6). places-map.html draws one marker per dot (screen readers hear
+    both names) and gives cards the dot's id (`_includes/places/dot-of.html`), so a card lights
+    and pulses the shared dot. North of Coldfoot and Atigun River Valley keep their own dots.
+  - **Murphey Candler Park checklist, 2026-05-03: 53 species, no photos** (user, 2026-11-04, from
+    screenshots of the eBird checklist; the user wrote "Murphy"). 41 new birds, 12 already on
+    the site (Gray Catbird = the site's `grey-catbird`). Rows in avians.yml in the checklist's
+    order, each with **`count`** (how many were counted; new optional field, kept in trips.yml as
+    `count:`, not shown on the page). Chinese: the sticker library's IOC Simplified, Traditional
+    by character conversion (the library's zh-Hant uses Taiwan's own names, e.g. 簇山雀; not used).
+    By hand: **Ruby-crowned Kinglet** `ebird: ruckin`, `iucn: LC` (the library has neither);
+    Yellow-rumped Warbler keeps eBird's name (IOC: Myrtle Warbler). **Chimney Swift shows VU**
+    (library / Wikidata). Stickers, facts and eBird ranges for all 41.
+    **Blue Jay's sticker is a photo cutout** (Blake Ross, iNaturalist, CC BY), not PolyForm Shield:
+    fetch_stickers.py now writes `sticker_by` / `sticker_license` / `sticker_url` to
+    bird_facts.yml for any photo-cutout sticker, the Avians credit line names them ("Blue Jay
+    sticker: photo by Blake Ross (CC BY)"), and stickers/LICENSE.md lists the exception.
+    Count "7 places · 81 species · 23 photos"; 10 trips. **Page weight**: avians.html is now
+    2.7 MB (660 KB gzipped), mostly the inline ranges (ranges.yml 2.1 MB): loading ranges per
+    card on hover is the fix when wanted.
+  - **Denali National Park checklist, 2025-09-22, no photo** (user, 2026-11-04): **Common Raven**
+    (渡鸦 / 渡鴉, *Corvus corax*, `comrav`; sticker, facts (LC) and range fetched; year-round,
+    reaching North America, Europe, Africa and Asia). New place `denali` ("Denali National Park
+    AK", 美国阿拉斯加州德纳利国家公园, at the park entrance 63.7, −148.9 like Traces' Denali stop;
+    `region: alaska`, so the Northern Hawk Owl shows under its dot too). Count "7 places · 40
+    species"; 9 trips.
+  - **Constitution Lakes checklist, 2026-06-14 08:00, no photos** (user, 2026-11-04, from an
+    eBird screenshot): new place `constitution-lakes` ("Constitution Lakes, Atlanta GA", DeKalb
+    County, 33.7, −84.3; 宪法湖公园, Claude's translation), **added to the `atlanta-area` dot**
+    (Claude's call, like the other Atlanta parks; the dot moved to 33.8). Birds in the
+    checklist's order with counts: Yellow-crowned Night Heron 2, Great Blue Heron 9, Belted
+    Kingfisher 1, Northern Cardinal 1, Indigo Bunting 1. New species: Yellow-crowned Night Heron
+    (黄冠夜鹭 / 黃冠夜鷺, `ycnher`; **`range_approx`**: patchy inland breeding, thin South
+    American coasts) and Belted Kingfisher (白腹鱼狗 / 白腹魚狗, `belkin1`; matches the expert
+    maps); both LC, stickers, facts and ranges fetched. Count "10 places · 85 species · 30
+    photos"; 13 trips.
+  - **Sensitive species: recorded only by state** (user, 2026-11-03): **Northern Hawk Owl**, seen
+    2025-09-19 on the Alaska trip, no photo (**北方鹰鸮 / 北方鷹鴞**, the user's name, not IOC's
+    猛鸮; *Surnia ulula*, `nohowl`; sticker, facts and range fetched). eBird lists it as sensitive (records shown only at ~400 km² grid level;
+    observers asked to keep the spot private), so its sighting is at a new place **`alaska`** with
+    `area: true`: no dot, no lat/lon, not counted in "N places". Places with **`region: alaska`**
+    (North of Coldfoot, Atigun River Valley; add it to any new Alaska place) count as the owl's,
+    so clicking any Alaska dot shows its card, and hovering the card lights them. Card and trip
+    read "2025-09-19 · AK" (美国阿拉斯加州; user, 2026-11-04: "AK", was "Alaska"). `sensitive: true` in species.yml puts an
+    accent-outlined **"Sensitive"** pill (敏感物种 / 敏感物種, a lock) **in the card's bottom-right
+    corner** (user, 2026-11-03; it sat after the name, then after "date · Alaska"), over the
+    sticker's foot on the page colour, its note opening above and to the left; and after the
+    place in the checklist trip's heading (a trip at an `area` place). Hovering or
+    focusing it shows "eBird sensitive species: the location is shown only by state, and the dots
+    on the map are not where it was seen." (user, 2026-11-04: say the dots aren't its actual
+    location; 观测地点只显示到州，地图上的点并非它的实际观测位置 / 繁 the same, with 牠). (`_includes/avians/sensitive.html`, `_sass/components/_sensitive.scss`).
+    Never give a sensitive bird's exact place anywhere (data, comments, file names).
+    **Its range is drawn year-round, with a note** (user, 2026-11-03: "the distribution … seems
+    not correct"; chose this of three options): eBird S&T 2023 models only its *nonbreeding*
+    range (Alaska, Canada to the Great Lakes, Fennoscandia to ~41°E) and nothing in Siberia.
+    The owl is resident there, so `SEASON_AS` in make_ranges.py reads that season as resident
+    (the southern fringe is really winter-only). `range_note` in species.yml ("eBird's data
+    covers only part of its range: Siberia isn't shown.") shows over the map's lower left while
+    the range does (`.range-note`, places-map.js `showRange()`); any species can have one. A full
+    range would need BirdLife's maps (the user's data request is waiting on a waiver question).
+    **Every range unlike the expert maps is marked** (user, 2026-11-04: "for the current and
+    future birds that do not match, mark that the data is based on observation and may not be
+    accurate"): `range_approx: true` in species.yml makes the same note over the map say "This
+    range is based on eBird observations and may not be accurate." (此分布图基于 eBird
+    观测记录，可能不准确。 / 此分布圖基於 eBird 觀測紀錄，可能不準確。); a `range_note` follows
+    it (the owl keeps its Siberia line). Marked from Claude's comparison of all 81 maps
+    (2026-11-04): Willow Ptarmigan, Northern Hawk Owl (Siberia missing); Ruddy Turnstone,
+    Black-bellied and Semipalmated Plover, Hudsonian Whimbrel (Arctic breeding patchy, inland
+    migration blobs); Tricolored Heron (inland patches); Osprey, Great Egret, Glossy Ibis,
+    Western Cattle-Egret (patchy outside the Americas); Canada Goose, Mallard (introduced birds
+    drawn as native). Not marked: thin coastal ranges (Boat-tailed Grackle, Brown Pelican,
+    Laughing Gull, Forster's Tern), right when zoomed in. **For every new species**: after
+    make_ranges.py, run `scripts/range_sheet.py <ids>` (pages in ../range-sheets/), compare
+    with its Birds of the World map, and set `range_approx: true` if they differ; say so to the
+    user. Count "6
+    places · 39 species".
+  - **Click a dot: its birds** (user, 2026-11-03: "when click on the place dot, show the birds
+    that is observed at this location. If one bird is observed at multiple place, still show it
+    here"; and "a button next to the search bar say return to all"). Clicking a dot (a grouped
+    dot counts as one) keeps only the cards of birds seen there (`.is-place-off` on the rest;
+    birds also seen elsewhere stay); the dot stays solid and 1.6× (`.is-chosen`). **Return to
+    all** (返回全部), an accent-outlined pill beside the search box, shows while a dot is chosen;
+    it, a second click on the same dot, or a continent change shows every bird again. Combines
+    with the search and sort. places-map.js fires `placechoose` (dot id), bird-cards.js filters
+    and answers `placechange`; a screen-reader status says "Birds seen at …". The click goes to
+    the dot **nearest the pointer** (`nearestMarker()`): the markers' 1.75rem hit areas overlap
+    for North of Coldfoot / Atigun River Valley, and the top one used to win. The gallery is not
+    filtered (it has its own Place filter). Checked at 1440 (world, North America) and 390 px.
+  - **Trip log** (user, 2026-11-03: "a documents on the backend stating each birding trip
+    details, what birds do I see each time"): `_data/trips.yml`, **generated** by
+    `scripts/make_trips.py` from avians.yml (avians.yml stays the one place sightings are
+    entered), shown on the page as the Checklist (below). A trip is one day at one place, newest first; each lists its
+    birds in the order seen (birds with no time of day after the timed ones), with Chinese and
+    scientific names and how many photos are on the site. `add_sighting.py` reruns it; after
+    editing avians.yml by hand, run it yourself. YAML, not Markdown: `.gitignore` ignores new
+    `*.md` files, so a Markdown log would never reach GitHub. 7 trips so far.
+  - **Checklist under the gallery** (user, 2026-11-03: "below the gallery, add a section named
+    Checklist… ordered the data in trips.yml into a table"): `_includes/avians/checklist.html`,
+    `_sass/components/_checklist.scss`. Heading "Checklists / 观鸟清单 / 觀鳥清單" (user, 2026-11-04:
+    plural, was "Checklist"; Chinese Claude's choice, unchanged); one table, a group of rows per trip, newest first: a heading row (date · place, "6
+    species · 9 photos" / 6 种鸟 · 9 张照片, "no photos" / 无照片) and then a row per bird in the
+    order seen: number, name, scientific name (Garamond italic), photos on the site ("–" for
+    none). trips.yml now carries `place_id` and each bird's `id`, so names come from species.yml
+    and the places list in all three languages. The continent bar filters it like the gallery
+    (places-map.js; the section hides when a continent has no trips). Phones: the scientific
+    name goes under the bird's name. Not filtered by a clicked dot or the card search. Checked
+    at 1440 (EN light, 简 dark, Europe empty) and 390 px (繁 dark).
+    **Folded, in a box of a set height** (user, 2026-11-03: "make the checklist a certain height,
+    and make each checklist a toggle list, only when click the '>', it shows the full bird
+    list"): every trip starts closed (heading row only); its ">" button (with the date · place)
+    opens or closes its birds, the ">" turning down. The table scrolls inside a box of at most
+    `min(38rem, 70vh)` (the card list's height), the foot fading while more is below. **No
+    header row over the list** (user, 2026-11-04: not needed while every trip is closed): each
+    trip has its own column labels (Bird · Scientific name · Photos) under its heading, shown only
+    while it is open. `assets/js/checklist.js` (folds on load, so without it every trip
+    stays open). Checked at 1440 (EN light) and 390 px (简 dark).
   - **Camera by the name** (user, 2026-10-31): a bird with photos gets a small camera icon
     after its name on the card; clicking it goes to its cover photo's tile in the gallery (the
     same `data-gallery-jump` link as the sticker: scrolls the tile to the middle, outlines it,

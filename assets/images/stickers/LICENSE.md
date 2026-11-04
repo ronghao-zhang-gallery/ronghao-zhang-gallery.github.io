@@ -6,6 +6,12 @@ whose full text follows. Keep this file beside them.
 
 Required Notice: Copyright (c) 2026 Huashu (alchaincyf), https://github.com/alchaincyf/huashu-bird-sticker
 
+Exception: a few stickers in the library are cut out of photos and keep the photo's own
+licence instead. Used here:
+
+- `blue-jay.webp`: photo by Blake Ross, CC BY, https://www.inaturalist.org/observations/144792422
+  (credited on the Avians page).
+
 ---
 
 # PolyForm Shield License 1.0.0

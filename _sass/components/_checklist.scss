@@ -1,0 +1,180 @@
+// Avians checklist (_includes/avians/checklist.html): every birding trip from _data/trips.yml
+// as one table under the gallery (user, 2026-11-03). A trip is a heading row (date · place,
+// counts) and then its birds in the order seen. As wide as the gallery and the top bar.
+// Trips start folded to their heading row; the ">" opens one (checklist.js), showing its column
+// labels and birds. The table scrolls inside a box of a set height.
+
+// ---- Section ----
+.checklist {
+  width: 100%;
+  max-width: calc(var(--content-w) - 2 * var(--gutter));
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+
+  &[hidden] { display: none; }     // continent bar: no trips on this continent
+}
+
+.checklist__title {                // the same heading as the gallery's
+  margin: 0 0 1.25rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 500;
+}
+
+// ---- The scroll box: a set height, like the bird card list under the world map ----
+.checklist__scroll {
+  max-height: min(38rem, 70vh);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+
+  // The foot fades while more trips are below (checklist.js sets .has-more).
+  &.has-more {
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 3rem), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3rem), transparent);
+  }
+}
+
+// ---- Table ----
+.checklist__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+
+  th, td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    vertical-align: baseline;
+  }
+}
+
+// Column labels: small spaced capitals, like the cards' "Last seen". Each trip has its own row of
+// them under its heading, shown only while it is open (user, 2026-11-04: with every trip closed,
+// a header row over the list wasn't needed).
+.checklist__cols th {
+  padding-top: 0.7rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+// ---- A trip's heading row ----
+// The ">" and date · place (one button) on the left, the counts quiet on the right.
+.checklist__trip-head th {
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-weight: 400;
+}
+
+.checklist__toggle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+  &:hover .checklist__chevron { color: var(--accent); }
+}
+
+// ">" turns to point down while the trip is open.
+.checklist__chevron {
+  flex: none;
+  width: 0.95rem;
+  height: 0.95rem;
+  align-self: center;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--ink-soft);
+  transition: transform 0.2s ease, color 0.2s ease;
+
+  .is-open & { transform: rotate(90deg); }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
+// Closed trips show only their heading row (the script adds .checklist--folded).
+.checklist--folded .checklist__trip:not(.is-open) :is(.checklist__cols, .checklist__bird) { display: none; }
+
+.checklist__when {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.checklist__dot { color: var(--ink-soft); }
+
+.checklist__count {
+  float: right;
+  margin-left: 1rem;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+// ---- Bird rows ----
+.checklist__bird td { border-bottom: 1px solid var(--line); }
+
+.checklist__n {
+  width: 2.5rem;
+  color: var(--ink-soft);
+  text-align: right !important;     // beats the table's left alignment
+}
+
+.checklist__sci {
+  color: var(--ink-soft);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.02rem;                // Garamond runs small beside Hanken
+}
+
+.checklist__photos {
+  width: 5rem;
+  text-align: right !important;
+}
+
+// ---- Phones: the scientific name goes under the bird's name ----
+@media (max-width: 560px) {
+  .checklist__sci-head { display: none; }
+
+  .checklist__cols {                   // same columns as the bird rows below
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    border-bottom: 1px solid var(--line);
+
+    th { border-bottom: 0; padding: 0.6rem 0.5rem 0.4rem; }
+  }
+
+  .checklist__bird {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    grid-template-areas: "n name photos" "n sci photos";
+    border-bottom: 1px solid var(--line);
+
+    td { border-bottom: 0; padding: 0.15rem 0.5rem; }
+    td:first-child { padding-top: 0.5rem; }
+  }
+
+  .checklist__bird .checklist__n { grid-area: n; width: auto; padding-top: 0.5rem; }
+  .checklist__name { grid-area: name; padding-top: 0.5rem !important; }
+  .checklist__sci { grid-area: sci; padding-bottom: 0.5rem !important; }
+  .checklist__bird .checklist__photos { grid-area: photos; width: auto; padding-top: 0.5rem; }
+
+  // Under the date · place, lined up with its text (past the ">": its width + the gap).
+  .checklist__count { float: none; display: block; margin: 0.2rem 0 0 1.45rem; }
+}

@@ -1,0 +1,8 @@
+{%- comment -%}
+  The map dot a place is drawn on: its `dots:` entry's id if one groups it (Avians, user
+  2026-11-01: nearby places share one dot), else the place's own id. Writes the id only.
+  Params: place (a place id), dots (the data file's `dots:` list, may be empty).
+{%- endcomment -%}
+{%- assign dot_id = include.place -%}
+{%- for d in include.dots -%}{%- if d.places contains include.place -%}{%- assign dot_id = d.id -%}{%- endif -%}{%- endfor -%}
+{{- dot_id -}}

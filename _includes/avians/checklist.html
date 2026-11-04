@@ -1,0 +1,66 @@
+{% comment %}
+  Avians checklist (user, 2026-11-03: "below the gallery, add a section named Checklist ...
+  ordered the data in trips.yml into a table"): every birding trip from _data/trips.yml (made
+  by scripts/make_trips.py from avians.yml), newest first, as one table. Each trip is a group of
+  rows (a <tbody>): a heading row with the date · place and how many species and photos, the
+  column labels (each trip has its own, so a closed list shows none: user, 2026-11-04), then
+  one row per bird in the order seen: number, name, scientific name, photos on the site
+  ("–" for birds seen only). Names come from species.yml and the places list by id, so they
+  follow the page's language. Each trip carries its continent, so the continent bar shows only
+  that continent's trips (places-map.js) and hides the section when there are none.
+  Folded (user, 2026-11-03: "make each checklist a toggle list, only when click the '>', it
+  shows the full bird list"): every trip starts closed, showing only its heading row; its ">"
+  button opens and closes the bird rows (checklist.js). The table sits in a box of a set height
+  that scrolls inside itself ("make the checklist a certain height"). Without the script, every
+  trip stays open.
+  A trip at an `area` place (the state a sensitive bird is recorded in) gets the "Sensitive"
+  mark after its place (avians/sensitive.html).
+  Params: trips (site.data.trips), places (avians.yml places).
+{% endcomment %}
+<section class="checklist" aria-labelledby="checklist-title" data-checklist>
+  <h2 class="checklist__title" id="checklist-title">{% include t.html en="Checklists" zh="观鸟清单" zh_hant="觀鳥清單" %}</h2>
+
+  <div class="checklist__scroll" data-checklist-scroll>
+  <table class="checklist__table">
+    {%- for trip in include.trips %}
+    {%- assign p = include.places | where: "id", trip.place_id | first %}
+    {%- capture date_zh %}{% include date-zh.html date=trip.date %}{% endcapture %}
+    <tbody class="checklist__trip" id="trip-{{ forloop.index }}" data-continent="{{ p.continent }}">
+      {%- comment -%} ---- The trip: date · place, species and photo counts ---- {%- endcomment %}
+      <tr class="checklist__trip-head">
+        <th scope="rowgroup" colspan="4">
+          {%- comment -%} The ">" and the date · place open the trip's bird rows. {%- endcomment %}
+          <button type="button" class="checklist__toggle" aria-expanded="true" aria-controls="trip-{{ forloop.index }}" data-checklist-toggle>
+            <svg class="checklist__chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>
+            <span class="checklist__when">{% include t.html en=trip.date zh=date_zh zh_hant=date_zh %}<span class="checklist__dot" aria-hidden="true"> · </span>{% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}</span>
+          </button>
+          {%- comment -%} A state standing in for a sensitive bird's spot: its mark after the place. {%- endcomment %}
+          {%- if p.area %} {% include avians/sensitive.html %}{% endif %}
+          {%- capture n_en %}{{ trip.species }} species · {% if trip.photos == 0 %}no photos{% elsif trip.photos == 1 %}1 photo{% else %}{{ trip.photos }} photos{% endif %}{% endcapture %}
+          {%- capture n_zh %}{{ trip.species }} 种鸟 · {% if trip.photos == 0 %}无照片{% else %}{{ trip.photos }} 张照片{% endif %}{% endcapture %}
+          {%- capture n_hant %}{{ trip.species }} 種鳥 · {% if trip.photos == 0 %}無照片{% else %}{{ trip.photos }} 張照片{% endif %}{% endcapture %}
+          <span class="checklist__count">{% include t.html en=n_en zh=n_zh zh_hant=n_hant %}</span>
+        </th>
+      </tr>
+      {%- comment -%} ---- Column labels, under the heading: shown only while the trip is open ---- {%- endcomment %}
+      <tr class="checklist__cols">
+        <th scope="col" class="checklist__n"><span class="visually-hidden">{% include t.html en="Order seen" zh="观测顺序" zh_hant="觀測順序" %}</span></th>
+        <th scope="col">{% include t.html en="Bird" zh="鸟种" zh_hant="鳥種" %}</th>
+        <th scope="col" class="checklist__sci-head">{% include t.html en="Scientific name" zh="学名" zh_hant="學名" %}</th>
+        <th scope="col" class="checklist__photos">{% include t.html en="Photos" zh="照片" zh_hant="照片" %}</th>
+      </tr>
+      {%- comment -%} ---- Its birds, in the order seen ---- {%- endcomment %}
+      {%- for b in trip.birds %}
+      {%- assign sp = site.data.species[b.id] %}
+      <tr class="checklist__bird">
+        <td class="checklist__n">{{ forloop.index }}</td>
+        <td class="checklist__name">{% include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant %}</td>
+        <td class="checklist__sci" lang="la">{{ sp.scientific }}</td>
+        <td class="checklist__photos">{% if b.photos > 0 %}{{ b.photos }}{% else %}<span aria-hidden="true">–</span><span class="visually-hidden">0</span>{% endif %}</td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+    {%- endfor %}
+  </table>
+  </div>
+</section>

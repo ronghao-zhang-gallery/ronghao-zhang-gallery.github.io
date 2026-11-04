@@ -1,0 +1,79 @@
+// "Sensitive" mark (_includes/avians/sensitive.html): an eBird sensitive species (user,
+// 2026-11-03), in its bird card's bottom-right corner and after the place in its checklist trip.
+// A small accent-outlined pill with a lock; hovering or focusing it shows a short note.
+
+// ---- The pill ----
+.sensitive {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.05rem 0.45rem 0.05rem 0.35rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: var(--font-text);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: help;
+
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+}
+
+// On a bird card: pinned to its bottom-right corner, over the sticker's foot, on the page colour
+// so it reads over the drawing (the card is positioned, _places.scss).
+.sensitive--corner {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  z-index: 1;
+  background: var(--bg);
+}
+
+.sensitive__icon {
+  width: 0.7rem;
+  height: 0.7rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+// ---- The note: below the pill; in a card's corner, above it and to its left (the card clips what leaves it) ----
+.sensitive__tip {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  z-index: 2;
+  width: max-content;
+  max-width: 15rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  background: var(--bg);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.4;
+  text-transform: none;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s;
+
+  .sensitive:hover &,
+  .sensitive:focus-visible & { opacity: 1; visibility: visible; }
+
+  .sensitive--corner & { top: auto; bottom: calc(100% + 0.35rem); left: auto; right: 0; }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}

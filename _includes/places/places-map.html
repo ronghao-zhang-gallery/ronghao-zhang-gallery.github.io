@@ -24,6 +24,16 @@
 {%- if avians %}{% assign data = site.data.avians %}{% else %}{% assign data = site.data.places %}{% endif %}
 {%- assign places = data.places %}
 {%- comment -%}
+  Map markers: the places no `dots:` entry groups, then the dots (Avians, user 2026-11-01:
+  nearby places drawn as one dot). grouped holds every grouped place id, padded with spaces so
+  `contains` matches whole ids only.
+{%- endcomment %}
+{%- assign grouped = " " %}
+{%- for d in data.dots %}{% for id in d.places %}{% assign grouped = grouped | append: id | append: " " %}{% endfor %}{% endfor %}
+{%- assign markers = "" | split: "" %}
+{%- for p in places %}{% capture key %} {{ p.id }} {% endcapture %}{% unless grouped contains key %}{% assign markers = markers | push: p %}{% endunless %}{% endfor %}
+{%- if data.dots %}{% assign markers = markers | concat: data.dots %}{% endif %}
+{%- comment -%}
   Newest first: Avians by the moment it was taken (several photos a day), Traces by date.
   Avians is built time by time, so rows with the same `taken` (a day's checklist without times,
   user 2026-10-31) keep their order in avians.yml; Liquid's sort would shuffle them.
@@ -47,19 +57,21 @@
     <h1 class="places__title">{% include t.html en="Traces" zh="足迹" zh_hant="足跡" %}</h1>
     {%- endif %}
     {%- comment -%} Count line: "1 place · 3 sightings" (singular when one). {%- endcomment %}
-    {%- if places.size == 1 %}{% assign place_word = "place" %}{% else %}{% assign place_word = "places" %}{% endif %}
+    {%- comment -%} Places on the map: an `area` place (a sensitive bird's state, Avians) is not one. {%- endcomment %}
+    {%- assign map_places = places | where_exp: "q", "q.area != true" %}
+    {%- if map_places.size == 1 %}{% assign place_word = "place" %}{% else %}{% assign place_word = "places" %}{% endif %}
     {%- if avians %}
     {%- comment -%} Avians counts places, every species seen, and photos (rows with a photo). {%- endcomment %}
     {%- assign species_count = visits | map: "species" | uniq | size %}
     {%- if photo_visits.size == 1 %}{% assign visit_word = "photo" %}{% else %}{% assign visit_word = "photos" %}{% endif %}
-    {%- capture en %}{{ places.size }} {{ place_word }} · {{ species_count }} species · {{ photo_visits.size }} {{ visit_word }}{% endcapture %}
-    {%- capture zh %}{{ places.size }} 个地方 · {{ species_count }} 种鸟 · {{ photo_visits.size }} 张照片{% endcapture %}
-    {%- capture zh_hant %}{{ places.size }} 個地方 · {{ species_count }} 種鳥 · {{ photo_visits.size }} 張照片{% endcapture %}
+    {%- capture en %}{{ map_places.size }} {{ place_word }} · {{ species_count }} species · {{ photo_visits.size }} {{ visit_word }}{% endcapture %}
+    {%- capture zh %}{{ map_places.size }} 个地方 · {{ species_count }} 种鸟 · {{ photo_visits.size }} 张照片{% endcapture %}
+    {%- capture zh_hant %}{{ map_places.size }} 個地方 · {{ species_count }} 種鳥 · {{ photo_visits.size }} 張照片{% endcapture %}
     {%- else %}
     {%- if visits.size == 1 %}{% assign visit_word = "visit" %}{% else %}{% assign visit_word = "visits" %}{% endif %}
-    {%- capture en %}{{ places.size }} {{ place_word }} · {{ visits.size }} {{ visit_word }}{% endcapture %}
-    {%- capture zh %}{{ places.size }} 个地方 · {{ visits.size }} 次{% endcapture %}
-    {%- capture zh_hant %}{{ places.size }} 個地方 · {{ visits.size }} 次{% endcapture %}
+    {%- capture en %}{{ map_places.size }} {{ place_word }} · {{ visits.size }} {{ visit_word }}{% endcapture %}
+    {%- capture zh %}{{ map_places.size }} 个地方 · {{ visits.size }} 次{% endcapture %}
+    {%- capture zh_hant %}{{ map_places.size }} 個地方 · {{ visits.size }} 次{% endcapture %}
     {%- endif %}
     <p class="places__count">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
 
@@ -118,6 +130,29 @@
             {%- endfor %}
           </g>
         </svg>
+        {%- comment -%}
+          Range notes (user, 2026-11-03): a species whose eBird range is incomplete has a
+          `range_note` in species.yml, shown over the map's lower left while its range is
+          (places-map.js), so the map never changes size on hover.
+        {%- endcomment %}
+        {%- comment -%}
+          A species marked `range_approx` (user, 2026-11-04: its range doesn't match the expert
+          maps) gets the standard line "based on eBird observations, may not be accurate";
+          its own `range_note`, if any, follows it.
+        {%- endcomment %}
+        {%- assign noted = "" %}
+        {%- for v in visits %}
+        {%- assign sp = site.data.species[v.species] %}
+        {%- if sp.range_note == nil and sp.range_approx != true %}{% continue %}{% endif %}
+        {%- assign noted_key = " " | append: v.species | append: " " %}
+        {%- if noted contains noted_key %}{% continue %}{% endif %}
+        {%- assign noted = noted | append: noted_key %}
+        <p class="range-note" data-range-note="{{ v.species }}">
+          {%- if sp.range_approx %}{% include t.html en="This range is based on eBird observations and may not be accurate." zh="此分布图基于 eBird 观测记录，可能不准确。" zh_hant="此分布圖基於 eBird 觀測紀錄，可能不準確。" %}{% endif %}
+          {%- if sp.range_approx and sp.range_note %} {% endif %}
+          {%- if sp.range_note %}{% include t.html en=sp.range_note.en zh=sp.range_note.zh zh_hant=sp.range_note.zh_hant %}{% endif -%}
+        </p>
+        {%- endfor %}
         {%- endif %}
         {%- comment -%}
           Routes: places-map.js gives this layer the map's viewBox and draws each line from its
@@ -145,9 +180,24 @@
         <p class="visually-hidden">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
         {%- endfor %}
         {%- endif %}
-        {%- for p in places %}
-        {%- if p.route %}{% continue %}{% endif %}
+        {%- comment -%}
+          One marker per place, except places grouped under a `dots:` entry (Avians, user
+          2026-11-01: the two Atlanta parks, the two Savannah spots), which share that dot's
+          marker. A grouped marker's name lists its places, and its dates are all of theirs.
+          An `area` place (Avians: the state a sensitive bird is recorded in) gets no marker.
+        {%- endcomment %}
+        {%- for p in markers %}
+        {%- if p.route or p.area %}{% continue %}{% endif %}
+        {%- if p.places %}
+        {%- assign members = places | where_exp: "q", "p.places contains q.id" %}
+        {%- assign own = visits | where_exp: "v", "p.places contains v.place" %}
+        {%- else %}
+        {%- assign members = places | where: "id", p.id %}
         {%- assign own = visits | where: "place", p.id %}
+        {%- endif %}
+        {%- capture name_en %}{% for q in members %}{{ q.name.en }}{% unless forloop.last %} · {% endunless %}{% endfor %}{% endcapture %}
+        {%- capture name_zh %}{% for q in members %}{{ q.name.zh }}{% unless forloop.last %} · {% endunless %}{% endfor %}{% endcapture %}
+        {%- capture name_zh_hant %}{% for q in members %}{{ q.name.zh_hant }}{% unless forloop.last %} · {% endunless %}{% endfor %}{% endcapture %}
         <button class="place-marker" type="button" data-place="{{ p.id }}" data-continent="{{ p.continent }}"{% if own[0].species %} data-species="{{ own[0].species }}"{% endif %} data-lat="{{ p.lat }}" data-lon="{{ p.lon }}">
           <span class="place-marker__dot" aria-hidden="true"></span>
           {%- comment -%}
@@ -155,7 +205,7 @@
             card already gives place and date), so there it is for screen readers only.
           {%- endcomment %}
           <span class="{% if avians %}visually-hidden{% else %}place-marker__label{% endif %}">
-            <span class="place-marker__name">{% include t.html en=p.name.en zh=p.name.zh zh_hant=p.name.zh_hant %}</span>
+            <span class="place-marker__name">{% include t.html en=name_en zh=name_zh zh_hant=name_zh_hant %}</span>
             <span class="place-marker__dates">
               {%- for v in own %}
               {%- capture date_zh %}{% include date-zh.html date=v.date %}{% endcapture %}
@@ -195,9 +245,20 @@
       {%- capture stickers %}<a href="https://github.com/alchaincyf/huashu-bird-sticker">huashu-bird-sticker</a>, © 2026 Huashu (alchaincyf), <a href="https://polyformproject.org/licenses/shield/1.0.0/">PolyForm Shield 1.0.0</a>{% endcapture %}
       {%- comment -%} The cards' measurements are AVONET's (CC BY 4.0, which asks for credit); IUCN categories via Wikidata. {%- endcomment %}
       {%- capture avonet %}<a href="https://doi.org/10.1111/ele.13898">AVONET</a> (Tobias et al. 2022, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>){% endcapture %}
-      {%- capture en %}Map data: Natural Earth; rivers: {{ hydro }}{{ ebird }}; bird stickers: {{ stickers }}; measurements: {{ avonet }}; IUCN status via Wikidata.{% endcapture %}
-      {%- capture zh %}地图数据：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鸟类贴纸：{{ stickers }}；形态数据：{{ avonet }}；IUCN等级来自Wikidata。{% endcapture %}
-      {%- capture zh_hant %}地圖資料：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鳥類貼紙：{{ stickers }}；形態資料：{{ avonet }}；IUCN等級來自Wikidata。{% endcapture %}
+      {%- comment -%}
+        A few stickers are photo cutouts under their photo's own licence (CC BY asks for the
+        photographer's name): `sticker_by` in bird_facts.yml (fetch_stickers.py) adds a credit.
+      {%- endcomment %}
+      {%- assign photo_en = "" %}{% assign photo_zh = "" %}{% assign photo_hant = "" %}
+      {%- for f in site.data.bird_facts %}{% if f[1].sticker_by %}
+      {%- assign fsp = site.data.species[f[0]] %}
+      {%- capture photo_en %}{{ photo_en }}; {{ fsp.name.en }} sticker: photo by <a href="{{ f[1].sticker_url }}">{{ f[1].sticker_by }}</a> ({{ f[1].sticker_license }}){% endcapture %}
+      {%- capture photo_zh %}{{ photo_zh }}；{{ fsp.name.zh }}贴纸：<a href="{{ f[1].sticker_url }}">{{ f[1].sticker_by }}</a> 摄（{{ f[1].sticker_license }}）{% endcapture %}
+      {%- capture photo_hant %}{{ photo_hant }}；{{ fsp.name.zh_hant }}貼紙：<a href="{{ f[1].sticker_url }}">{{ f[1].sticker_by }}</a> 攝（{{ f[1].sticker_license }}）{% endcapture %}
+      {%- endif %}{% endfor %}
+      {%- capture en %}Map data: Natural Earth; rivers: {{ hydro }}{{ ebird }}; bird stickers: {{ stickers }}{{ photo_en }}; measurements: {{ avonet }}; IUCN status via Wikidata.{% endcapture %}
+      {%- capture zh %}地图数据：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鸟类贴纸：{{ stickers }}{{ photo_zh }}；形态数据：{{ avonet }}；IUCN等级来自Wikidata。{% endcapture %}
+      {%- capture zh_hant %}地圖資料：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鳥類貼紙：{{ stickers }}{{ photo_hant }}；形態資料：{{ avonet }}；IUCN等級來自Wikidata。{% endcapture %}
       <p class="map-credit">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
       {%- else %}
       {%- comment -%} ---- Legend: what the map's colours mean ---- {%- endcomment %}
@@ -244,6 +305,13 @@
           <input type="search" autocomplete="off" spellcheck="false" data-card-search
                  data-placeholder-en="Search birds or places" data-placeholder-zh-hans="搜索鸟种或地点" data-placeholder-zh-hant="搜尋鳥種或地點">
         </label>
+        {%- comment -%}
+          After a dot on the map is clicked, the cards show only the birds seen there (user,
+          2026-11-03); this button brings every bird back (bird-cards.js). The status line tells
+          screen readers which place is shown.
+        {%- endcomment %}
+        <button type="button" class="card-tools__all" hidden data-card-all>{% include t.html en="Return to all" zh="返回全部" zh_hant="返回全部" %}</button>
+        <p class="visually-hidden" aria-live="polite" data-card-place-status></p>
         <div class="card-tools__sort" role="group" aria-labelledby="card-sort-label">
           <span class="visually-hidden" id="card-sort-label">{% include t.html en="Sort birds" zh="鸟种排序" zh_hant="鳥種排序" %}</span>
           <button type="button" class="card-tools__option" data-card-sort="recent" aria-pressed="true">{% include t.html en="Recent" zh="最近" zh_hant="最近" %}</button>
@@ -266,18 +334,27 @@
           Every place and continent this species was seen in, and the words the card search
           matches (bird-cards.js): its names in all three languages, its scientific name and its
           places' names. data-range: the continents its range reaches (_data/range_continents.yml),
-          so a continent view can point to the others (places-map.js).
+          so a continent view can point to the others (places-map.js). A sighting at an `area` place
+          (a sensitive bird recorded only as its state, user 2026-11-03) counts every dot of a
+          place with `region:` that area, so clicking any of them shows the bird.
         {%- endcomment %}
         {%- assign range_continents = site.data.range_continents[sp.ebird] | join: " " %}
         {%- assign seen_places = "" %}{% assign seen_continents = "" %}
         {%- capture search_words %}{{ sp.name.en }} {{ sp.name.zh }} {{ sp.name.zh_hant }} {{ sp.scientific }}{% endcapture %}
         {%- for s in sightings %}
         {%- assign sp_place = places | where: "id", s.place | first %}
-        {%- unless seen_places contains s.place %}{% assign seen_places = seen_places | append: " " | append: s.place %}{% capture search_words %}{{ search_words }} {{ sp_place.name.en }} {{ sp_place.name.zh }} {{ sp_place.name.zh_hant }}{% endcapture %}{% endunless %}
+        {%- if sp_place.area %}{% assign s_places = places | where: "region", s.place | map: "id" %}{% else %}{% assign s_places = s.place | split: "," %}{% endif %}
+        {%- for sid_place in s_places %}
+        {%- capture s_dot %}{% include places/dot-of.html place=sid_place dots=data.dots %}{% endcapture %}
+        {%- capture s_key %} {{ s_dot }} {% endcapture %}{% capture seen_key %}{{ seen_places }} {% endcapture %}
+        {%- unless seen_key contains s_key %}{% assign seen_places = seen_places | append: " " | append: s_dot %}{% endunless %}
+        {%- endfor %}
+        {%- capture s_words %} {{ sp_place.name.en }} {{ sp_place.name.zh }} {{ sp_place.name.zh_hant }}{% endcapture %}
+        {%- unless search_words contains s_words %}{% capture search_words %}{{ search_words }}{{ s_words }}{% endcapture %}{% endunless %}
         {%- unless seen_continents contains sp_place.continent %}{% assign seen_continents = seen_continents | append: " " | append: sp_place.continent %}{% endunless %}
         {%- endfor %}
         {%- capture date_zh %}{% include date-zh.html date=v.date %}{% endcapture %}
-        <li class="visit visit--bird" data-species="{{ v.species }}" data-places="{{ seen_places | strip }}" data-last-place="{{ v.place }}" data-continents="{{ seen_continents | strip }}" data-range="{{ range_continents }}"
+        <li class="visit visit--bird" data-species="{{ v.species }}" data-places="{{ seen_places | strip }}" data-last-place="{% include places/dot-of.html place=v.place dots=data.dots %}" data-continents="{{ seen_continents | strip }}" data-range="{{ range_continents }}"
             data-search="{{ search_words | downcase | escape }}" data-name-en="{{ sp.name.en | escape }}" data-name-zh-hans="{{ sp.name.zh }}" data-name-zh-hant="{{ sp.name.zh_hant }}">
           {%- comment -%}
             The species' photos, if any: its cover (`cover: true` in avians.yml, else the
@@ -352,6 +429,11 @@
             fetched, its cover photo shows, or a quiet "No photo yet" box of the same size, so
             the cards stay even.
           {%- endcomment %}
+          {%- comment -%}
+            An eBird sensitive species: its "Sensitive" mark in the card's bottom-right corner
+            (user, 2026-11-03), over the sticker's foot; its place is only the state.
+          {%- endcomment %}
+          {%- if sp.sensitive %}{% include avians/sensitive.html corner=true %}{% endif %}
           {%- capture sticker_path %}/assets/images/stickers/{{ v.species }}.webp{% endcapture %}
           {%- assign sticker = site.static_files | where: "path", sticker_path | first %}
           {%- capture sticker_img %}<img class="visit__photo visit__photo--sticker" src="{{ sticker_path | relative_url }}" alt="" loading="lazy" decoding="async">{% endcapture %}
@@ -392,8 +474,9 @@
     {%- endif %}
   </div>
 
-  {%- comment -%} ---- Avians: a gallery of every photo, under the cards ---- {%- endcomment %}
+  {%- comment -%} ---- Avians: a gallery of every photo under the cards, then the checklist of every trip ---- {%- endcomment %}
   {%- if avians %}
   {% include avians/gallery.html visits=photo_visits places=places %}
+  {% include avians/checklist.html trips=site.data.trips places=places %}
   {%- endif %}
 </section>

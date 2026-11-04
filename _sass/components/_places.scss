@@ -395,6 +395,30 @@
 
 .places.is-polar .places-ranges { opacity: 0; }
 
+// A note over the map's lower left while an incomplete range shows (user, 2026-11-03: the
+// Northern Hawk Owl, whose eBird range misses Siberia). Laid over the map, so nothing moves.
+.range-note {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: min(22rem, 60%);
+  margin: 0;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.4rem;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s;
+
+  &.is-shown { opacity: 1; visibility: visible; }
+
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
 .range {
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -532,6 +556,13 @@
   }
 
   .place-marker__dot::after { display: none; }
+
+  // The dot whose birds the cards show (clicked; user, 2026-11-03) stays solid and larger.
+  .place-marker.is-chosen {
+    opacity: 1;
+
+    .place-marker__dot { transform: translate(-50%, -50%) scale(1.6); }
+  }
 
   // Every place of the hovered bird turns solid; only where it was last seen grows and beats
   // (user, 2026-10-25: "only the place last seen have dynamics").

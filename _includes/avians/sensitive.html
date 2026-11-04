@@ -1,0 +1,15 @@
+{% comment %}
+  "Sensitive" mark for an eBird sensitive species (user, 2026-11-03: Northern Hawk Owl; eBird
+  shows such records only coarsely and asks observers to keep the exact spot private). Set by
+  `sensitive: true` in _data/species.yml. In the bird card's bottom-right corner (user,
+  2026-11-03), and after the place in its checklist trip's heading. A small pill; hovering or
+  focusing it shows why the place is only the state, and that the map's dots are not where it
+  was seen (user, 2026-11-04). Params: corner (true: pinned to the card's
+  bottom-right corner, its note opening above it, since the card clips what leaves it). Styles:
+  _sass/components/_sensitive.scss.
+{% endcomment %}
+<span class="sensitive{% if include.corner %} sensitive--corner{% endif %}" tabindex="0">
+  <svg class="sensitive__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="7" width="9" height="6.5" rx="1.2"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>
+  <span class="sensitive__label">{% include t.html en="Sensitive" zh="敏感物种" zh_hant="敏感物種" %}</span>
+  <span class="sensitive__tip" role="tooltip">{% include t.html en="eBird sensitive species: the location is shown only by state, and the dots on the map are not where it was seen." zh="eBird 敏感物种：观测地点只显示到州，地图上的点并非它的实际观测位置。" zh_hant="eBird 敏感物種：觀測地點只顯示到州，地圖上的點並非牠的實際觀測位置。" %}</span>
+</span>

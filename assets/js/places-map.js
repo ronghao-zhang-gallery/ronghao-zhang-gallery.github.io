@@ -12,6 +12,9 @@
  *   - Hover a marker or a list row (or tap it on a phone): every ring pauses, that place's marker
  *     shows its label, and the other markers and rows dim. On Avians, a species' range map shows
  *     only while the cursor is on its card (on phones, while its card is at the reading line).
+ *   - Avians, click a dot (user, 2026-11-03): the cards show only the birds seen there
+ *     (bird-cards.js does the filtering; this fires `placechoose` and marks the dot shown when
+ *     `placechange` comes back). Traces keeps the tap-to-pick below.
  *   - Phones, while scrolling the list: the row at the reading line (40% down the screen) is
  *     picked, like lyrics lighting up.
  */
@@ -33,6 +36,8 @@
   var empty = document.querySelector('[data-visit-empty]');
   var gallery = document.querySelector('[data-gallery]');          // Avians: every photo
   var galleryTiles = gallery ? Array.prototype.slice.call(gallery.querySelectorAll('.photo-tile')) : [];
+  var checklist = document.querySelector('[data-checklist]');      // Avians: every trip
+  var trips = checklist ? Array.prototype.slice.call(checklist.querySelectorAll('.checklist__trip')) : [];
   var bar = document.querySelector('[data-continent-bar]');
   var options = bar ? Array.prototype.slice.call(bar.querySelectorAll('.continent-bar__option')) : [];
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -93,8 +98,11 @@
 
   // ---- Ranges (Avians): only while the cursor is on that species' card (user, 2026-10-25) ----
   var rangeGroups = ranges ? Array.prototype.slice.call(ranges.querySelectorAll('.range')) : [];
+  // A species with an incomplete eBird range has a note over the map, shown with its range.
+  var rangeNotes = Array.prototype.slice.call(map.querySelectorAll('[data-range-note]'));
   function showRange(species) {
     rangeGroups.forEach(function (g) { g.classList.toggle('is-shown', !!species && g.dataset.species === species); });
+    rangeNotes.forEach(function (n) { n.classList.toggle('is-shown', !!species && n.dataset.rangeNote === species); });
   }
 
   // Zoomed into a continent, the map shows only that continent's part of a range. The other
@@ -150,10 +158,41 @@
   rows.forEach(hoverable);
 
   // Tap a marker (phones): toggle it. Tap anywhere else: let go.
+  // Avians: a click shows that dot's birds in the cards instead (again: every bird).
+  var birdPlaces = section.classList.contains('places--plain') && !!document.querySelector('[data-card-tools]');
   markers.forEach(function (m) {
+    if (birdPlaces) m.setAttribute('aria-pressed', 'false');
     m.addEventListener('click', function (e) {
       e.stopPropagation();
+      if (birdPlaces) {
+        var near = e.detail ? nearestMarker(e.clientX, e.clientY) || m : m;   // detail 0: keyboard
+        document.dispatchEvent(new CustomEvent('placechoose', { detail: { place: near.dataset.place, marker: near } }));
+        return;
+      }
       pick(picked === m ? null : m);
+    });
+  });
+  // Markers' hit areas (1.75rem) are much larger than Avians' dots, so close places overlap
+  // (North of Coldfoot and Atigun River Valley): a click goes to the dot nearest the pointer,
+  // not to whichever marker happens to be on top.
+  function nearestMarker(x, y) {
+    var best = null, bestDist = Infinity;
+    markers.forEach(function (m) {
+      if (m.classList.contains('is-off') || !m.classList.contains('is-placed')) return;
+      var r = m.querySelector('.place-marker__dot').getBoundingClientRect();
+      var d = Math.hypot(r.left + r.width / 2 - x, r.top + r.height / 2 - y);
+      if (d < bestDist) { bestDist = d; best = m; }
+    });
+    return best;
+  }
+  // The dot whose birds the cards show stays solid and a little larger (_places.scss).
+  document.addEventListener('placechange', function (e) {
+    var id = e.detail.place;
+    map.classList.toggle('has-chosen', !!id);
+    markers.forEach(function (m) {
+      var on = !!id && m.dataset.place === id;
+      m.classList.toggle('is-chosen', on);
+      m.setAttribute('aria-pressed', String(on));
     });
   });
   // Avians on phones: the card seen whole keeps its range (phoneCards() picks it again).
@@ -224,6 +263,10 @@
     var tiles = 0;
     galleryTiles.forEach(function (t) { t.hidden = off(t); if (!t.hidden) tiles++; });
     if (gallery) gallery.hidden = galleryTiles.length > 0 && tiles === 0;
+    // Avians checklist: only this continent's trips; hidden when it has none.
+    var shownTrips = 0;
+    trips.forEach(function (t) { t.hidden = off(t); if (!t.hidden) shownTrips++; });
+    if (checklist) checklist.hidden = trips.length > 0 && shownTrips === 0;
     document.dispatchEvent(new CustomEvent('continentchange'));   // the gallery count follows
   }
 
@@ -328,7 +371,9 @@
   var phone = window.matchMedia('(max-width: 760px)');
   var plain = section.classList.contains('places--plain');
   function cardsInView() {
-    return rows.filter(function (r) { return !r.hidden && !r.classList.contains('is-search-off'); });
+    return rows.filter(function (r) {
+      return !r.hidden && !r.classList.contains('is-search-off') && !r.classList.contains('is-place-off');
+    });
   }
   // Sizes: measured with the set card height taken off, so cards can shrink again (a language
   // with shorter lines, a narrower window). Run on resize, language, continent and font changes.
@@ -381,7 +426,7 @@
     if (plain || !phone.matches || !rows.length) return;
     var line = window.innerHeight * 0.4, best = null, bestDist = Infinity;
     rows.forEach(function (r) {
-      if (r.hidden || r.classList.contains('is-search-off')) return;   // continent / card search
+      if (r.hidden || r.classList.contains('is-search-off') || r.classList.contains('is-place-off')) return;
       var b = r.getBoundingClientRect();
       var d = Math.abs((b.top + b.bottom) / 2 - line);
       if (d < bestDist) { bestDist = d; best = r; }

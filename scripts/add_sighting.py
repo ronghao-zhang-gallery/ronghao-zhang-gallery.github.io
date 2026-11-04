@@ -22,6 +22,7 @@ give the web file's name with --web. The sighting then stores that name (and the
 as `export`), the site loads the photo from the image repo, and no local thumbnail is made:
   python scripts/add_sighting.py ../bird-2026/IM8A1015.jpg --place legacy-park \
       --species eastern-bluebird --web 20261025-001_eastern-bluebird_2026_atlanta-ga.webp
+After adding the sighting it rewrites the trip log, _data/trips.yml (make_trips.py).
 """
 
 import argparse
@@ -30,6 +31,8 @@ from pathlib import Path
 
 import yaml
 from PIL import ExifTags, Image, ImageOps
+
+import make_trips      # scripts/make_trips.py, next to this one: the trip log
 
 ROOT = Path(__file__).resolve().parent.parent
 AVIANS = ROOT / '_data' / 'avians.yml'
@@ -154,6 +157,7 @@ def main():
     text = AVIANS.read_text(encoding='utf-8').rstrip('\n') + '\n' + '\n'.join(lines) + '\n'
     AVIANS.write_text(text, encoding='utf-8')
     print(f'Added to {AVIANS.name}:\n' + '\n'.join(lines))
+    make_trips.main()                  # keep the trip log (_data/trips.yml) in step
 
 
 if __name__ == '__main__':

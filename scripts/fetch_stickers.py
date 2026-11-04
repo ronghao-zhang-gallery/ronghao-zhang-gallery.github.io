@@ -111,7 +111,8 @@ def write_facts(facts):
     ]
     for sid, f in facts.items():
         lines.append(f"{sid}:")
-        lines += [f"  {k}: {v}" for k, v in f.items()]
+        # Credits are quoted (URLs hold colons); numbers and IUCN codes are written bare.
+        lines += [f"  {k}: {json.dumps(v, ensure_ascii=False) if k.startswith('sticker_') else v}" for k, v in f.items()]
     FACTS_YML.write_text("\n".join(lines) + "\n")
 
 
@@ -140,6 +141,14 @@ def main():
             missing.append(f"{sid} ({code})")
             continue
         facts[sid] = facts_of(entry)
+        # A photo-cutout sticker keeps its photo's licence (e.g. CC BY), which asks for the
+        # photographer's name: kept here, and the Avians credit line names them (2026-11-04).
+        sticker = entry["sticker"]
+        if sticker["kind"] != "ai-illustration":
+            src = sticker.get("source") or {}
+            facts[sid]["sticker_by"] = src.get("author") or "unknown"
+            facts[sid]["sticker_license"] = sticker.get("license") or ""
+            facts[sid]["sticker_url"] = src.get("page") or sticker.get("licenseURL") or ""
         if info["iucn"]:
             facts[sid]["iucn"] = info["iucn"]          # set by hand in species.yml
         elif "iucn" not in facts[sid]:
@@ -148,7 +157,6 @@ def main():
         if out.exists() and not args.force:
             print(f"  {sid}: sticker already there")
             continue
-        sticker = entry["sticker"]
         im = Image.open(io.BytesIO(read(sticker["file"]))).convert("RGBA")
         im.thumbnail((LONG_EDGE, LONG_EDGE), Image.LANCZOS)
         # Written under a hidden name (Jekyll skips dotfiles), then renamed: a running
@@ -159,9 +167,10 @@ def main():
         part.replace(out)
         print(f"  {sid}: {entry['id']} ({sticker['kind']}, {sticker['license']}) -> {out.relative_to(ROOT)}, "
               f"{out.stat().st_size // 1024} KB")
-        # The 34 photo-cutout stickers keep their photo's own licence, not PolyForm Shield.
+        # The 34 photo-cutout stickers keep their photo's own licence, not PolyForm Shield;
+        # their credit goes into bird_facts.yml (above) and onto the page.
         if sticker["kind"] != "ai-illustration":
-            print(f"    note: {sticker['kind']}, licence {sticker['license']}; credit it separately")
+            print(f"    note: {sticker['kind']}, licence {sticker['license']}; credited on the page")
 
     write_facts(facts)
     print(f"wrote {FACTS_YML.relative_to(ROOT)} ({len(facts)} species)")

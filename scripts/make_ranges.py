@@ -57,6 +57,14 @@ MIN_CELLS = 4       # specks smaller than this are dropped
 #           (2026-11-01: from -180 it showed the bird in Asia).
 LON_CLIP = {'whimbr': (-168, -25)}
 
+# eBird seasons read as another, for species whose S&T model covers only part of the year
+# (user's birds, 2026-11-03): eBird code -> {eBird season: season used}.
+#   nohowl  Northern Hawk Owl: S&T 2023 has only a nonbreeding range (summer records in the
+#           remote boreal forest are too few). The owl is resident there, wandering south in
+#           some winters, so its range is drawn as year-round (user chose this). Its card also
+#           says the range misses Siberia (range_note in species.yml).
+SEASON_AS = {'nohowl': {'nonbreeding': 'resident'}}
+
 
 # ---- Download ----
 
@@ -226,6 +234,8 @@ def main():
     for code in codes:
         print(f'{code} …')
         features = read_gpkg(download_range(code, args.version, args.key, args.cache))
+        swap = SEASON_AS.get(code, {})
+        features = [(swap.get(season, season), polys) for season, polys in features]
         grid = classify(season_masks(features), vb, LON_CLIP.get(code))
         ranges[code] = {'source': f'eBird Status & Trends {args.version}'}
         for k, season in enumerate(SEASONS):

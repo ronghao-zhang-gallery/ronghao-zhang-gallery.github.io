@@ -7,6 +7,11 @@
 #          (scripts/fetch_stickers.py otherwise takes it from the library)
 #   ebird  eBird species code: names the range map in _data/ranges.yml (scripts/make_ranges.py
 #          fetches it from eBird Status & Trends)
+#   range_approx  optional, true: its eBird range looks unlike the expert maps (Birds of the World):
+#          the map then shows "This range is based on eBird observations and may not be
+#          accurate." while the range is drawn (user, 2026-11-04). Set it for every new species
+#          whose range doesn't match (check with scripts/range_sheet.py).
+#   range_note  optional { en, zh, zh_hant }: a further, species-specific line after that one
 # Chinese names: Claude's choice from common usage; check them. From the Savannah NWR birds on
 # (2026-10-31), Simplified is the IOC Chinese name and Traditional its character conversion.
 
@@ -97,6 +102,7 @@ anhinga:
   ebird: anhing
 
 glossy-ibis:
+  range_approx: true       # unlike Birds of the World: patchy outside the Americas (2026-11-04)
   name: { en: Glossy Ibis, zh: 彩鹮, zh_hant: 彩鹮 }
   scientific: Plegadis falcinellus
   ebird: gloibi
@@ -107,6 +113,7 @@ white-faced-ibis:
   ebird: whfibi
 
 tricolored-heron:
+  range_approx: true       # unlike Birds of the World: inland patches (Louisiana, Arkansas) expert maps leave out (2026-11-04)
   name: { en: Tricolored Heron, zh: 三色鹭, zh_hant: 三色鷺 }
   scientific: Egretta tricolor
   ebird: triher
@@ -117,6 +124,7 @@ snowy-egret:
   ebird: snoegr
 
 great-egret:
+  range_approx: true       # unlike Birds of the World: patchy outside the Americas (2026-11-04)
   name: { en: Great Egret, zh: 大白鹭, zh_hant: 大白鷺 }
   scientific: Ardea alba
   ebird: greegr
@@ -127,6 +135,7 @@ great-blue-heron:
   ebird: grbher3
 
 osprey:
+  range_approx: true       # unlike Birds of the World: patchy in Europe, Africa and Asia (2026-11-04)
   name: { en: Osprey, zh: 鹗, zh_hant: 鶚 }
   scientific: Pandion haliaetus carolinensis   # the user's subspecies (IOC species: Pandion haliaetus)
   ebird: osprey
@@ -143,22 +152,26 @@ boat-tailed-grackle:
 
 # ---- Fort Pulaski NM, Chatham County GA, 2026-04-19 (user, 2026-10-31) ----
 black-bellied-plover:
+  range_approx: true       # unlike Birds of the World: Arctic breeding range mostly missing; inland migration blobs (2026-11-04)
   name: { en: Black-bellied Plover, zh: 灰斑鸻, zh_hant: 灰斑鴴 }   # IOC English: Grey Plover
   scientific: Pluvialis squatarola
   ebird: bkbplo
 
 semipalmated-plover:
+  range_approx: true       # unlike Birds of the World: breeding range patchy (2026-11-04)
   name: { en: Semipalmated Plover, zh: 半蹼鸻, zh_hant: 半蹼鴴 }
   scientific: Charadrius semipalmatus
   ebird: semplo
 
 hudsonian-whimbrel:
+  range_approx: true       # unlike Birds of the World: breeding range patchy; coastal winter range thin (2026-11-04)
   name: { en: Hudsonian Whimbrel, zh: 哈德森杓鹬, zh_hant: 哈德森杓鷸 }
   scientific: Numenius hudsonicus
   iucn: LC                 # the Red List still lumps it in Whimbrel (Numenius phaeopus), LC
   ebird: whimbr            # eBird Status & Trends 2023 has it only under this code
 
 ruddy-turnstone:
+  range_approx: true       # unlike Birds of the World: Arctic breeding range mostly missing; inland migration blobs (2026-11-04)
   name: { en: Ruddy Turnstone, zh: 翻石鹬, zh_hant: 翻石鷸 }
   scientific: Arenaria interpres
   ebird: rudtur
@@ -170,6 +183,7 @@ laughing-gull:
   ebird: laugul
 
 western-cattle-egret:
+  range_approx: true       # unlike Birds of the World: patchy outside the Americas (2026-11-04)
   name: { en: Western Cattle-Egret, zh: 西牛背鹭, zh_hant: 西牛背鷺 }
   scientific: Ardea ibis
   ebird: categr1           # not in the sticker library's ids; matched there by scientific name
@@ -190,3 +204,240 @@ red-tailed-hawk:
   name: { en: Red-tailed Hawk, zh: 红尾鵟, zh_hant: 紅尾鵟 }   # a juvenile, with a squirrel
   scientific: Buteo jamaicensis
   ebird: rethaw
+
+# ---- North of Coldfoot AK, Dalton Highway, 2025-09-20 (user, 2026-11-01) ----
+spruce-grouse:
+  name: { en: Spruce Grouse, zh: 枞树镰翅鸡, zh_hant: 樅樹鐮翅雞 }   # a male
+  scientific: Canachites canadensis
+  iucn: LC                 # by hand: the sticker library has none (IUCN Red List: Least Concern)
+  ebird: sprgro
+
+# Seen the same day, no photos (user, 2026-11-01)
+willow-ptarmigan:
+  range_approx: true       # unlike Birds of the World: Russia and Siberia mostly missing (2026-11-04)
+  name: { en: Willow Ptarmigan, zh: 柳雷鸟, zh_hant: 柳雷鳥 }
+  scientific: Lagopus lagopus
+  ebird: wilpta
+canada-jay:
+  name: { en: Canada Jay, zh: 灰噪鸦, zh_hant: 灰噪鴉 }
+  scientific: Perisoreus canadensis
+  ebird: gryjay
+
+# Denali National Park, 2025-09-22 (user, 2026-11-04), no photo
+common-raven:
+  name: { en: Common Raven, zh: 渡鸦, zh_hant: 渡鴉 }
+  scientific: Corvus corax
+  ebird: comrav
+
+# Murphey Candler Park checklist, 2026-05-03 (user, 2026-11-04): 41 new birds, no photos.
+# Chinese: the sticker library's IOC Simplified, Traditional by character conversion.
+canada-goose:
+  range_approx: true       # unlike Birds of the World: introduced birds (Europe, New Zealand) drawn as native (2026-11-04)
+  name: { en: Canada Goose, zh: 加拿大黑雁, zh_hant: 加拿大黑雁 }
+  scientific: Branta canadensis
+  ebird: cangoo
+mallard:
+  range_approx: true       # unlike Birds of the World: introduced birds (New Zealand, Australia) drawn as native (2026-11-04)
+  name: { en: Mallard, zh: 绿头鸭, zh_hant: 綠頭鴨 }
+  scientific: Anas platyrhynchos
+  ebird: mallar3
+chimney-swift:
+  name: { en: Chimney Swift, zh: 烟囱雨燕, zh_hant: 煙囪雨燕 }
+  scientific: Chaetura pelagica
+  ebird: chiswi
+red-shouldered-hawk:
+  name: { en: Red-shouldered Hawk, zh: 赤肩鵟, zh_hant: 赤肩鵟 }
+  scientific: Buteo lineatus
+  ebird: reshaw
+eastern-wood-pewee:
+  name: { en: Eastern Wood-Pewee, zh: 东绿霸鹟, zh_hant: 東綠霸鶲 }
+  scientific: Contopus virens
+  ebird: eawpew
+white-eyed-vireo:
+  name: { en: White-eyed Vireo, zh: 白眼莺雀, zh_hant: 白眼鶯雀 }
+  scientific: Vireo griseus
+  ebird: whevir
+yellow-throated-vireo:
+  name: { en: Yellow-throated Vireo, zh: 黄喉莺雀, zh_hant: 黃喉鶯雀 }
+  scientific: Vireo flavifrons
+  ebird: yetvir
+red-eyed-vireo:
+  name: { en: Red-eyed Vireo, zh: 红眼莺雀, zh_hant: 紅眼鶯雀 }
+  scientific: Vireo olivaceus
+  ebird: reevir
+blue-jay:
+  name: { en: Blue Jay, zh: 冠蓝鸦, zh_hant: 冠藍鴉 }
+  scientific: Cyanocitta cristata
+  ebird: blujay
+american-crow:
+  name: { en: American Crow, zh: 短嘴鸦, zh_hant: 短嘴鴉 }
+  scientific: Corvus brachyrhynchos
+  ebird: amecro
+fish-crow:
+  name: { en: Fish Crow, zh: 鱼鸦, zh_hant: 魚鴉 }
+  scientific: Corvus ossifragus
+  ebird: fiscro
+carolina-chickadee:
+  name: { en: Carolina Chickadee, zh: 卡罗山雀, zh_hant: 卡羅山雀 }
+  scientific: Poecile carolinensis
+  ebird: carchi
+tufted-titmouse:
+  name: { en: Tufted Titmouse, zh: 美洲凤头山雀, zh_hant: 美洲鳳頭山雀 }
+  scientific: Baeolophus bicolor
+  ebird: tuftit
+northern-rough-winged-swallow:
+  name: { en: Northern Rough-winged Swallow, zh: 中北美毛翅燕, zh_hant: 中北美毛翅燕 }
+  scientific: Stelgidopteryx serripennis
+  ebird: nrwswa
+barn-swallow:
+  name: { en: Barn Swallow, zh: 家燕, zh_hant: 家燕 }
+  scientific: Hirundo rustica
+  ebird: barswa
+ruby-crowned-kinglet:
+  name: { en: Ruby-crowned Kinglet, zh: 红冠戴菊, zh_hant: 紅冠戴菊 }
+  scientific: Corthylio calendula
+  ebird: ruckin               # by hand: the sticker library has no eBird code
+  iucn: LC                    # by hand: the sticker library has none (IUCN Red List: Least Concern)
+white-breasted-nuthatch:
+  name: { en: White-breasted Nuthatch, zh: 白胸䴓, zh_hant: 白胸鳾 }
+  scientific: Sitta carolinensis
+  ebird: whbnut
+brown-headed-nuthatch:
+  name: { en: Brown-headed Nuthatch, zh: 褐头䴓, zh_hant: 褐頭鳾 }
+  scientific: Sitta pusilla
+  ebird: bnhnut
+blue-gray-gnatcatcher:
+  name: { en: Blue-gray Gnatcatcher, zh: 灰蓝蚋莺, zh_hant: 灰藍蚋鶯 }
+  scientific: Polioptila caerulea
+  ebird: buggna
+brown-thrasher:
+  name: { en: Brown Thrasher, zh: 褐弯嘴嘲鸫, zh_hant: 褐彎嘴嘲鶇 }
+  scientific: Toxostoma rufum
+  ebird: brnthr
+american-robin:
+  name: { en: American Robin, zh: 旅鸫, zh_hant: 旅鶇 }
+  scientific: Turdus migratorius
+  ebird: amerob
+cedar-waxwing:
+  name: { en: Cedar Waxwing, zh: 雪松太平鸟, zh_hant: 雪松太平鳥 }
+  scientific: Bombycilla cedrorum
+  ebird: cedwax
+song-sparrow:
+  name: { en: Song Sparrow, zh: 歌带鹀, zh_hant: 歌帶鵐 }
+  scientific: Melospiza melodia
+  ebird: sonspa
+eastern-towhee:
+  name: { en: Eastern Towhee, zh: 棕胁唧鹀, zh_hant: 棕脅唧鵐 }
+  scientific: Pipilo erythrophthalmus
+  ebird: eastow
+baltimore-oriole:
+  name: { en: Baltimore Oriole, zh: 橙腹拟鹂, zh_hant: 橙腹擬鸝 }
+  scientific: Icterus galbula
+  ebird: balori
+black-and-white-warbler:
+  name: { en: Black-and-white Warbler, zh: 黑白森莺, zh_hant: 黑白森鶯 }
+  scientific: Mniotilta varia
+  ebird: bawwar
+tennessee-warbler:
+  name: { en: Tennessee Warbler, zh: 灰冠虫森莺, zh_hant: 灰冠蟲森鶯 }
+  scientific: Leiothlypis peregrina
+  ebird: tenwar
+common-yellowthroat:
+  name: { en: Common Yellowthroat, zh: 黄喉地莺, zh_hant: 黃喉地鶯 }
+  scientific: Geothlypis trichas
+  ebird: comyel
+hooded-warbler:
+  name: { en: Hooded Warbler, zh: 黑枕威森莺, zh_hant: 黑枕威森鶯 }
+  scientific: Setophaga citrina
+  ebird: hoowar
+american-redstart:
+  name: { en: American Redstart, zh: 橙尾鸲莺, zh_hant: 橙尾鴝鶯 }
+  scientific: Setophaga ruticilla
+  ebird: amered
+cape-may-warbler:
+  name: { en: Cape May Warbler, zh: 栗颊林莺, zh_hant: 栗頰林鶯 }
+  scientific: Setophaga tigrina
+  ebird: camwar
+northern-parula:
+  name: { en: Northern Parula, zh: 北森莺, zh_hant: 北森鶯 }
+  scientific: Setophaga americana
+  ebird: norpar
+magnolia-warbler:
+  name: { en: Magnolia Warbler, zh: 纹胸林莺, zh_hant: 紋胸林鶯 }
+  scientific: Setophaga magnolia
+  ebird: magwar
+chestnut-sided-warbler:
+  name: { en: Chestnut-sided Warbler, zh: 栗胁林莺, zh_hant: 栗脅林鶯 }
+  scientific: Setophaga pensylvanica
+  ebird: chswar
+palm-warbler:
+  name: { en: Palm Warbler, zh: 棕榈林莺, zh_hant: 棕櫚林鶯 }
+  scientific: Setophaga palmarum
+  ebird: palwar
+pine-warbler:
+  name: { en: Pine Warbler, zh: 松莺, zh_hant: 松鶯 }
+  scientific: Setophaga pinus
+  ebird: pinwar
+yellow-rumped-warbler:
+  name: { en: Yellow-rumped Warbler, zh: 黄腰白喉林莺, zh_hant: 黃腰白喉林鶯 }
+  scientific: Setophaga coronata
+  ebird: yerwar
+canada-warbler:
+  name: { en: Canada Warbler, zh: 加拿大威森莺, zh_hant: 加拿大威森鶯 }
+  scientific: Cardellina canadensis
+  ebird: canwar
+summer-tanager:
+  name: { en: Summer Tanager, zh: 玫红丽唐纳雀, zh_hant: 玫紅麗唐納雀 }
+  scientific: Piranga rubra
+  ebird: sumtan
+scarlet-tanager:
+  name: { en: Scarlet Tanager, zh: 猩红丽唐纳雀, zh_hant: 猩紅麗唐納雀 }
+  scientific: Piranga olivacea
+  ebird: scatan
+indigo-bunting:
+  name: { en: Indigo Bunting, zh: 靛蓝彩鹀, zh_hant: 靛藍彩鵐 }
+  scientific: Passerina cyanea
+  ebird: indbun
+
+# eBird sensitive species (user, 2026-11-03): `sensitive: true` puts a "Sensitive" mark in its
+# card's corner and on its checklist trip; its sightings are recorded only at state level
+# (place `alaska`).
+northern-hawk-owl:
+  range_approx: true       # unlike Birds of the World: nonbreeding range only, no Siberia (see range_note) (2026-11-04)
+  name: { en: Northern Hawk Owl, zh: 北方鹰鸮, zh_hant: 北方鷹鴞 }   # user's name (not IOC's 猛鸮)
+  scientific: Surnia ulula
+  ebird: nohowl
+  sensitive: true
+  # range_note: shown over the map while this bird's range is (user, 2026-11-03). eBird models
+  # only its nonbreeding range, drawn as year-round (SEASON_AS in make_ranges.py), and has
+  # nothing for its Asian range.
+  range_note: { en: "eBird's data covers only part of its range: Siberia isn't shown.", zh: eBird 数据只覆盖其部分分布：未显示西伯利亚。, zh_hant: eBird 資料只涵蓋其部分分布：未顯示西伯利亞。 }
+
+# ---- Cooper Landing AK, 2025-09-25 (user, 2026-11-04) ----
+stellers-jay:
+  name: { en: Steller's Jay, zh: 暗冠蓝鸦, zh_hant: 暗冠藍鴉 }
+  scientific: Cyanocitta stelleri
+  ebird: stejay
+
+# ---- Kenai Fjords National Park AK, 2025-09-25 (user, 2026-11-04) ----
+bald-eagle:
+  name: { en: Bald Eagle, zh: 白头海雕, zh_hant: 白頭海鵰 }   # two adults on the cliffs
+  scientific: Haliaeetus leucocephalus
+  ebird: baleag
+leachs-storm-petrel:
+  name: { en: Leach's Storm Petrel, zh: 白腰叉尾海燕, zh_hant: 白腰叉尾海燕 }   # seen at sea, no photo (user, 2026-11-04)
+  scientific: Hydrobates leucorhous
+  ebird: lcspet
+  # A seabird: the map draws ranges on land only, so only its nesting coasts show (2026-11-04).
+  range_note: { en: "A seabird that lives at sea: this map shows land only, so just its nesting coasts appear.", zh: 远洋海鸟：此地图只显示陆地，因此仅能看到它的繁殖海岸。, zh_hant: 遠洋海鳥：此地圖只顯示陸地，因此僅能看到牠的繁殖海岸。 }
+
+# ---- Constitution Lakes, Atlanta GA, 2026-06-14 (user, 2026-11-04) ----
+yellow-crowned-night-heron:
+  range_approx: true       # unlike Birds of the World: breeding range in scattered inland patches, South American coasts thin (2026-11-04)
+  name: { en: Yellow-crowned Night Heron, zh: 黄冠夜鹭, zh_hant: 黃冠夜鷺 }
+  scientific: Nyctanassa violacea
+  ebird: ycnher
+belted-kingfisher:
+  name: { en: Belted Kingfisher, zh: 白腹鱼狗, zh_hant: 白腹魚狗 }
+  scientific: Megaceryle alcyon
+  ebird: belkin1
