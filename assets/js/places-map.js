@@ -11,7 +11,8 @@
  *     in the address (#europe), so a continent can be linked to.
  *   - Hover a marker or a list row (or tap it on a phone): every ring pauses, that place's marker
  *     shows its label, and the other markers and rows dim. On Avians, a species' range map shows
- *     only while the cursor is on its card (on phones, while its card is at the reading line).
+ *     while the cursor is on its card; otherwise the card resting in the list's middle shows
+ *     its range (phones: the card seen whole; wider screens: the middle card, user 2026-11-04).
  *   - Avians, click a dot (user, 2026-11-03): the cards show only the birds seen there
  *     (bird-cards.js does the filtering; this fires `placechoose` and marks the dot shown when
  *     `placechange` comes back). Traces keeps the tap-to-pick below.
@@ -148,11 +149,14 @@
     showBeyond(card);
   }
 
+  // Letting go of a hovered card or marker goes back to the resting card (Avians, see
+  // restingCard() below), not to nothing.
+  var hovering = null;
   function hoverable(el) {
-    el.addEventListener('mouseenter', function () { pick(el); });
-    el.addEventListener('mouseleave', function () { pick(null); });
+    el.addEventListener('mouseenter', function () { hovering = el; pick(el); });
+    el.addEventListener('mouseleave', function () { hovering = null; pick(null); requestResting(); });
     el.addEventListener('focus', function () { pick(el); });
-    el.addEventListener('blur', function () { pick(null); });
+    el.addEventListener('blur', function () { pick(null); requestResting(); });
   }
   markers.forEach(hoverable);
   rows.forEach(hoverable);
@@ -195,8 +199,8 @@
       m.setAttribute('aria-pressed', String(on));
     });
   });
-  // Avians on phones: the card seen whole keeps its range (phoneCards() picks it again).
-  document.addEventListener('click', function () { pick(null); requestPhone(); });
+  // Avians: the resting card keeps its range (restingCard() picks it again).
+  document.addEventListener('click', function () { pick(null); requestResting(); });
 
   // ---- Continent bar ----
   var GLIDE = 700;   // ms: the zoom, the same as the layout change in _places.scss
@@ -360,14 +364,20 @@
     more();
   }
 
-  // ---- Avians on phones: at most 1.5 cards in view, the whole one shows its range ----
-  // (user, 2026-11-01: "we can see at most 1.5 bird cards, whenever 1 bird card can be seen
-  // completely, the map should [show] that bird's distribution".) Cards differ in height (a
+  // ---- Avians: the resting card shows its range, with no cursor on a card ----
+  // Phones (user, 2026-11-01: "we can see at most 1.5 bird cards, whenever 1 bird card can be
+  // seen completely, the map should [show] that bird's distribution"): cards differ in height (a
   // morphology line that wraps, or none), so every card is made as tall as the tallest in view
   // (--phone-card-h) and the list 1.5 of them (--phone-list-h, _places.scss): exactly one and a
-  // half show. After every scroll, search, sort or continent change, the first card wholly
-  // inside the list is picked. While none is whole (mid-scroll), the last one stays, so the
-  // range doesn't flicker.
+  // half show, and the first card wholly inside the list is picked. While none is whole
+  // (mid-scroll), the last one stays, so the range doesn't flicker.
+  // Wider screens (user, 2026-11-04: "when the bird card is in the center, it will show that
+  // distribution. do that also for the website mode"): the card under a line across the list
+  // (the world view's sideways row, or the column beside a zoomed map) is picked. The line is
+  // in the middle, and slides to the near edge as the list nears its start or end, so the first
+  // and last cards can be picked too (a card at the very start can never reach the middle).
+  // A hovered card or marker wins; letting go comes back here. Run after every scroll, search,
+  // sort, dot pick or continent change.
   var phone = window.matchMedia('(max-width: 760px)');
   var plain = section.classList.contains('places--plain');
   function cardsInView() {
@@ -387,35 +397,63 @@
     section.style.setProperty('--phone-card-h', tallest + 'px');
     section.style.setProperty('--phone-list-h', Math.ceil(tallest * 1.5 + gap) + 'px');
   }
+  // Wider screens: the card nearest the line across the list.
+  function middleCard(cards) {
+    var box = list.getBoundingClientRect();
+    var row = list.scrollWidth > list.clientWidth + 4;          // the world view's sideways row
+    var pos = row ? list.scrollLeft : list.scrollTop;
+    var max = row ? list.scrollWidth - list.clientWidth : list.scrollHeight - list.clientHeight;
+    // How far along the list the line sits: 0 at the start, 1 at the end, the middle once the
+    // list is half a list's length away from both ends.
+    var half = (row ? list.clientWidth : list.clientHeight) / 2;
+    var from = max > 1 ? Math.min(Math.max(pos, 0) / half, 1) : 0;
+    var to = max > 1 ? Math.min(Math.max(max - pos, 0) / half, 1) : 1;
+    var edge = from / (from + to);
+    var start = row ? box.left : box.top, size = row ? box.width : box.height;
+    var line = start + 8 + edge * (size - 16);
+    var best = null, bestDist = Infinity;
+    cards.forEach(function (r) {
+      var b = r.getBoundingClientRect();
+      var a = row ? b.left : b.top, z = row ? b.right : b.bottom;
+      var d = line < a ? a - line : line > z ? line - z : 0;
+      if (d < bestDist) { bestDist = d; best = r; }
+    });
+    return best;
+  }
   var resized = true;
-  function phoneCards() {
-    phoneQueued = false;
+  function restingCard() {
+    restingQueued = false;
     if (!plain || !list) return;
     if (resized) { resized = false; sizePhoneCards(); }
-    if (!phone.matches) return;
+    if (hovering) return;                                          // the cursor's card wins
     var cards = cardsInView();
-    var box = list.getBoundingClientRect();
-    var whole = cards.find(function (r) {
-      var b = r.getBoundingClientRect();
-      return b.top >= box.top - 1 && b.bottom <= box.bottom + 1;
-    });
-    if (whole && whole !== picked) pick(whole);
+    var choice;
+    if (phone.matches) {
+      var box = list.getBoundingClientRect();
+      choice = cards.find(function (r) {
+        var b = r.getBoundingClientRect();
+        return b.top >= box.top - 1 && b.bottom <= box.bottom + 1;
+      });
+    } else {
+      choice = middleCard(cards);
+    }
+    if (choice && choice !== picked) pick(choice);
   }
-  var phoneQueued = false;
-  function requestPhone() {
-    if (phoneQueued || !plain) return;
-    phoneQueued = true;
-    window.requestAnimationFrame(phoneCards);
+  var restingQueued = false;
+  function requestResting() {
+    if (restingQueued || !plain) return;
+    restingQueued = true;
+    window.requestAnimationFrame(restingCard);
   }
-  function resizePhone() { resized = true; requestPhone(); }
+  function resizeResting() { resized = true; requestResting(); }
   if (plain && list) {
-    list.addEventListener('scroll', requestPhone, { passive: true });
-    document.addEventListener('cardschange', resizePhone);             // search / sort (bird-cards.js)
-    window.addEventListener('resize', resizePhone);
-    window.addEventListener('langchange', resizePhone);
-    document.addEventListener('continentchange', function () { list.scrollTop = 0; resizePhone(); });
-    if (document.fonts) document.fonts.ready.then(resizePhone);        // card heights settle
-    requestPhone();
+    list.addEventListener('scroll', requestResting, { passive: true });
+    document.addEventListener('cardschange', resizeResting);           // search / sort / dot (bird-cards.js)
+    window.addEventListener('resize', resizeResting);
+    window.addEventListener('langchange', resizeResting);
+    document.addEventListener('continentchange', function () { list.scrollTop = 0; list.scrollLeft = 0; resizeResting(); });
+    if (document.fonts) document.fonts.ready.then(resizeResting);      // card heights settle
+    requestResting();
   }
 
   // ---- Phones, other lists (Traces' rows, when shown): the row at the reading line is picked

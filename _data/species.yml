@@ -4,7 +4,7 @@
 #   scientific  scientific name (IOC World Bird List, as in the sticker library); shown in
 #          italics under the name on the bird card
 #   iucn   optional: the IUCN category by hand, only where the sticker library has none
-#          (scripts/fetch_stickers.py otherwise takes it from the library)
+#          (scripts/fetch_bird_facts.py otherwise takes it from the library)
 #   ebird  eBird species code: names the range map in _data/ranges.yml (scripts/make_ranges.py
 #          fetches it from eBird Status & Trends)
 #   range_approx  optional, true: its eBird range looks unlike the expert maps (Birds of the World):
@@ -12,6 +12,12 @@
 #          accurate." while the range is drawn (user, 2026-11-04). Set it for every new species
 #          whose range doesn't match (check with scripts/range_sheet.py).
 #   range_note  optional { en, zh, zh_hant }: a further, species-specific line after that one
+#   allaboutbirds  optional: the bird's page on the Cornell Lab's All About Birds,
+#          https://www.allaboutbirds.org/guide/<this>/overview, linked from the card's name (user,
+#          2026-11-04). Left out, it is the English name with apostrophes dropped and spaces as
+#          underscores (Steller's Jay → Stellers_Jay); set it where the site's name differs
+#          (Grey Catbird → Gray_Catbird, a split species' older page), or `none` for a bird with
+#          no page (All About Birds covers North America). Check the link for every new species.
 # Chinese names: Claude's choice from common usage; check them. From the Savannah NWR birds on
 # (2026-10-31), Simplified is the IOC Chinese name and Traditional its character conversion.
 
@@ -59,6 +65,7 @@ grey-catbird:
   name: { en: Grey Catbird, zh: 灰嘲鸫, zh_hant: 灰嘲鶇 }
   scientific: Dumetella carolinensis
   ebird: grycat
+  allaboutbirds: Gray_Catbird            # AOS spelling
 
 common-gallinule:
   name: { en: Common Gallinule, zh: 美洲黑水鸡, zh_hant: 美洲黑水雞 }
@@ -169,6 +176,7 @@ hudsonian-whimbrel:
   scientific: Numenius hudsonicus
   iucn: LC                 # the Red List still lumps it in Whimbrel (Numenius phaeopus), LC
   ebird: whimbr            # eBird Status & Trends 2023 has it only under this code
+  allaboutbirds: Whimbrel                # the page from before the 2025 split
 
 ruddy-turnstone:
   range_approx: true       # unlike Birds of the World: Arctic breeding range mostly missing; inland migration blobs (2026-11-04)
@@ -187,6 +195,7 @@ western-cattle-egret:
   name: { en: Western Cattle-Egret, zh: 西牛背鹭, zh_hant: 西牛背鷺 }
   scientific: Ardea ibis
   ebird: categr1           # not in the sticker library's ids; matched there by scientific name
+  allaboutbirds: Cattle_Egret            # the page from before the 2023 split
 
 brown-pelican:
   name: { en: Brown Pelican, zh: 褐鹈鹕, zh_hant: 褐鵜鶘 }
@@ -428,6 +437,7 @@ leachs-storm-petrel:
   name: { en: Leach's Storm Petrel, zh: 白腰叉尾海燕, zh_hant: 白腰叉尾海燕 }   # seen at sea, no photo (user, 2026-11-04)
   scientific: Hydrobates leucorhous
   ebird: lcspet
+  allaboutbirds: Leachs_Storm-Petrel
   # A seabird: the map draws ranges on land only, so only its nesting coasts show (2026-11-04).
   range_note: { en: "A seabird that lives at sea: this map shows land only, so just its nesting coasts appear.", zh: 远洋海鸟：此地图只显示陆地，因此仅能看到它的繁殖海岸。, zh_hant: 遠洋海鳥：此地圖只顯示陸地，因此僅能看到牠的繁殖海岸。 }
 

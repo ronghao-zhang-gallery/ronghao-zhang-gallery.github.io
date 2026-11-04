@@ -1,0 +1,9 @@
+{%- comment -%}
+  One number in the Traces / Avians count line ("10 places · 86 species"), in the
+  accent colour (user, 2026-11-04). It counts up from 0 when the page loads (count-up.js).
+  The final number is in the HTML, so without the script it simply shows. --d is its number of
+  digits, so the box keeps its final width while counting and the line doesn't shift.
+  Params: n (the number).
+{%- endcomment -%}
+{%- assign digits = include.n | append: "" | size -%}
+<span class="places__num" data-count-to="{{ include.n }}" style="--d: {{ digits }}">{{ include.n }}</span>

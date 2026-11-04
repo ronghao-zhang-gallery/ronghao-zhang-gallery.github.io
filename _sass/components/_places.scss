@@ -30,11 +30,28 @@
   line-height: 1.05;
 }
 
+// The whole line in the page title's font, EB Garamond (user, 2026-11-04); Garamond runs small,
+// so the words are a little larger than the old 0.9rem sans line.
 .places__count {
   grid-area: count;
   margin: 0.6rem 0 0;
-  font-size: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
   color: var(--ink-soft);
+}
+
+// The numbers in it: the accent colour, weight 500 like the title, and larger than the words
+// (user, 2026-11-04). They count up on load (count-up.js); equal-width digits in
+// a box as wide as the final number (--d digits) keep the words beside them still while counting.
+.places__num {
+  display: inline-block;
+  min-width: calc(var(--d, 1) * 1ch);
+  color: var(--accent);
+  font-size: 1.6em;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 
 // Narrow screens: the bar goes under the count, from the left.
@@ -669,7 +686,7 @@
 // ---- Avians: one card per species (user, 2026-10-25) ----
 // Compact framed cards (user, 2026-10-31: "too large… the thumbnail really small and to the right
 // of the text, each bird card should have an edge"): the species' name, "Last seen" and its
-// latest date · place on the left, a small 4:3 thumbnail on the right, a thin rounded border.
+// latest date · place, a thin rounded border (no image since 2026-11-04).
 // The cards are spaced apart instead of divided by rules.
 .places--plain .visit-list {
   display: grid;
@@ -677,17 +694,15 @@
   border-top: 0;
 }
 
-// The photo fills the card's right end, top to bottom (user, 2026-10-31: "the photo should take
-// entire height of the bird card. the left edge should be a straight line"): no padding on that
-// side, and the card's rounded corners clip the photo's right corners.
+// A framed card of text only (user, 2026-11-04: "do not show any image"; a photo, then a
+// sticker, filled its right end before).
 .visit--bird {
   // Positioned, so its screen-reader-only labels (absolute) stay inside the card: without it they
   // escaped the world row's sideways scroll and made the whole page ~14,000 px wide (2026-10-31).
   position: relative;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: 0.9rem;
-  padding: 0 0 0 0.9rem;
+  padding: 0 0.9rem;
   border: 1px solid var(--line);
   border-radius: 0.6rem;
   overflow: hidden;
@@ -710,6 +725,25 @@
   margin-bottom: 0.05rem;
   font-size: 1.1rem;
   line-height: 1.25;
+}
+
+// The name links to the bird's All About Birds page (user, 2026-11-04): it reads as the name,
+// and under the cursor or in focus it takes the accent with a thin underline.
+.visit__guide {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 }
 
 // The name, then (birds with photos) a small camera that goes to the photo in the gallery
@@ -796,69 +830,6 @@
   text-transform: uppercase;
   color: var(--ink-soft);
   opacity: 0.75;
-}
-
-// The photo's slot: the card's full height (stretched), a set width (about 4:3 at the card's
-// height). The photo is laid over it (absolute), so it fills the slot without adding height.
-.visit__photos {
-  position: relative;
-  align-self: stretch;
-  width: 6.25rem;
-}
-
-// The species' cover photo (shown only until its sticker is fetched). Square corners: the left
-// edge is a straight line.
-.visit__photo {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: var(--surface);      // while loading
-}
-
-// The photo links to its tile in the gallery below (user, 2026-10-30); it dims a little on hover.
-// The focus ring sits inside, since the card clips anything outside it.
-a.visit__photos {
-  color: inherit;
-  text-decoration: none;
-
-  &:focus-visible { outline-offset: -3px; }
-
-  .visit__photo { transition: opacity 0.2s ease; }
-  &:hover .visit__photo { opacity: 0.82; }
-}
-
-// The species' sticker (user, 2026-10-31): the whole bird, transparent around its white
-// outline, so it sits on the card itself (no tint, no crop) with a little room at the edges.
-.visit__photo--sticker {
-  padding: 0.3rem 0.45rem 0.3rem 0;
-  object-fit: contain;
-  background: none;
-}
-
-a.visit__photos:hover .visit__photo--sticker { opacity: 1; transform: scale(1.06); }
-a.visit__photos .visit__photo--sticker { transition: transform 0.25s ease; }
-
-// Bigger stickers beside a zoomed map and in the world row (user, 2026-10-31): off phones,
-// the slot is 40% of the card's own width (the card is a size container), 6.25–10rem.
-@media (min-width: 761px) {
-  .places--plain .visit--bird { container-type: inline-size; }
-  .places--plain .visit--bird .visit__photos { width: clamp(6.25rem, 40cqi, 10rem); }
-}
-
-// A bird seen but not photographed (user, 2026-10-30): the photo's slot, faintly tinted, with a
-// quiet "No photo yet", so the cards stay even.
-.visit__photo--none {
-  display: grid;
-  place-items: center;
-  padding: 0.3rem;
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
-  font-size: 0.6rem;
-  line-height: 1.2;
-  color: var(--ink-soft);
-  text-align: center;
 }
 
 // While one place is picked, the other rows dim; the picked rows get the accent date.
@@ -951,9 +922,8 @@ a.visit__photos .visit__photo--sticker { transition: transform 0.25s ease; }
       &.has-more-left.has-more-right { mask-image: linear-gradient(to right, transparent, #000 4rem, #000 calc(100% - 4rem), transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 4rem, #000 calc(100% - 4rem), transparent); }
     }
 
-    // The same card as everywhere (text left, sticker right), at a set width (user,
-    // 2026-10-31: "the bird card can be wider and the sticker can be bigger"; 25.5rem keeps the
-    // morphology line on one line beside a 10rem sticker for most birds). A short, wide
+    // The same card as everywhere, at a set width (user, 2026-10-31: 25.5rem, sized for the
+    // text beside a 10rem sticker; the card has had no image since 2026-11-04 and kept the width). A short, wide
     // two-column version was tried the same day and rejected ("too narrow, change it back").
     .visit--bird {
       flex: 0 0 25.5rem;

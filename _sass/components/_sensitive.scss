@@ -26,8 +26,7 @@
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 }
 
-// On a bird card: pinned to its bottom-right corner, over the sticker's foot, on the page colour
-// so it reads over the drawing (the card is positioned, _places.scss).
+// On a bird card: pinned to its bottom-right corner, on the page colour (the card is positioned, _places.scss).
 .sensitive--corner {
   position: absolute;
   right: 0.6rem;

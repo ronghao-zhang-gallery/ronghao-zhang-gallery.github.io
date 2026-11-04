@@ -795,7 +795,37 @@ use a marked placeholder instead.
     its right corners to the card's round ones. The text's padding sets the card's height; the
     photo is laid over its slot (absolute) so it never adds height. "No photo yet" fills the
     same slot on a faint tint (no dashed frame). The link's focus ring sits inside the card.
-  - **Stickers in place of the card thumbnails** (user, 2026-10-31: "replace the thumbnail
+  - **No image on the bird cards; stickers removed** (user, 2026-11-04: "for the same reason,
+    let's remove all the bird stickers from the website", then "put nothing on the card, do not
+    show any image"). **This replaces the sticker, cover-photo and "No photo yet" slot in the
+    notes below**: a card is text only (name + camera, scientific name, morphology, IUCN, Last
+    seen, date · place), one column, padding on both sides; birds with photos reach them through
+    the camera by the name. World-row cards kept 25.5rem. Reason: the stickers are AI drawings
+    made from other people's photos, mostly under non-commercial or all-rights-reserved terms
+    (see the reference-photo check below). Deleted: `assets/images/stickers/` (86 stickers +
+    LICENSE.md), the sticker credit (PolyForm Shield notice, Blue Jay / Bald Eagle photo credits),
+    the `sticker_*` fields, the sticker and photo-slot styles. `scripts/fetch_stickers.py` became
+    **`scripts/fetch_bird_facts.py`**: it only writes `_data/bird_facts.yml` (the library's data,
+    MIT; measurements AVONET). Rerun it after adding a species; "sticker fetched" in older notes
+    means the facts now. Don't bring stickers or card images back without asking. Checked at
+    1440 (world, North America) and 390 px (繁 dark): no images, no sideways page scroll, the
+    Sensitive pill clear of the text.
+  - **The bird's name links to All About Birds** (user, 2026-11-04: "add a link to
+    https://www.allaboutbirds.org/ for each bird… .../guide/Stellers_Jay/overview"), in a new tab;
+    under the cursor it takes the accent with a thin underline (`.visit__guide`). The page name is
+    the English name with apostrophes dropped and spaces as underscores; `allaboutbirds:` in
+    species.yml where it differs (Gray_Catbird, Whimbrel and Cattle_Egret: the pages from before
+    the splits, Leachs_Storm-Petrel), `none` for a bird with no page (it covers North America).
+    allaboutbirds.org blocks scripts (Cloudflare 403), so the slugs were checked by web search,
+    not fetched; check a new bird's link the same way.
+  - **The resting card shows its range on wide screens too** (user, 2026-11-04: "when the bird
+    card is in the center, it will show that distribution. do that also for the website mode").
+    With no cursor on a card, places-map.js `restingCard()` picks the card under a line across the
+    list: the middle of the world row or of the zoomed column, sliding to the start / end as the
+    list nears them, so the first card is picked on load and the last at the end. Hovering a card
+    or a dot wins; leaving goes back to the resting card. Phones keep "the card seen whole". The
+    other cards dim as on phones. Checked at 1440 (world, North America) and 390 px.
+  - **Stickers in place of the card thumbnails** (removed 2026-11-04, see above; user, 2026-10-31: "replace the thumbnail
     images in the bird card to the corresponding sticker"): Huashu's bird-sticker library, the
     user's fork https://github.com/ronghao-zhang-gallery/huashu-bird-sticker (upstream
     alchaincyf/huashu-bird-sticker; 11,064 species, AI illustrations, transparent with a white
@@ -811,6 +841,17 @@ use a marked placeholder instead.
     page a personal photo record. It requires the Required Notice and the terms: kept in
     `assets/images/stickers/LICENSE.md` and in the Avians map credit ("bird stickers: …").
     The 34 photo-cutout stickers have other licences; the script flags them (none used yet).
+    **Reference-photo check, 2026-11-04** (user asked whether the sticker author had permission,
+    after public criticism of AI stickers): no sign the author asked photographers; the library
+    relies on each reference photo's licence plus an opt-out ("email us, removed within 7
+    days") and says itself that whether a drawing is bound by its photo's licence is unsettled.
+    For the site's 86 species (upstream data/species.json `sticker.reference`): 19 open
+    (CC0 / CC BY / CC BY-SA), 48 non-commercial or no-derivatives, 2 Macaulay Library terms
+    (Anhinga, White-faced Ibis), 1 all rights reserved (Northern Hawk Owl), 16 not recorded;
+    23 fall below the library's own quality bar (`meetsQualityBar: false`). Upstream v2.0
+    (2026-11-03) made every sticker an AI drawing; the site's Blue Jay and Bald Eagle are still
+    the older photo cutouts (credited). The page's credit does not yet say the stickers are AI
+    illustrations; suggested to the user, not done.
   - **Scientific name under the common name** (user, 2026-10-31), in italics on every card in
     all three languages: `scientific:` in `_data/species.yml` (IOC names, the same as the
     sticker library; `fetch_stickers.py` prints it as Genus_species for a new bird). EB Garamond
@@ -1301,6 +1342,19 @@ use a marked placeholder instead.
     HydroRIVERS"; land a touch whiter in light mode with a faint coastline (`.places--plain`),
     like Ariel Mu's map;
   - count line "1 place · 1 sighting" (English singular/plural for both pages; 次记录 / 次記錄).
+    **Numbers in the accent colour, counting up on load** (user, 2026-11-04: "the numbers should
+    be the highlighted color, and when refresh the page, it should fastly increase from 0"), then
+    the same day: **the whole line in the page title's font** (EB Garamond, words 1.1rem; was
+    Hanken 0.9rem), numbers weight 500 at 1.6× the words; **Avians no longer counts photos**
+    ("do not report how many photos I take": "10 places · 86 species" / 10 个地方 · 86 种鸟).
+    Each number is `_includes/places/count-num.html` (equal-width digits in a box as wide as the
+    final number, so the words don't move); `assets/js/count-up.js`, loaded right after the line
+    (not deferred, so the final numbers never flash first), counts them from 0 over **4 s with a
+    quartic ease-out** (0.9 s, then 2.2 s cubic, were "too fast"; the user wanted it slower near
+    the end: the last steps 82 → 86 take ~0.8 s and 86 lands at ~3.1 s; a steeper curve reaches
+    the last whole number long before the end and seems to stop), once the fonts are ready.
+    Reduced motion: no counting. Both pages (the line is shared). Checked at 1440: EN light,
+    简 dark, Traces.
   The land in every map file is the real path (`id="…-land-shape"`) and the clip refers to it
   with <use>, so vector-effect works on the coastline.
 

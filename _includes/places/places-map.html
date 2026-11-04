@@ -45,7 +45,7 @@
 {%- else %}{% assign visits = data.visits | sort: "date" | reverse %}{% endif %}
 {%- comment -%}
   Avians: a sighting row without `photo` is a bird seen but not photographed (user, 2026-10-30:
-  the cards list every bird seen). It gets a card and its dots; the gallery and the photo count
+  the cards list every bird seen). It gets a card and its dots; the gallery and the camera links
   use only the rows with a photo.
 {%- endcomment %}
 {%- if avians %}{% assign photo_visits = visits | where_exp: "v", "v.photo" %}{% endif %}
@@ -56,24 +56,29 @@
     {%- else %}
     <h1 class="places__title">{% include t.html en="Traces" zh="足迹" zh_hant="足跡" %}</h1>
     {%- endif %}
-    {%- comment -%} Count line: "1 place · 3 sightings" (singular when one). {%- endcomment %}
+    {%- comment -%} Count line: "10 places · 86 species" on Avians, "1 place · 1 visit" on Traces (singular when one). {%- endcomment %}
     {%- comment -%} Places on the map: an `area` place (a sensitive bird's state, Avians) is not one. {%- endcomment %}
     {%- assign map_places = places | where_exp: "q", "q.area != true" %}
     {%- if map_places.size == 1 %}{% assign place_word = "place" %}{% else %}{% assign place_word = "places" %}{% endif %}
+    {%- comment -%} The numbers are accent-coloured and count up on load (count-num.html, count-up.js). {%- endcomment %}
+    {%- capture n_places %}{% include places/count-num.html n=map_places.size %}{% endcapture %}
     {%- if avians %}
-    {%- comment -%} Avians counts places, every species seen, and photos (rows with a photo). {%- endcomment %}
+    {%- comment -%} Avians counts places and every species seen; no photo count (user, 2026-11-04). {%- endcomment %}
     {%- assign species_count = visits | map: "species" | uniq | size %}
-    {%- if photo_visits.size == 1 %}{% assign visit_word = "photo" %}{% else %}{% assign visit_word = "photos" %}{% endif %}
-    {%- capture en %}{{ map_places.size }} {{ place_word }} · {{ species_count }} species · {{ photo_visits.size }} {{ visit_word }}{% endcapture %}
-    {%- capture zh %}{{ map_places.size }} 个地方 · {{ species_count }} 种鸟 · {{ photo_visits.size }} 张照片{% endcapture %}
-    {%- capture zh_hant %}{{ map_places.size }} 個地方 · {{ species_count }} 種鳥 · {{ photo_visits.size }} 張照片{% endcapture %}
+    {%- capture n_species %}{% include places/count-num.html n=species_count %}{% endcapture %}
+    {%- capture en %}{{ n_places }} {{ place_word }} · {{ n_species }} species{% endcapture %}
+    {%- capture zh %}{{ n_places }} 个地方 · {{ n_species }} 种鸟{% endcapture %}
+    {%- capture zh_hant %}{{ n_places }} 個地方 · {{ n_species }} 種鳥{% endcapture %}
     {%- else %}
     {%- if visits.size == 1 %}{% assign visit_word = "visit" %}{% else %}{% assign visit_word = "visits" %}{% endif %}
-    {%- capture en %}{{ map_places.size }} {{ place_word }} · {{ visits.size }} {{ visit_word }}{% endcapture %}
-    {%- capture zh %}{{ map_places.size }} 个地方 · {{ visits.size }} 次{% endcapture %}
-    {%- capture zh_hant %}{{ map_places.size }} 個地方 · {{ visits.size }} 次{% endcapture %}
+    {%- capture n_visits %}{% include places/count-num.html n=visits.size %}{% endcapture %}
+    {%- capture en %}{{ n_places }} {{ place_word }} · {{ n_visits }} {{ visit_word }}{% endcapture %}
+    {%- capture zh %}{{ n_places }} 个地方 · {{ n_visits }} 次{% endcapture %}
+    {%- capture zh_hant %}{{ n_places }} 個地方 · {{ n_visits }} 次{% endcapture %}
     {%- endif %}
     <p class="places__count">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
+    {%- comment -%} Not deferred: it sets the numbers to 0 before the first paint, so the final numbers never flash first. {%- endcomment %}
+    <script src="{{ '/assets/js/count-up.js' | relative_url }}"></script>
 
     {%- comment -%}
       ---- Continent bar: World, then the continents of _data/continents.yml, on the title's
@@ -241,24 +246,14 @@
       {%- capture hydro %}<a href="https://www.hydrosheds.org">HydroRIVERS</a> (Lehner &amp; Grill 2013){% endcapture %}
       {%- capture ebird %}{% if drawn != "" and drawn %}; ranges: <a href="https://science.ebird.org/en/status-and-trends">eBird Status &amp; Trends</a>, Cornell Lab of Ornithology{% endif %}{% endcapture %}
       {%- capture ebird_zh %}{% if drawn != "" and drawn %}；分布：<a href="https://science.ebird.org/en/status-and-trends">eBird Status &amp; Trends</a>，Cornell Lab of Ornithology{% endif %}{% endcapture %}
-      {%- comment -%} The stickers' licence (PolyForm Shield 1.0.0) asks for its Required Notice and the terms' URL. {%- endcomment %}
-      {%- capture stickers %}<a href="https://github.com/alchaincyf/huashu-bird-sticker">huashu-bird-sticker</a>, © 2026 Huashu (alchaincyf), <a href="https://polyformproject.org/licenses/shield/1.0.0/">PolyForm Shield 1.0.0</a>{% endcapture %}
-      {%- comment -%} The cards' measurements are AVONET's (CC BY 4.0, which asks for credit); IUCN categories via Wikidata. {%- endcomment %}
-      {%- capture avonet %}<a href="https://doi.org/10.1111/ele.13898">AVONET</a> (Tobias et al. 2022, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>){% endcapture %}
       {%- comment -%}
-        A few stickers are photo cutouts under their photo's own licence (CC BY asks for the
-        photographer's name): `sticker_by` in bird_facts.yml (fetch_stickers.py) adds a credit.
+        The cards' measurements are AVONET's (CC BY 4.0, which asks for credit); IUCN categories
+        via Wikidata. No sticker credit: the stickers were removed (user, 2026-11-04).
       {%- endcomment %}
-      {%- assign photo_en = "" %}{% assign photo_zh = "" %}{% assign photo_hant = "" %}
-      {%- for f in site.data.bird_facts %}{% if f[1].sticker_by %}
-      {%- assign fsp = site.data.species[f[0]] %}
-      {%- capture photo_en %}{{ photo_en }}; {{ fsp.name.en }} sticker: photo by <a href="{{ f[1].sticker_url }}">{{ f[1].sticker_by }}</a> ({{ f[1].sticker_license }}){% endcapture %}
-      {%- capture photo_zh %}{{ photo_zh }}；{{ fsp.name.zh }}贴纸：<a href="{{ f[1].sticker_url }}">{{ f[1].sticker_by }}</a> 摄（{{ f[1].sticker_license }}）{% endcapture %}
-      {%- capture photo_hant %}{{ photo_hant }}；{{ fsp.name.zh_hant }}貼紙：<a href="{{ f[1].sticker_url }}">{{ f[1].sticker_by }}</a> 攝（{{ f[1].sticker_license }}）{% endcapture %}
-      {%- endif %}{% endfor %}
-      {%- capture en %}Map data: Natural Earth; rivers: {{ hydro }}{{ ebird }}; bird stickers: {{ stickers }}{{ photo_en }}; measurements: {{ avonet }}; IUCN status via Wikidata.{% endcapture %}
-      {%- capture zh %}地图数据：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鸟类贴纸：{{ stickers }}{{ photo_zh }}；形态数据：{{ avonet }}；IUCN等级来自Wikidata。{% endcapture %}
-      {%- capture zh_hant %}地圖資料：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；鳥類貼紙：{{ stickers }}{{ photo_hant }}；形態資料：{{ avonet }}；IUCN等級來自Wikidata。{% endcapture %}
+      {%- capture avonet %}<a href="https://doi.org/10.1111/ele.13898">AVONET</a> (Tobias et al. 2022, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>){% endcapture %}
+      {%- capture en %}Map data: Natural Earth; rivers: {{ hydro }}{{ ebird }}; measurements: {{ avonet }}; IUCN status via Wikidata.{% endcapture %}
+      {%- capture zh %}地图数据：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；形态数据：{{ avonet }}；IUCN等级来自Wikidata。{% endcapture %}
+      {%- capture zh_hant %}地圖資料：Natural Earth；河流：{{ hydro }}{{ ebird_zh }}；形態資料：{{ avonet }}；IUCN等級來自Wikidata。{% endcapture %}
       <p class="map-credit">{% include t.html en=en zh=zh zh_hant=zh_hant %}</p>
       {%- else %}
       {%- comment -%} ---- Legend: what the map's colours mean ---- {%- endcomment %}
@@ -284,8 +279,8 @@
       ---- The list. Traces: one row per visit, newest first. Avians: one card per species seen
       (user, 2026-10-25; photographed or not, 2026-10-30): first the birds with photos, then
       those without (user, 2026-10-31), each group newest sighting first. On a card: the species'
-      name; "Last seen" with its latest date · place below; its sticker, which links to the
-      species' cover photo in the gallery when it has photos. Hovering a card (or, on phones, the
+      name; "Last seen" with its latest date · place below; its cover photo, which links to
+      that photo in the gallery ("No photo yet" for a bird seen only). Hovering a card (or, on phones, the
       card at the reading line) shows the species' range. A continent shows only its own rows /
       cards. ----
     {%- endcomment %}
@@ -359,7 +354,7 @@
           {%- comment -%}
             The species' photos, if any: its cover (`cover: true` in avians.yml, else the
             newest) and the gallery tile holding it (a tile is named after its stack's newest
-            photo: same bird, day and place). The camera by the name and the sticker link there.
+            photo: same bird, day and place). The camera by the name and the photo link there.
           {%- endcomment %}
           {%- assign shots = sightings | where_exp: "s", "s.photo" %}
           {%- if shots.size > 0 %}
@@ -371,9 +366,20 @@
             {%- comment -%}
               The name, and for a bird with photos a small camera after it that goes to its photo
               in the gallery (user, 2026-10-31; gallery-filter.js handles data-gallery-jump).
+              The name links to the bird's page on All About Birds (user, 2026-11-04), in a new
+              tab: `allaboutbirds` in species.yml, else the English name with apostrophes dropped
+              and spaces as underscores (Steller's Jay → Stellers_Jay); `none`: no link.
             {%- endcomment %}
+            {%- if sp.allaboutbirds %}{% assign aab = sp.allaboutbirds %}{% else %}{% assign aab = sp.name.en | remove: "'" | replace: " ", "_" %}{% endif %}
             <span class="visit__head">
+              {%- if aab == "none" %}
               <span class="visit__place">{% include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant %}</span>
+              {%- else %}
+              <a class="visit__place visit__guide" href="https://www.allaboutbirds.org/guide/{{ aab }}/overview" target="_blank" rel="noopener">
+                {%- include t.html en=sp.name.en zh=sp.name.zh zh_hant=sp.name.zh_hant -%}
+                <span class="visually-hidden">{% include t.html en=" on All About Birds (opens in a new tab)" zh="（All About Birds，在新标签页打开）" zh_hant="（All About Birds，在新分頁開啟）" %}</span>
+              </a>
+              {%- endif %}
               {%- if shots.size > 0 %}
               <a class="visit__camera" href="{{ tile_href }}" data-gallery-jump>
                 <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 8h3l1.6-2.2h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -387,7 +393,7 @@
             {%- endif %}
             {%- comment -%}
               Field-guide facts, before the sighting (user, 2026-10-31), from _data/bird_facts.yml (made by
-              scripts/fetch_stickers.py): a morphology line (species' mean weight, wing and tail,
+              scripts/fetch_bird_facts.py): a morphology line (species' mean weight, wing and tail,
               AVONET), and the IUCN Red List category as a bar of the seven categories in IUCN's
               colours, this bird's lit. Each part breaks at a dot, never inside.
             {%- endcomment %}
@@ -421,35 +427,14 @@
             </span>
           </span>
           {%- comment -%}
-            Preview: the species' sticker (user, 2026-10-31: Huashu's bird stickers in place of
-            the photo thumbnails; scripts/fetch_stickers.py copies them to
-            assets/images/stickers/<species id>.webp). A bird with photos links to the gallery
-            tile holding its cover photo (user, 2026-10-30: "go directly to the Gallery, at that
-            position"); gallery-filter.js scrolls there and marks it. Until a species' sticker is
-            fetched, its cover photo shows, or a quiet "No photo yet" box of the same size, so
-            the cards stay even.
-          {%- endcomment %}
-          {%- comment -%}
+            No image on the card (user, 2026-11-04: "put nothing on the card, do not show any
+            image"): illustrated stickers stood here from 2026-10-31, and the cover photo before
+            them; the stickers were removed because they are AI drawings made from other
+            people's photos. A bird with photos reaches them through the camera by its name.
             An eBird sensitive species: its "Sensitive" mark in the card's bottom-right corner
-            (user, 2026-11-03), over the sticker's foot; its place is only the state.
+            (user, 2026-11-03); its place is only the state.
           {%- endcomment %}
           {%- if sp.sensitive %}{% include avians/sensitive.html corner=true %}{% endif %}
-          {%- capture sticker_path %}/assets/images/stickers/{{ v.species }}.webp{% endcapture %}
-          {%- assign sticker = site.static_files | where: "path", sticker_path | first %}
-          {%- capture sticker_img %}<img class="visit__photo visit__photo--sticker" src="{{ sticker_path | relative_url }}" alt="" loading="lazy" decoding="async">{% endcapture %}
-          {%- if shots.size > 0 %}
-          <a class="visit__photos" href="{{ tile_href }}" data-gallery-jump>
-            {%- if sticker %}{{ sticker_img }}{% else %}
-            {% include avians/photo.html photo=card_photo.photo date=card_photo.date class="visit__photo" %}{% endif %}
-            <span class="visually-hidden">{% include t.html en="Show in the gallery" zh="在相册中查看" zh_hant="在相簿中查看" %}</span>
-          </a>
-          {%- elsif sticker %}
-          <span class="visit__photos">{{ sticker_img }}</span>
-          {%- else %}
-          <span class="visit__photos">
-            <span class="visit__photo visit__photo--none">{% include t.html en="No photo yet" zh="暂无照片" zh_hant="暫無照片" %}</span>
-          </span>
-          {%- endif %}
         </li>
         {%- endfor %}
         {%- else %}
